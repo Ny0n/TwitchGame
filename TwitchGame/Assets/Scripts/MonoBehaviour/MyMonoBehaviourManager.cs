@@ -17,6 +17,8 @@ public class MyMonoBehaviourManager : MonoBehaviour
     {
         foreach (MyMonoBehaviour myMonoBehaviour in _myMonoBehaviours)
         {
+            if (myMonoBehaviour == null) continue;
+            if (!myMonoBehaviour.gameObject.activeInHierarchy) continue;
             myMonoBehaviour.DoUpdate();
         }
     }
