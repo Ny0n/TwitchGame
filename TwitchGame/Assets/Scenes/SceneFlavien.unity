@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 825313086}
   - component: {fileID: 825313088}
   - component: {fileID: 825313087}
+  - component: {fileID: 825313089}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -329,6 +330,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a696139dd16ddd48851417b9cf86e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &825313089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825313085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8490914b9cbdac1479d083e99381243b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 0}
+  _onEventRaised:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1119105424
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +375,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1158070577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158070578}
+  m_Layer: 0
+  m_Name: --------- TESTS -------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1158070578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158070577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.9571404, y: -2.7819037, z: 6.9010835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321923486
 GameObject:
@@ -457,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1654011111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -757,7 +804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1372929369805666711
 Animator:
   serializedVersion: 3

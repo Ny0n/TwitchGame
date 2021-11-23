@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField]
+    protected List<string> _scenesToLoad;
 
-    private List<string> _scenesToLoad;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         foreach (string scene in _scenesToLoad)
         {

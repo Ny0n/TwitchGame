@@ -24,8 +24,6 @@ public class PlayerMove : MyMonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)) GoDown();
         if (Input.GetKeyDown(KeyCode.Q)) GoLeft();
         if (Input.GetKeyDown(KeyCode.D)) GoRight();
-        _anim.SetBool("Rotating", _rotating);
-        print(_rotating);
     }
 
     private void GoDir(Vector3 targetRotation)
@@ -55,7 +53,7 @@ public class PlayerMove : MyMonoBehaviour
     }
 
     bool coroutineRunning = false;
-    IEnumerator rotateAndMove(GameObject go, Quaternion newRot, float duration)
+    private IEnumerator rotateAndMove(GameObject go, Quaternion newRot, float duration)
     {
         if (coroutineRunning)
         {
@@ -73,6 +71,7 @@ public class PlayerMove : MyMonoBehaviour
         {
             // Rotate over 1 sec
             _rotating = true;
+            _anim.SetBool("Rotating", _rotating);
             float counter = 0;
             while (counter < duration)
             {
@@ -81,6 +80,7 @@ public class PlayerMove : MyMonoBehaviour
                 yield return null;
             }
             _rotating = false;
+            _anim.SetBool("Rotating", _rotating);
         }
         
         // Jump
@@ -89,7 +89,6 @@ public class PlayerMove : MyMonoBehaviour
 
         coroutineRunning = false;
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
