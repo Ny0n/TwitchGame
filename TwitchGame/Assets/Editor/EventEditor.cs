@@ -1,21 +1,22 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(ScriptableObject_GameEvent))]
-public class GameEventEditor : Editor
+[CustomEditor(typeof(ScriptablePlayerEvent)), CanEditMultipleObjects]
+public class EventEditor : Editor
 {
+    private GenericEvent _event;
+
     private void OnEnable()
     {
-        _event = target as ScriptableObject_GameEvent;
+        _event = target as GenericEvent;
     }
 
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         if (GUILayout.Button("Raise"))
         {
             _event.Raise();
         }
     }
-
-    private ScriptableObject_GameEvent _event;
 }

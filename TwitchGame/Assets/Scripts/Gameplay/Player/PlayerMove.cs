@@ -13,17 +13,38 @@ public class PlayerMove : MyMonoBehaviour
 
     void Start()
     {
-        GameManager.Instance?.Hey();
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
     }
 
     public override void DoUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) GoUp();
-        if (Input.GetKeyDown(KeyCode.S)) GoDown();
-        if (Input.GetKeyDown(KeyCode.Q)) GoLeft();
-        if (Input.GetKeyDown(KeyCode.D)) GoRight();
+
+    }
+
+    public void RunCommand(Enums.Command command)
+    {
+        switch (command)
+        {
+            case Enums.Command.STAY:
+                break;
+            
+            case Enums.Command.UP:
+                    GoUp();
+                break;
+            
+            case Enums.Command.DOWN:
+                    GoDown();
+                break;
+            
+            case Enums.Command.RIGHT:
+                    GoRight();
+                break;
+            
+            case Enums.Command.LEFT:
+                    GoLeft();
+                break;
+        }
     }
 
     private void GoDir(Vector3 targetRotation)
@@ -32,22 +53,22 @@ public class PlayerMove : MyMonoBehaviour
         StartCoroutine(rotateAndMove(gameObject, rotation, 1f));
     }
 
-    public void GoUp()
+    private void GoUp()
     {
         GoDir(new Vector3(0f, 0f, 0f));
     }
-    
-    public void GoDown()
+
+    private void GoDown()
     {
         GoDir(new Vector3(0f, 180f, 0f));
     }
-    
-    public void GoLeft()
+
+    private void GoLeft()
     {
         GoDir(new Vector3(0f, -90f, 0f));
     }
-    
-    public void GoRight()
+
+    private void GoRight()
     {
         GoDir(new Vector3(0f, 90f, 0f));
     }

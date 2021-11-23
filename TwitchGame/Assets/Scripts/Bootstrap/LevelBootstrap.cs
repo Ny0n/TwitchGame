@@ -13,7 +13,7 @@ public class LevelBootstrap : Bootstrap
     private string _nextLevelName;
 
     [SerializeField]
-    private ScriptableObject_GameEvent _levelStartEvent;
+    private GenericEvent _levelStartEvent;
 
     private IEnumerator Start()
     {
