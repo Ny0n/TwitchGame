@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class CommandManager : MySingleton<CommandManager>
 {
-    public override bool DoDestroyOnLoad => false;
-
     public ScriptablePlayerEvent playerEvent;
 
     public Dictionary<string, Enums.Command> Commands { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Commands = new Dictionary<string, Enums.Command>();
     }
 
@@ -29,18 +28,15 @@ public class CommandManager : MySingleton<CommandManager>
 
     public void ProcessCommand(string playerName, Enums.Command command)
     {
+        print("ProcessCommand " + playerName + " " + command.ToString());
         switch (command)
         {
             case Enums.Command.REGISTER:
-                playerEvent.name = playerName;
-                playerEvent.action = ScriptablePlayerEvent.Action.ADD;
-                playerEvent.Raise();
+                playerEvent.SetAndRaise(playerName, Enums.PlayerEventAction.ADD);
                 break;
             
             case Enums.Command.UNREGISTER:
-                playerEvent.name = playerName;
-                playerEvent.action = ScriptablePlayerEvent.Action.REMOVE;
-                playerEvent.Raise();
+                playerEvent.SetAndRaise(playerName, Enums.PlayerEventAction.REMOVE);
                 break;
 
             default:
@@ -65,6 +61,13 @@ public class CommandManager : MySingleton<CommandManager>
         foreach (string playerName in PlayersManager.Instance.Players.Keys)
         {
             PlayersManager.Instance.Players[playerName].PlayerObject.GetComponent<PlayerMove>().RunCommand(Commands[playerName]);
+            print(playerName);
+            print(Commands[playerName].ToString());
         }
+    }
+
+    public void OnGameEnd() // event
+    {
+        Commands.Clear();
     }
 }

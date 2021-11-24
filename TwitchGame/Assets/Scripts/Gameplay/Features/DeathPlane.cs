@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DeathPlane : MonoBehaviour
 {
+    public ScriptablePlayerEvent playerEvent;
+
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(collision.gameObject);
+        playerEvent.SetAndRaise(collision.gameObject.name, Enums.PlayerEventAction.DEAD);
     }
 }

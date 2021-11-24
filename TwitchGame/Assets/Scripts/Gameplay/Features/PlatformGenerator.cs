@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
+    public ScriptableGameEvent mapLoadedEvent;
+
     public GameObject platformPrefab;
     public Transform startPoint;
     public float dist = 2f;
@@ -23,5 +25,6 @@ public class PlatformGenerator : MonoBehaviour
                 yield return new WaitForSeconds(waitTime);
             }
         }
+        mapLoadedEvent.Raise();
     }
 }

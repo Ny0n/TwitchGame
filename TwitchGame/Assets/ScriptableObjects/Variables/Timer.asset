@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17dde7ab0c1ac7d46856f74a11b82faf, type: 3}
-  m_Name: PlayerEvent
+  m_Script: {fileID: 11500000, guid: a5de59a4a66932847a3d8157d28c8d89, type: 3}
+  m_Name: Timer
   m_EditorClassIdentifier: 
-  _listeners: []
-  <PlayerName>k__BackingField: player2
-  <Action>k__BackingField: 0

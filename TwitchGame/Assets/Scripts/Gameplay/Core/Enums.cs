@@ -8,7 +8,6 @@ public class Enums : MonoBehaviour
     {
         REGISTER,
         UNREGISTER,
-
         STAY,
         UP,
         DOWN,
@@ -18,9 +17,17 @@ public class Enums : MonoBehaviour
 
     public enum GameState
     {
+        PAUSED,
         WAITINGFORPLAYERS,
         STARTINGGAME,
         PLAYING,
         ENDINGGAME,
+    }
+
+    public enum PlayerEventAction
+    {
+        ADD,
+        REMOVE,
+        DEAD,
     }
 }
