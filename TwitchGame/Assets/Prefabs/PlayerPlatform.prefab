@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 4335972592104975466}
   - component: {fileID: 7627475318032857568}
   - component: {fileID: 6706997602586671972}
-  - component: {fileID: 2842227374022011860}
   m_Layer: 0
-  m_Name: Platform
+  m_Name: PlayerPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 150ec0d219493304fbd641d21cbae276, type: 2}
+  - {fileID: 2100000, guid: b9d790b8972b8a14c979ff575f13a7ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,16 +108,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da729efba2d23e40af88f563b85711b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2842227374022011860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8417205674601576954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf701b39bd10ead45a0fb7e8fd0c5239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destructionTimer: 22

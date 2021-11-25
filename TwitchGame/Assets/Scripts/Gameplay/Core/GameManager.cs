@@ -6,6 +6,7 @@ public class GameManager : MySingleton<GameManager>
 {
     public TimerManager timerManager;
     public ScriptableGameEvent startRoundEvent;
+    public ScriptableGameEvent gameStartEvent;
     public ScriptableGameEvent gameEndEvent;
 
     public Enums.GameState CurrentState { get; private set; }
@@ -19,53 +20,66 @@ public class GameManager : MySingleton<GameManager>
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(2);
+        StartWaitingForPlayers();
     }
 
-    public void OnMapLoaded() // event
+    void StartWaitingForPlayers()
     {
-        StartGame();
+        CurrentState = Enums.GameState.WAITINGFORPLAYERS;
     }
 
     private void Update()
     {
-        if (CurrentState == Enums.GameState.PLAYING)
+        switch (CurrentState)
         {
-            if (PlayersManager.Instance.Players.Count <= 1)
-                gameEndEvent.Raise();
+            case Enums.GameState.PLAYING:
+                CheckForGameEnd();
+                break;
+            case Enums.GameState.WAITINGFORPLAYERS:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    CurrentState = Enums.GameState.STARTINGGAME;
+                    gameStartEvent.Raise();
+                }
+                break;
         }
     }
 
-    public void StartGame()
+    public void OnMapLoaded() // event
     {
-        print("StartGame");
-        CurrentState = Enums.GameState.WAITINGFORPLAYERS; // use event
-        timerManager.StartTimer(5);
+        CurrentState = Enums.GameState.PLAYING;
+        StartRound();
     }
 
     public void OnTimerEnd() // event
     {
         switch (CurrentState)
         {
-            case Enums.GameState.WAITINGFORPLAYERS:
-                timerManager.StartTimer(10);
-                CurrentState = Enums.GameState.PLAYING;
-                startRoundEvent.Raise();
-                break;
             case Enums.GameState.PLAYING:
-                StartCoroutine(WaitForActionEnd());
+                StartRound();
                 break;
         }
     }
 
-    IEnumerator WaitForActionEnd()
+    private void StartRound()
     {
-        yield return new WaitForSeconds(2);
+        if (CurrentState != Enums.GameState.PLAYING)
+            return;
         timerManager.StartTimer(10);
         startRoundEvent.Raise();
     }
 
+    private void CheckForGameEnd()
+    {
+        if (PlayersManager.Instance.Players.Count <= 1)
+        {
+            CurrentState = Enums.GameState.ENDINGGAME;
+            gameEndEvent.Raise();
+        }
+    }
+
     public void OnGameEnd() // event
     {
-        StartGame();
+        StartWaitingForPlayers();
     }
 }

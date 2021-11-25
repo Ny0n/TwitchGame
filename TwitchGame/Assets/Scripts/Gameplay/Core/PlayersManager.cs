@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     [SerializeField]
     private GameObject playerPrefab;
+    [SerializeField]
+    private PlatformGenerator platformGenerator;
 
     private int currentPlayerNumber = 1;
 
@@ -34,10 +37,10 @@ public class PlayersManager : MySingleton<PlayersManager>
         return Players.ContainsKey(name);
     }
 
-    private GameObject CreateNewPlayerObject(string name)
+    private GameObject CreateNewPlayerGameObject(string name)
     {
         // creation of player scene character
-        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn(), Quaternion.identity);
         player.name = name;
         // add random skin, link Player object...
 
@@ -76,7 +79,8 @@ public class PlayersManager : MySingleton<PlayersManager>
         if (IsPlayerRegistered(playerName))
             return;
 
-        Player player = new Player(CreateNewPlayerObject(playerName), playerName, currentPlayerNumber);
+        Player player = new Player(CreateNewPlayerGameObject(playerName), playerName, currentPlayerNumber);
+        player.PlayerObject.GetComponent<PlayerData>().Player = player; // TODO pas ouf
         Players.Add(playerName, player);
         currentPlayerNumber++;
     }
@@ -92,7 +96,7 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void UnregisterAllPlayers()
     {
-        foreach (string playerName in Players.Keys)
+        foreach (string playerName in Players.Keys.ToList())
         {
             UnregisterPlayer(playerName);
         }
