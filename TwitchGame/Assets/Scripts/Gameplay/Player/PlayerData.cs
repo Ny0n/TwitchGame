@@ -6,26 +6,11 @@ public class PlayerData : MonoBehaviour
 {
     public Player Player { get; set; }
 
-    private GameObject _platform;
-
-    [SerializeField]
-    private GameObject skinParent;
-
-    public Animator _animator;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject _skinParent;
 
     private bool _rebindAnimator = false;
 
-    private void Start()
-    {
-        //_animator = GetComponent<Animator>();
-    }
-
-    public void SetSkin(GameObject skin)
-    {
-        Destroy(skinParent.transform.GetChild(0).gameObject);
-        Instantiate(skin, skinParent.transform);
-        _rebindAnimator = true;
-    }
     private void LateUpdate()
     {
         if (_rebindAnimator)
@@ -35,27 +20,10 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void SetSkin(GameObject skin)
     {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            _platform = collision.gameObject;
-            _platform.GetComponent<PlatformPlayerInfo>().Player = Player;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            _platform.GetComponent<PlatformPlayerInfo>().Player = null;
-            _platform = null;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (_platform != null)
-            _platform.GetComponent<PlatformPlayerInfo>().Player = null;
+        Destroy(_skinParent.transform.GetChild(0).gameObject);
+        Instantiate(skin, _skinParent.transform);
+        _rebindAnimator = true;
     }
 }

@@ -57,7 +57,6 @@ public class PlayersManager : MySingleton<PlayersManager>
                         break;
                 }
                 break;
-            
         }
     }
 

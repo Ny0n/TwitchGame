@@ -12,13 +12,11 @@ public class PlatformGenerator : MonoBehaviour
 
     public Transform originPoint;
     public float dist = 2f;
-
     public int width = 10;
     public int height = 10;
 
     public Vector3 playerSpawnOffset = new Vector3(0f, 2f, 0f);
-
-    private GameObject[,] _generatedPlatforms;
+    public Vector3 offsetFromNormalPlatforms = new Vector3(0f, 3f, 0f);
 
     private Dictionary<int, GameObject> _generatedPlayerPlatforms;
 
@@ -34,7 +32,6 @@ public class PlatformGenerator : MonoBehaviour
 
     private GameObject CreateNewPlayerPlatform()
     {
-        Vector3 offsetFromNormalPlatforms = new Vector3(0f, 3f, 0f);
         int currentCount = _generatedPlayerPlatforms.Count;
 
         // we find where to place the next platform
@@ -77,6 +74,7 @@ public class PlatformGenerator : MonoBehaviour
 
     private IEnumerator StartingGame()
     {
+        // spawn game platforms
         for (int w = 0; w < width; w++)
         {
             for (int h = 0; h < height; h++)
@@ -86,6 +84,7 @@ public class PlatformGenerator : MonoBehaviour
             }
         }
 
+        // destroy player platforms
         foreach (KeyValuePair<int, GameObject> entry in _generatedPlayerPlatforms)
         {
             Destroy(entry.Value);

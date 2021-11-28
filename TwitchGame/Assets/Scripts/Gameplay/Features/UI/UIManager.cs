@@ -6,7 +6,6 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-
     public Slider TimerSlider;
     public TMP_Text CurrentStateText;
     public TMP_Text PlayersList;
@@ -25,6 +24,7 @@ public class UIManager : MonoBehaviour
         TimerSlider.value = TimerVariable.Value / 20f;
         CurrentStateText.text = GameManager.Instance.CurrentState.ToString();
 
+        // TODO put this in OnPlayerEvent func
         PlayersList.text = "";
         foreach (var entry in PlayersManager.Instance.Players)
         {
