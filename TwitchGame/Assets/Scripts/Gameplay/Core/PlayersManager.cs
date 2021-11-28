@@ -20,16 +20,9 @@ public class PlayersManager : MySingleton<PlayersManager>
         Players = new Dictionary<string, Player>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public List<string> GetNamesList()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return Players.Keys.ToList();
     }
 
     public bool IsPlayerRegistered(string name)
@@ -52,7 +45,7 @@ public class PlayersManager : MySingleton<PlayersManager>
         switch (playerEvent.Action)
         {
             case Enums.PlayerEventAction.DEAD:
-                UnregisterPlayer(playerEvent.PlayerName); // change later
+                UnregisterPlayer(playerEvent.PlayerName); // TODO change later
                 break;
 
             default:
@@ -96,7 +89,7 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void UnregisterAllPlayers()
     {
-        foreach (string playerName in Players.Keys.ToList())
+        foreach (string playerName in GetNamesList())
         {
             UnregisterPlayer(playerName);
         }

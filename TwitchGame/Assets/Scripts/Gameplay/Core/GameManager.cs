@@ -33,7 +33,7 @@ public class GameManager : MySingleton<GameManager>
         switch (CurrentState)
         {
             case Enums.GameState.PLAYING:
-                CheckForGameEnd();
+                //CheckForGameEnd();
                 break;
             case Enums.GameState.WAITINGFORPLAYERS:
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -56,9 +56,15 @@ public class GameManager : MySingleton<GameManager>
         switch (CurrentState)
         {
             case Enums.GameState.PLAYING:
-                StartRound();
+                StartCoroutine(RestartRound());
                 break;
         }
+    }
+
+    IEnumerator RestartRound()
+    {
+        yield return new WaitForSeconds(2);
+        StartRound();
     }
 
     private void StartRound()

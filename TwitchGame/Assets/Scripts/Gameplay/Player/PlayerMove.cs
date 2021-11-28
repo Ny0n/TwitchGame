@@ -22,53 +22,28 @@ public class PlayerMove : MyMonoBehaviour
 
     }
 
-    public void RunCommand(Enums.Command command)
-    {
-        switch (command)
-        {
-            case Enums.Command.STAY:
-                break;
-            
-            case Enums.Command.UP:
-                    GoUp();
-                break;
-            
-            case Enums.Command.DOWN:
-                    GoDown();
-                break;
-            
-            case Enums.Command.RIGHT:
-                    GoRight();
-                break;
-            
-            case Enums.Command.LEFT:
-                    GoLeft();
-                break;
-        }
-    }
-
     private void GoDir(Vector3 targetRotation)
     {
         Quaternion rotation = Quaternion.Euler(targetRotation);
         StartCoroutine(rotateAndMove(gameObject, rotation, 1f));
     }
 
-    private void GoUp()
+    public void GoUp()
     {
         GoDir(new Vector3(0f, 0f, 0f));
     }
 
-    private void GoDown()
+    public void GoDown()
     {
         GoDir(new Vector3(0f, 180f, 0f));
     }
 
-    private void GoLeft()
+    public void GoLeft()
     {
         GoDir(new Vector3(0f, -90f, 0f));
     }
 
-    private void GoRight()
+    public void GoRight()
     {
         GoDir(new Vector3(0f, 90f, 0f));
     }
