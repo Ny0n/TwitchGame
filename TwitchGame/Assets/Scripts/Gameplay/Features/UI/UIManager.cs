@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     public Slider TimerSlider;
     public TMP_Text CurrentStateText;
+    public TMP_Text PlayersList;
 
     public ScriptableFloatVariable TimerVariable;
 
@@ -23,5 +24,12 @@ public class UIManager : MonoBehaviour
     {
         TimerSlider.value = TimerVariable.Value / 20f;
         CurrentStateText.text = GameManager.Instance.CurrentState.ToString();
+
+        PlayersList.text = "";
+        foreach (var entry in PlayersManager.Instance.Players)
+        {
+            Player player = entry.Value;
+            PlayersList.text += player.Number + ": " + player.Name + " (" + (player.IsAlive ? "alive" : "dead") + ")" + "\n"; // TODO temporaire
+        }
     }
 }

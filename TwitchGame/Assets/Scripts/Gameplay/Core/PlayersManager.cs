@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SkinDatabase))]
 public class PlayersManager : MySingleton<PlayersManager>
 {
     public Dictionary<string, Player> Players { get; private set; }
@@ -14,10 +15,13 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private int currentPlayerNumber = 1;
 
+    private SkinDatabase skinDatabase;
+
     protected override void Awake()
     {
         base.Awake();
         Players = new Dictionary<string, Player>();
+        skinDatabase = GetComponent<SkinDatabase>();
     }
 
     public List<string> GetNamesList()
@@ -30,22 +34,12 @@ public class PlayersManager : MySingleton<PlayersManager>
         return Players.ContainsKey(name);
     }
 
-    private GameObject CreateNewPlayerGameObject(string name)
-    {
-        // creation of player scene character
-        GameObject player = Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn(), Quaternion.identity);
-        player.name = name;
-        // add random skin, link Player object...
-
-        return player;
-    }
-
     public void OnRecievePlayerEvent(ScriptablePlayerEvent playerEvent) // event
     {
         switch (playerEvent.Action)
         {
             case Enums.PlayerEventAction.DEAD:
-                UnregisterPlayer(playerEvent.PlayerName); // TODO change later
+                Players[playerEvent.PlayerName].Kill();
                 break;
 
             default:
@@ -72,8 +66,11 @@ public class PlayersManager : MySingleton<PlayersManager>
         if (IsPlayerRegistered(playerName))
             return;
 
-        Player player = new Player(CreateNewPlayerGameObject(playerName), playerName, currentPlayerNumber);
-        player.PlayerObject.GetComponent<PlayerData>().Player = player; // TODO pas ouf
+        // creation of new player object
+        Player player = new Player(playerName, currentPlayerNumber);
+        player.SetSkin(skinDatabase.GetRandomSkin());
+        player.Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn()); // TODO here for now
+
         Players.Add(playerName, player);
         currentPlayerNumber++;
     }

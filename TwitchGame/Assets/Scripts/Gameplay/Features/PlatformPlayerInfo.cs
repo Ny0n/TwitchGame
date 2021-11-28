@@ -4,41 +4,25 @@ using UnityEngine;
 
 public class PlatformPlayerInfo : MonoBehaviour
 {
-    private GameObject _player;
-    public bool HasPlayer { get; set; } = false; // TODO REDO
-    
-    //public bool HasPlayer
-    //{
-    //    get
-    //    {
-    //        return _player != null;
-    //    }
-    //}
+    private Player _player;
+
+    public bool HasPlayer
+    {
+        get
+        {
+            return _player is Player;
+        }
+    }
 
     public Player Player
     {
         get
         {
-            if (HasPlayer)
-            {
-                return _player.GetComponent<PlayerData>().Player;
-            }
-            return null;
+            return _player;
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        _player = collision.gameObject;
-        HasPlayer = true;
-    }
-
-    // TODO CHECK IN UPDATE ??
-
-    private void OnCollisionExit(Collision collision)
-    {
-        print("EXIT");
-        _player = null;
-        HasPlayer = false;
+        set
+        {
+            _player = value;
+        }
     }
 }

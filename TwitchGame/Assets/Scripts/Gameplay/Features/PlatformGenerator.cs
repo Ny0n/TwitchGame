@@ -29,7 +29,6 @@ public class PlatformGenerator : MonoBehaviour
 
     private Vector3 GetSpawnPosFromPlatform(GameObject platform)
     {
-        platform.GetComponent<PlatformPlayerInfo>().HasPlayer = true;
         return platform.transform.position + playerSpawnOffset;
     }
 
@@ -37,7 +36,18 @@ public class PlatformGenerator : MonoBehaviour
     {
         Vector3 offsetFromNormalPlatforms = new Vector3(0f, 3f, 0f);
         int currentCount = _generatedPlayerPlatforms.Count;
-        return Instantiate(playerPlatformPrefab, originPoint.position + offsetFromNormalPlatforms + (dist * currentCount%width * Vector3.forward) + (dist * currentCount%height * Vector3.right), Quaternion.identity, transform);
+
+        // we find where to place the next platform
+        int currentWidth = currentCount;
+        int currentHeight = 0;
+        currentCount -= width;
+        while (currentCount >= 0)
+        {
+            currentHeight++;
+            currentCount -= width;
+        }
+
+        return Instantiate(playerPlatformPrefab, originPoint.position + offsetFromNormalPlatforms + (dist * (currentWidth % width) * Vector3.right) + (dist * currentHeight * Vector3.forward), Quaternion.identity, transform);
     }
 
     private bool PlatformHasPlayer(GameObject platform)
@@ -71,7 +81,7 @@ public class PlatformGenerator : MonoBehaviour
         {
             for (int h = 0; h < height; h++)
             {
-                Instantiate(platformPrefab, originPoint.position + (dist * w * Vector3.forward) + (dist * h * Vector3.right), Quaternion.identity, transform);
+                Instantiate(platformPrefab, originPoint.position + (dist * w * Vector3.right) + (dist * h * Vector3.forward), Quaternion.identity, transform);
                 yield return new WaitForSeconds(waitTime);
             }
         }

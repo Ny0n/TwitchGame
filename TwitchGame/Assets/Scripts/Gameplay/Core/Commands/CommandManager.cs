@@ -18,7 +18,7 @@ public class CommandManager : MySingleton<CommandManager>
 
     public void ProcessCommand(Command command)
     {
-        print("ProcessCommand " + command.ToString());
+        //print("ProcessCommand " + command.ToString());
         switch (command.type)
         {
             case Enums.CommandType.REGISTER:

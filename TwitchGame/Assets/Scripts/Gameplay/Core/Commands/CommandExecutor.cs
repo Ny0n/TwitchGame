@@ -10,7 +10,6 @@ public class CommandExecutor : MonoBehaviour
 
     public void Execute(Command command)
     {
-        print("Execute " + command.ToString());
         switch (command.type)
         {
             case Enums.CommandType.REGISTER:
