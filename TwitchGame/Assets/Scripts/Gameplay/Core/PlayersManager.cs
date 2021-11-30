@@ -1,37 +1,30 @@
 using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SkinDatabase))]
 public class PlayersManager : MySingleton<PlayersManager>
 {
-    public Dictionary<string, Player> Players { get; private set; }
+    public ScriptablePlayersList PlayersList;
 
-    [SerializeField]
-    private GameObject playerPrefab;
-    [SerializeField]
-    private PlatformGenerator platformGenerator;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private PlatformGenerator platformGenerator;
 
-    private int currentPlayerNumber = 1;
-
-    private SkinDatabase skinDatabase;
+    private int _currentPlayerNumber = 1;
+    private SkinDatabase _skinDatabase;
+    private MyDictionary<string, Player> _players;
 
     protected override void Awake()
     {
         base.Awake();
-        Players = new Dictionary<string, Player>();
-        skinDatabase = GetComponent<SkinDatabase>();
+        _players = PlayersList.Dico;
+        _skinDatabase = GetComponent<SkinDatabase>();
     }
 
-    public List<string> GetNamesList()
+    public void NotifyPlayerUpdated(Player player)
     {
-        return Players.Keys.ToList();
-    }
-
-    public bool IsPlayerRegistered(string name)
-    {
-        return Players.ContainsKey(name);
+        if (_players.ContainsKey(player.Name))
+            _players.NotifyChange();
     }
 
     public void OnRecievePlayerEvent(ScriptablePlayerEvent playerEvent) // event
@@ -39,7 +32,7 @@ public class PlayersManager : MySingleton<PlayersManager>
         switch (playerEvent.Action)
         {
             case Enums.PlayerEventAction.DEAD:
-                Players[playerEvent.PlayerName].Kill();
+                _players[playerEvent.PlayerName].Kill();
                 break;
 
             default:
@@ -62,30 +55,30 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void RegisterNewPlayer(string playerName)
     {
-        if (IsPlayerRegistered(playerName))
+        if (PlayersList.IsPlayerRegistered(playerName))
             return;
 
         // creation of new player object
-        Player player = new Player(playerName, currentPlayerNumber);
-        player.SetSkin(skinDatabase.GetRandomSkin());
+        Player player = new Player(playerName, _currentPlayerNumber);
+        player.SetSkin(_skinDatabase.GetRandomSkin());
         player.Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn()); // TODO here for now
 
-        Players.Add(playerName, player);
-        currentPlayerNumber++;
+        _players.Add(playerName, player);
+        _currentPlayerNumber++;
     }
     
     private void UnregisterPlayer(string playerName)
     {
-        if (!IsPlayerRegistered(playerName))
+        if (!PlayersList.IsPlayerRegistered(playerName))
             return;
 
-        Players[playerName].Remove();
-        Players.Remove(playerName);
+        _players[playerName].Remove();
+        _players.Remove(playerName);
     }
 
     private void UnregisterAllPlayers()
     {
-        foreach (string playerName in GetNamesList())
+        foreach (string playerName in PlayersList.GetNamesList())
         {
             UnregisterPlayer(playerName);
         }

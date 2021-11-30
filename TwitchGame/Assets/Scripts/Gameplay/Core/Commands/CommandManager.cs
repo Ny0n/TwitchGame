@@ -1,58 +1,81 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CommandExecutor))]
 public class CommandManager : MySingleton<CommandManager>
 {
-    public Dictionary<string, Command> StoredCommands { get; private set; }
+    public ScriptablePlayersList playersList;
 
-    private CommandExecutor commandExecutor;
+    public Dictionary<string, CommandObject> StoredCommands { get; private set; }
+
+    private List<CommandObject> _commandsToProcess;
 
     protected override void Awake()
     {
         base.Awake();
-        StoredCommands = new Dictionary<string, Command>();
-        commandExecutor = GetComponent<CommandExecutor>();
+        StoredCommands = new Dictionary<string, CommandObject>();
+        _commandsToProcess = new List<CommandObject>();
     }
 
-    public void ProcessCommand(Command command)
+    // *********************** PROCESS *********************** //
+
+    private void Update()
     {
-        //print("ProcessCommand " + command.ToString());
-        switch (command.type)
+        if (_commandsToProcess.Count > 0)
         {
-            case Enums.CommandType.REGISTER:
-            case Enums.CommandType.UNREGISTER:
-                commandExecutor.Execute(command);
+            foreach (CommandObject commandObject in _commandsToProcess.ToList())
+            {
+                ProcessCommand(commandObject);
+                _commandsToProcess.Remove(commandObject);
+            }
+        }
+    }
+
+    public void AddCommand(CommandObject commandObject)
+    {
+        _commandsToProcess.Add(commandObject);
+    }
+
+    private void ProcessCommand(CommandObject commandObject)
+    {
+        switch (GameManager.Instance.CurrentState)
+        {
+            case Enums.GameState.WAITINGFORPLAYERS:
+                ExecuteCommand(commandObject);
                 break;
 
             default:
-                if (PlayersManager.Instance.IsPlayerRegistered(command.playerName))
-                    StoreCommand(command);
+                StoreCommand(commandObject);
                 break;
         }
     }
 
-    private void StoreCommand(Command command)
+    // *********************** EXECUTION *********************** //
+
+    private void ExecuteCommand(CommandObject commandObject)
     {
-        StoredCommands[command.playerName] = command;
+        commandObject.Execute(playersList);
+    }
+
+    private void StoreCommand(CommandObject commandObject)
+    {
+        StoredCommands[commandObject.PlayerName] = commandObject;
     }
 
     public void ExecuteAllCommands()
     {
-        foreach (string playerName in PlayersManager.Instance.GetNamesList())
-        {
-            commandExecutor.Execute(StoredCommands[playerName]);
-        }
+        foreach (var entry in StoredCommands.ToList())
+            ExecuteCommand(entry.Value);
     }
     
     public void ResetAllCommands()
     {
-        foreach (string playerName in PlayersManager.Instance.GetNamesList())
-        {
-            StoredCommands[playerName] = new Command(playerName, Enums.CommandType.STAY); // MOUAIS pas fan des new
-        }
+        foreach (var entry in StoredCommands.ToList())
+            StoreCommand(new CommandObject(entry.Key, new EmptyCommand()));
     }
+
+    // *********************** EVENTS *********************** //
 
     public void OnRoundStart() // event
     {

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TwitchInterpreter
+public class TwitchInterpreter : MonoBehaviour
 {
-    public void Interpret(string playerName, string command)
+    public List<Command> commands;
+
+    public void Interpret(string playerName, string message)
     {
         if (playerName == null || playerName == "") return;
 
-        foreach (var entry in Enums.Commands)
+        foreach (Command command in commands)
         {
-            if (command == entry.Value)
+            if (message == command.Text)
             {
-                CommandManager.Instance.ProcessCommand(new Command(playerName, entry.Key));
+                CommandManager.Instance.AddCommand(new CommandObject(playerName, command));
                 return;
             }
         }

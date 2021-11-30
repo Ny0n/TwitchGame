@@ -4,61 +4,37 @@ using UnityEngine;
 public class KeyboardInput : MonoBehaviour
 {
     [System.Serializable]
-    private class Players
+    public struct InputCommand
     {
-        public string name;
-        public KeyCode REGISTER;
-        public KeyCode UNREGISTER;
-        public KeyCode UP;
-        public KeyCode DOWN;
-        public KeyCode LEFT;
-        public KeyCode RIGHT;
-        // new commands...
+        public Command command;
+        public KeyCode key;
     }
-    [SerializeField]
-    private Players[] players; // Create keyboard players in the inspector
 
-    private Dictionary<string, Dictionary<Enums.CommandType, KeyCode>> playersInputs;
-
-    void Start()
+    [System.Serializable]
+    public struct PlayerInputs
     {
-        playersInputs = new Dictionary<string, Dictionary<Enums.CommandType, KeyCode>>();
-        foreach (var player in players)
-        {
-            if (player.name == "" || playersInputs.ContainsKey(player.name))
-            {
-                Debug.LogWarning("Warning: Invalid keyboard player name (must be unique and have at least one character)");
-                continue;
-            }
+        public string playerName;
+        public List<InputCommand> inputCommands;
 
-            playersInputs[player.name] = new Dictionary<Enums.CommandType, KeyCode>
-            {
-                [Enums.CommandType.REGISTER] = player.REGISTER,
-                [Enums.CommandType.UNREGISTER] = player.UNREGISTER,
-                [Enums.CommandType.UP] = player.UP,
-                [Enums.CommandType.DOWN] = player.DOWN,
-                [Enums.CommandType.LEFT] = player.LEFT,
-                [Enums.CommandType.RIGHT] = player.RIGHT,
-                // new commands...
-            };
-        }
     }
+
+    [SerializeField] private List<PlayerInputs> players; // Create keyboard players in the inspector
 
     void Update()
     {
-        foreach (var playerInputs in playersInputs)
+        foreach (PlayerInputs playerInputs in players)
         {
-            ManagePlayer(playerInputs.Key, playerInputs.Value);
+            ManagePlayer(playerInputs.playerName, playerInputs.inputCommands);
         }
     }
 
-    void ManagePlayer(string name, Dictionary<Enums.CommandType, KeyCode> inputs)
+    void ManagePlayer(string playerName, List<InputCommand> inputCommands)
     {
-        foreach (var entry in Enums.Commands)
+        foreach (InputCommand inputCommand in inputCommands)
         {
-            if (Input.GetKeyDown(inputs[entry.Key]))
+            if (Input.GetKeyDown(inputCommand.key))
             {
-                CommandManager.Instance.ProcessCommand(new Command(name, entry.Key));
+                CommandManager.Instance.AddCommand(new CommandObject(playerName, inputCommand.command));
                 return;
             }
         }

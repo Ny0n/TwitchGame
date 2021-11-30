@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class GameManager : MySingleton<GameManager>
 {
+    public ScriptablePlayersList PlayersList;
+
     public TimerManager timerManager;
     public ScriptableGameEvent startRoundEvent;
     public ScriptableGameEvent gameStartEvent;
     public ScriptableGameEvent gameEndEvent;
 
     public Enums.GameState CurrentState { get; private set; }
+
+    public bool CompareState(Enums.GameState state) => CurrentState == state;
 
     protected override void Awake()
     {
@@ -28,13 +32,11 @@ public class GameManager : MySingleton<GameManager>
         CurrentState = Enums.GameState.WAITINGFORPLAYERS;
     }
 
+    float updateEvery = 1f;
     private void Update()
     {
         switch (CurrentState)
         {
-            case Enums.GameState.PLAYING:
-                //CheckForGameEnd();
-                break;
             case Enums.GameState.WAITINGFORPLAYERS:
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -43,6 +45,14 @@ public class GameManager : MySingleton<GameManager>
                 }
                 break;
         }
+
+        //updateEvery -= Time.deltaTime;
+        //if (updateEvery <= 0)
+        //{
+        //    updateEvery = 1f;
+        //    if (CurrentState == Enums.GameState.PLAYING)
+        //            CheckForGameEnd();
+        //}
     }
 
     public void OnMapLoaded() // event
@@ -77,7 +87,14 @@ public class GameManager : MySingleton<GameManager>
 
     private void CheckForGameEnd()
     {
-        if (PlayersManager.Instance.Players.Count <= 1)
+        int alive = 0;
+        foreach (Player player in PlayersList.GetPlayersList())
+        {
+            if (player.IsAlive)
+                alive++;
+        }
+
+        if (alive <= 1)
         {
             CurrentState = Enums.GameState.ENDINGGAME;
             gameEndEvent.Raise();

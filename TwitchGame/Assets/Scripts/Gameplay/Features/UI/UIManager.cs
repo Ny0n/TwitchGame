@@ -6,30 +6,29 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public Slider TimerSlider;
-    public TMP_Text CurrentStateText;
-    public TMP_Text PlayersList;
+    public Slider timerSlider;
+    public TMP_Text currentStateText;
+    public TMP_Text playersListText;
 
-    public ScriptableFloatVariable TimerVariable;
+    public ScriptableFloatVariable timerVariable;
+    public ScriptablePlayersList playersList;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable() => playersList.Dico.ValueChanged += OnPlayersUpdated;
+    private void OnDisable() => playersList.Dico.ValueChanged -= OnPlayersUpdated;
+
+    void OnPlayersUpdated()
     {
-        
+        playersListText.text = "";
+        foreach (Player player in playersList.GetPlayersList())
+        {
+            playersListText.text += player.Number + ": " + player.Name + " (" + (player.IsAlive ? "alive" : "dead") + ")" + "\n";
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        TimerSlider.value = TimerVariable.Value / 20f;
-        CurrentStateText.text = GameManager.Instance.CurrentState.ToString();
-
-        // TODO put this in OnPlayerEvent func
-        PlayersList.text = "";
-        foreach (var entry in PlayersManager.Instance.Players)
-        {
-            Player player = entry.Value;
-            PlayersList.text += player.Number + ": " + player.Name + " (" + (player.IsAlive ? "alive" : "dead") + ")" + "\n"; // TODO temporaire
-        }
+        timerSlider.value = timerVariable.Value / 20f;
+        currentStateText.text = GameManager.Instance.CurrentState.ToString();
     }
 }
