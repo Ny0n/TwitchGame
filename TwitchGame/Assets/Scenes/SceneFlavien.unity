@@ -1354,7 +1354,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 996979474}
           m_TargetAssemblyTypeName: PlayersManager, Assembly-CSharp
-          m_MethodName: OnRecievePlayerEvent
+          m_MethodName: OnReceivePlayerEvent
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: 976502ec049b36d46951733cfece77aa, type: 2}

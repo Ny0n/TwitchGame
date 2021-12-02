@@ -24,8 +24,8 @@ public class CommandManager : MySingleton<CommandManager>
         if (_commandsToProcess.Count <= 0) return;
         foreach (CommandObject commandObject in _commandsToProcess.ToList())
         {
-            ProcessCommand(commandObject);
             _commandsToProcess.Remove(commandObject);
+            ProcessCommand(commandObject);
         }
     }
 
