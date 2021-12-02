@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
-using System.Timers;
 using UnityEngine;
-using System.ComponentModel; 
 
 [RequireComponent(typeof(TwitchInterpreter))]
 public class TwitchConnexion : MonoBehaviour

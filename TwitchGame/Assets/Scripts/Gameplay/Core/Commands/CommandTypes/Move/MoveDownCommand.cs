@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Command/MoveDown", fileName = "MoveDown")]
@@ -10,6 +8,6 @@ public class MoveDownCommand : BaseMoveCommand
         base.Execute(playerName, playersList);
         if (!IsValid) return;
         
-        playerMove.GoDown();
+        _playerMove.GoDown();
     }
 }

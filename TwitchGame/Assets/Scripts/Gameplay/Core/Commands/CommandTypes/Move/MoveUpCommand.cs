@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Command/MoveUp", fileName = "MoveUp")]
@@ -10,6 +8,6 @@ public class MoveUpCommand : BaseMoveCommand
         base.Execute(playerName, playersList);
         if (!IsValid) return;
 
-        playerMove.GoUp();
+        _playerMove.GoUp();
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Command/Register", fileName = "Register")]
@@ -9,6 +7,6 @@ public class RegisterCommand : Command
 
     public override void Execute(string playerName, ScriptablePlayersList playersList)
     {
-        playerEvent.SetAndRaise(playerName, Enums.PlayerEventAction.ADD);
+        playerEvent.SetAndRaise(playerName, Enums.PlayerEventAction.Add);
     }
 }

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SkinDatabase))]
 public class PlayersManager : MySingleton<PlayersManager>
 {
-    public ScriptablePlayersList PlayersList;
+    public ScriptablePlayersList playersList;
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private PlatformGenerator platformGenerator;
@@ -17,7 +16,7 @@ public class PlayersManager : MySingleton<PlayersManager>
     protected override void Awake()
     {
         base.Awake();
-        _players = PlayersList.Dico;
+        _players = playersList.Players;
         _skinDatabase = GetComponent<SkinDatabase>();
     }
 
@@ -27,25 +26,25 @@ public class PlayersManager : MySingleton<PlayersManager>
             _players.NotifyChange();
     }
 
-    public void OnRecievePlayerEvent(ScriptablePlayerEvent playerEvent) // event
+    public void OnReceivePlayerEvent(ScriptablePlayerEvent playerEvent) // event
     {
         switch (playerEvent.Action)
         {
-            case Enums.PlayerEventAction.DEAD:
+            case Enums.PlayerEventAction.Dead:
                 _players[playerEvent.PlayerName].Kill();
                 break;
 
             default:
-                if (GameManager.Instance.CurrentState != Enums.GameState.WAITINGFORPLAYERS)
+                if (GameManager.Instance.CurrentState != Enums.GameState.WaitingForPlayers)
                     return;
 
                 switch (playerEvent.Action)
                 {
-                    case Enums.PlayerEventAction.ADD: // create new player
+                    case Enums.PlayerEventAction.Add: // create new player
                         RegisterNewPlayer(playerEvent.PlayerName);
                         break;
 
-                    case Enums.PlayerEventAction.REMOVE: // remove existing player
+                    case Enums.PlayerEventAction.Remove: // remove existing player
                         UnregisterPlayer(playerEvent.PlayerName);
                         break;
                 }
@@ -55,7 +54,7 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void RegisterNewPlayer(string playerName)
     {
-        if (PlayersList.IsPlayerRegistered(playerName))
+        if (playersList.IsPlayerRegistered(playerName))
             return;
 
         // creation of new player object
@@ -69,7 +68,7 @@ public class PlayersManager : MySingleton<PlayersManager>
     
     private void UnregisterPlayer(string playerName)
     {
-        if (!PlayersList.IsPlayerRegistered(playerName))
+        if (!playersList.IsPlayerRegistered(playerName))
             return;
 
         _players[playerName].Remove();
@@ -78,7 +77,7 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void UnregisterAllPlayers()
     {
-        foreach (string playerName in PlayersList.GetNamesList())
+        foreach (string playerName in playersList.GetNamesList())
         {
             UnregisterPlayer(playerName);
         }

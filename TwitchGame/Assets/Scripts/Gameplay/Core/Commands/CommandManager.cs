@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CommandManager : MySingleton<CommandManager>
 {
     public ScriptablePlayersList playersList;
+    public Command defaultCommand;
 
-    public Dictionary<string, CommandObject> StoredCommands { get; private set; }
+    private Dictionary<string, CommandObject> StoredCommands { get; set; }
 
     private List<CommandObject> _commandsToProcess;
 
@@ -22,13 +21,11 @@ public class CommandManager : MySingleton<CommandManager>
 
     private void Update()
     {
-        if (_commandsToProcess.Count > 0)
+        if (_commandsToProcess.Count <= 0) return;
+        foreach (CommandObject commandObject in _commandsToProcess.ToList())
         {
-            foreach (CommandObject commandObject in _commandsToProcess.ToList())
-            {
-                ProcessCommand(commandObject);
-                _commandsToProcess.Remove(commandObject);
-            }
+            ProcessCommand(commandObject);
+            _commandsToProcess.Remove(commandObject);
         }
     }
 
@@ -41,7 +38,7 @@ public class CommandManager : MySingleton<CommandManager>
     {
         switch (GameManager.Instance.CurrentState)
         {
-            case Enums.GameState.WAITINGFORPLAYERS:
+            case Enums.GameState.WaitingForPlayers:
                 ExecuteCommand(commandObject);
                 break;
 
@@ -63,16 +60,16 @@ public class CommandManager : MySingleton<CommandManager>
         StoredCommands[commandObject.PlayerName] = commandObject;
     }
 
-    public void ExecuteAllCommands()
+    private void ExecuteAllCommands()
     {
         foreach (var entry in StoredCommands.ToList())
             ExecuteCommand(entry.Value);
     }
-    
-    public void ResetAllCommands()
+
+    private void ResetAllCommands()
     {
         foreach (var entry in StoredCommands.ToList())
-            StoreCommand(new CommandObject(entry.Key, new EmptyCommand()));
+            StoreCommand(new CommandObject(entry.Key, defaultCommand));
     }
 
     // *********************** EVENTS *********************** //

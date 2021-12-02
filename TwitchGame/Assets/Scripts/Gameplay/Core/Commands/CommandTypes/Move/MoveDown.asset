@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0cf61d2c3db54a4ba867c0c65cb5c30, type: 3}
   m_Name: MoveDown
   m_EditorClassIdentifier: 
-  _text: '!down'
+  <Text>k__BackingField: '!down'

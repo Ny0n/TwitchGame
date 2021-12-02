@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  defaultCommand: {fileID: 11400000, guid: 0ec0b54adaea041499bacee4c4e1c460, type: 2}
 --- !u!114 &389594942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,12 +472,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players:
-  - playerName: player1
+  - playerName: keyboard1
     inputCommands:
     - command: {fileID: 11400000, guid: b6d08479b96a88642b78c54a4a636296, type: 2}
       key: 101
     - command: {fileID: 11400000, guid: 88850780d5f52ba458033fd50d52e02c, type: 2}
       key: 97
+    - command: {fileID: 11400000, guid: 721b2fc65ac46da4da3f71c4ca308dfb, type: 2}
+      key: 122
+    - command: {fileID: 11400000, guid: 58e46b5f35c6d2f4e910afeb1fbfb911, type: 2}
+      key: 115
+    - command: {fileID: 11400000, guid: 442f2f029d138c64da72a8f25533626c, type: 2}
+      key: 113
+    - command: {fileID: 11400000, guid: 8dc07f9e6c719a14d98582f79f496d9e, type: 2}
+      key: 100
+  - playerName: keyboard2
+    inputCommands:
+    - command: {fileID: 11400000, guid: b6d08479b96a88642b78c54a4a636296, type: 2}
+      key: 112
+    - command: {fileID: 11400000, guid: 88850780d5f52ba458033fd50d52e02c, type: 2}
+      key: 105
+    - command: {fileID: 11400000, guid: 721b2fc65ac46da4da3f71c4ca308dfb, type: 2}
+      key: 111
+    - command: {fileID: 11400000, guid: 58e46b5f35c6d2f4e910afeb1fbfb911, type: 2}
+      key: 108
+    - command: {fileID: 11400000, guid: 442f2f029d138c64da72a8f25533626c, type: 2}
+      key: 107
+    - command: {fileID: 11400000, guid: 8dc07f9e6c719a14d98582f79f496d9e, type: 2}
+      key: 109
+  - playerName: keyboard3
+    inputCommands:
+    - command: {fileID: 11400000, guid: b6d08479b96a88642b78c54a4a636296, type: 2}
+      key: 256
+    - command: {fileID: 11400000, guid: 88850780d5f52ba458033fd50d52e02c, type: 2}
+      key: 305
+    - command: {fileID: 11400000, guid: 721b2fc65ac46da4da3f71c4ca308dfb, type: 2}
+      key: 273
+    - command: {fileID: 11400000, guid: 58e46b5f35c6d2f4e910afeb1fbfb911, type: 2}
+      key: 274
+    - command: {fileID: 11400000, guid: 442f2f029d138c64da72a8f25533626c, type: 2}
+      key: 276
+    - command: {fileID: 11400000, guid: 8dc07f9e6c719a14d98582f79f496d9e, type: 2}
+      key: 275
+  - playerName: keyboard4
+    inputCommands:
+    - command: {fileID: 11400000, guid: b6d08479b96a88642b78c54a4a636296, type: 2}
+      key: 265
+    - command: {fileID: 11400000, guid: 88850780d5f52ba458033fd50d52e02c, type: 2}
+      key: 263
+    - command: {fileID: 11400000, guid: 721b2fc65ac46da4da3f71c4ca308dfb, type: 2}
+      key: 264
+    - command: {fileID: 11400000, guid: 58e46b5f35c6d2f4e910afeb1fbfb911, type: 2}
+      key: 261
+    - command: {fileID: 11400000, guid: 442f2f029d138c64da72a8f25533626c, type: 2}
+      key: 260
+    - command: {fileID: 11400000, guid: 8dc07f9e6c719a14d98582f79f496d9e, type: 2}
+      key: 262
 --- !u!1 &603386745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68d19ba11ff5cb4cbbc139a11e128d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
   playerPrefab: {fileID: 7913447538169836104, guid: 1c4a1f970ab1ff6478bf0ad8d9a74280, type: 3}
   platformGenerator: {fileID: 1541093748}
 --- !u!4 &996979475

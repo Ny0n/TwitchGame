@@ -1,23 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public struct CommandObject
+public readonly struct CommandObject
 {
     public string PlayerName { get; }
-    public Command Command { get; }
+    private Command CommandRef { get; }
 
-    public CommandObject(string playerName, Command command)
+    public CommandObject(string playerName, Command commandRef)
     {
         PlayerName = playerName;
-        Command = command;
+        CommandRef = commandRef;
     }
 
     public void Execute(ScriptablePlayersList playersList)
     {
-        if (Command is Command)
-            Command.Execute(PlayerName, playersList);
+        if (CommandRef != null)
+            CommandRef.Execute(PlayerName, playersList);
     }
 
-    public override string ToString() => $"{{ PlayerName = \"{PlayerName}\", Command = \"{Command}\" }}";
+    public override string ToString() => $"{{ PlayerName = \"{PlayerName}\", Command = \"{CommandRef}\" }}";
 }

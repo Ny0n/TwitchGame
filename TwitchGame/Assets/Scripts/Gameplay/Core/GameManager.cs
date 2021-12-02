@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MySingleton<GameManager>
@@ -18,7 +17,7 @@ public class GameManager : MySingleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        CurrentState = Enums.GameState.PAUSED;
+        CurrentState = Enums.GameState.Paused;
     }
 
     private IEnumerator Start()
@@ -29,7 +28,7 @@ public class GameManager : MySingleton<GameManager>
 
     void StartWaitingForPlayers()
     {
-        CurrentState = Enums.GameState.WAITINGFORPLAYERS;
+        CurrentState = Enums.GameState.WaitingForPlayers;
     }
 
     float updateEvery = 1f;
@@ -37,10 +36,10 @@ public class GameManager : MySingleton<GameManager>
     {
         switch (CurrentState)
         {
-            case Enums.GameState.WAITINGFORPLAYERS:
+            case Enums.GameState.WaitingForPlayers:
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    CurrentState = Enums.GameState.STARTINGGAME;
+                    CurrentState = Enums.GameState.Starting;
                     gameStartEvent.Raise();
                 }
                 break;
@@ -57,7 +56,7 @@ public class GameManager : MySingleton<GameManager>
 
     public void OnMapLoaded() // event
     {
-        CurrentState = Enums.GameState.PLAYING;
+        CurrentState = Enums.GameState.Playing;
         StartRound();
     }
 
@@ -65,7 +64,7 @@ public class GameManager : MySingleton<GameManager>
     {
         switch (CurrentState)
         {
-            case Enums.GameState.PLAYING:
+            case Enums.GameState.Playing:
                 StartCoroutine(RestartRound());
                 break;
         }
@@ -79,7 +78,7 @@ public class GameManager : MySingleton<GameManager>
 
     private void StartRound()
     {
-        if (CurrentState != Enums.GameState.PLAYING)
+        if (CurrentState != Enums.GameState.Playing)
             return;
         timerManager.StartTimer(10);
         startRoundEvent.Raise();
@@ -96,7 +95,7 @@ public class GameManager : MySingleton<GameManager>
 
         if (alive <= 1)
         {
-            CurrentState = Enums.GameState.ENDINGGAME;
+            CurrentState = Enums.GameState.Ending;
             gameEndEvent.Raise();
         }
     }

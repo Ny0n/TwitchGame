@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21636b7f27580f3479557a3bd2de7f26, type: 3}
   m_Name: MoveUp
   m_EditorClassIdentifier: 
-  _text: '!up'
+  <Text>k__BackingField: '!up'

@@ -1,26 +1,26 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class KeyboardInput : MonoBehaviour
 {
     [System.Serializable]
-    public struct InputCommand
+    private struct InputCommand
     {
         public Command command;
         public KeyCode key;
     }
 
     [System.Serializable]
-    public struct PlayerInputs
+    private struct PlayerInputs
     {
         public string playerName;
         public List<InputCommand> inputCommands;
-
     }
 
     [SerializeField] private List<PlayerInputs> players; // Create keyboard players in the inspector
 
-    void Update()
+    private void Update()
     {
         foreach (PlayerInputs playerInputs in players)
         {
@@ -28,15 +28,12 @@ public class KeyboardInput : MonoBehaviour
         }
     }
 
-    void ManagePlayer(string playerName, List<InputCommand> inputCommands)
+    private void ManagePlayer(string playerName, List<InputCommand> inputCommands)
     {
-        foreach (InputCommand inputCommand in inputCommands)
+        foreach (var inputCommand in inputCommands.Where(inputCommand => Input.GetKeyDown(inputCommand.key)))
         {
-            if (Input.GetKeyDown(inputCommand.key))
-            {
-                CommandManager.Instance.AddCommand(new CommandObject(playerName, inputCommand.command));
-                return;
-            }
+            CommandManager.Instance.AddCommand(new CommandObject(playerName, inputCommand.command));
+            return;
         }
     }
 }

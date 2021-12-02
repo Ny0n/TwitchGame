@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5592fa7ca35eacc458b21f041c2c7e9a, type: 3}
   m_Name: Register
   m_EditorClassIdentifier: 
-  _text: '!join'
+  <Text>k__BackingField: '!join'
   playerEvent: {fileID: 11400000, guid: 976502ec049b36d46951733cfece77aa, type: 2}

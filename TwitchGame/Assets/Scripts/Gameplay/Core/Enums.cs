@@ -1,22 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Enums
+public static class Enums
 {
     public enum GameState
     {
-        PAUSED,
-        WAITINGFORPLAYERS,
-        STARTINGGAME,
-        PLAYING,
-        ENDINGGAME,
+        Paused,
+        WaitingForPlayers,
+        Starting,
+        Playing,
+        Ending,
     }
 
     public enum PlayerEventAction
     {
-        ADD,
-        REMOVE,
-        DEAD,
+        Add,
+        Remove,
+        Dead,
     }
 }

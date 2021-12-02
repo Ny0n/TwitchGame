@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Command/MoveRight", fileName = "MoveRight")]
@@ -10,6 +8,6 @@ public class MoveRightCommand : BaseMoveCommand
         base.Execute(playerName, playersList);
         if (!IsValid) return;
 
-        playerMove.GoRight();
+        _playerMove.GoRight();
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MyLazySingleton<T> : MonoBehaviour where T : MyLazySingleton<T>

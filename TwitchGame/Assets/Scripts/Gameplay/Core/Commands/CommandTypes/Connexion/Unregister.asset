@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27cea39ff627ad4b9dddc12d2cc70ac, type: 3}
   m_Name: Unregister
   m_EditorClassIdentifier: 
-  _text: '!leave'
+  <Text>k__BackingField: '!leave'
   playerEvent: {fileID: 11400000, guid: 976502ec049b36d46951733cfece77aa, type: 2}
