@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MySingleton<GameManager>
 {
-    public ScriptablePlayersList PlayersList;
+    public ScriptablePlayersList playersList;
 
     public TimerManager timerManager;
     public ScriptableGameEvent startRoundEvent;
@@ -87,7 +88,7 @@ public class GameManager : MySingleton<GameManager>
     private void CheckForGameEnd()
     {
         int alive = 0;
-        foreach (Player player in PlayersList.GetPlayersList())
+        foreach (Player player in playersList.GetPlayersList())
         {
             if (player.IsAlive)
                 alive++;

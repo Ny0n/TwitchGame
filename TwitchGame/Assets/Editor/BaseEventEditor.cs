@@ -1,8 +1,7 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-[CustomEditor(typeof(ScriptablePlayerEvent)), CanEditMultipleObjects]
-public class EventEditor : Editor
+public abstract class BaseEventEditor : Editor
 {
     private GenericEvent _event;
 

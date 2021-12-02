@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7a0755aeebf834b90d7c712df9495e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
   timerManager: {fileID: 262622764}
   startRoundEvent: {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
   gameStartEvent: {fileID: 11400000, guid: 717b9464896ede4449ee7558a0573665, type: 2}
