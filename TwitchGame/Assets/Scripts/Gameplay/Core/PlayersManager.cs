@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SkinDatabase))]
 public class PlayersManager : MySingleton<PlayersManager>

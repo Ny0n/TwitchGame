@@ -19,8 +19,19 @@ public class UIManager : MonoBehaviour
         playersListText.text = "";
         foreach (Player player in playersList.GetPlayersList())
         {
-            playersListText.text += player.Number + ": " + player.Name + " (" + (player.IsAlive ? "alive" : "dead") + ")" + "\n";
+            playersListText.text += GetLineFormat(player);
         }
+    }
+
+    private string GetLineFormat(Player player)
+    {
+        const string alive = "<color=green>alive</color>";
+        const string dead = "<color=red>dead</color>";
+        
+        string format = player.Number + ": " + player.Name;
+        format += " (" + (player.IsAlive ? alive : dead) + ")" + "\n";
+
+        return format;
     }
 
     // Update is called once per frame

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class BaseMoveCommand : Command
 {
     protected Player _player;

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17dde7ab0c1ac7d46856f74a11b82faf, type: 3}
-  m_Name: PlayerEvent
+  m_Script: {fileID: 11500000, guid: 132d5834fe5edfc43824ae4f31a87f75, type: 3}
+  m_Name: GameState
   m_EditorClassIdentifier: 
   _listeners: []
-  <PlayerName>k__BackingField: keyboard4
-  <Action>k__BackingField: 1
+  <State>k__BackingField: 0
