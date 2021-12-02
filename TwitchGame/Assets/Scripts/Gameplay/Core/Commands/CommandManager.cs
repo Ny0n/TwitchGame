@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CommandManager : MySingleton<CommandManager>
 {
@@ -14,8 +15,7 @@ public class CommandManager : MySingleton<CommandManager>
     {
         base.Awake();
         StoredCommands = new Dictionary<string, CommandObject>();
-        _commandsToProcess = new List<CommandObject>();
-    }
+        _commandsToProcess = new List<CommandObject>(); }
 
     // *********************** PROCESS *********************** //
 

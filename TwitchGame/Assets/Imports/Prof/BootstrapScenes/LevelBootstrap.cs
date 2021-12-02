@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +13,7 @@ public class LevelBootstrap : Bootstrap
     private string _nextLevelName;
 
     [SerializeField]
-    private GenericEvent _levelStartEvent;
+    private ScriptableGameEvent _levelStartEvent;
 
     private IEnumerator Start()
     {
