@@ -7,7 +7,7 @@ public class GameManager : MySingleton<GameManager>
 {
     public ScriptablePlayersList playersList;
 
-    public TimerManager timerManager;
+    public ScriptableTimerVariable roundTimer;
     public ScriptableGameEvent startRoundEvent;
     public ScriptableGameEvent gameStartEvent;
     public ScriptableGameEvent gameEndEvent;
@@ -31,7 +31,6 @@ public class GameManager : MySingleton<GameManager>
                 gameStartEvent.Raise();
                 break;
             case Enums.GameState.Playing:
-                StartRound();
                 break;
             case Enums.GameState.Ending:
                 gameEndEvent.Raise();
@@ -70,7 +69,8 @@ public class GameManager : MySingleton<GameManager>
     {
         if (!CompareState(Enums.GameState.Playing))
             return;
-        timerManager.StartTimer(10);
+        print("StartRound");
+        roundTimer.StartTimer();
         startRoundEvent.Raise();
     }
     
@@ -84,14 +84,34 @@ public class GameManager : MySingleton<GameManager>
 
     private IEnumerator GameLoopCoroutine()
     {
+        yield return StartCoroutine(StartingCoroutine());
+        yield return StartCoroutine(PlayingCoroutine());
+        yield return StartCoroutine(EndingCoroutine());
+        SwitchToState(Enums.GameState.WaitingForPlayers);
+    }
+    
+    private IEnumerator StartingCoroutine()
+    {
         SwitchToState(Enums.GameState.Starting);
-        yield return WaitCoroutine(2f);
-        SwitchToState(Enums.GameState.Playing);
-        // loop timer until game end
         yield return StartCoroutine(WaitCoroutine(2f));
+    }
+    
+    private IEnumerator PlayingCoroutine()
+    {
+        SwitchToState(Enums.GameState.Playing);
+        while (!CheckForGameEnd())
+        {
+            yield return StartCoroutine(StartRoundCoroutine());
+            yield return StartCoroutine(WaitForTimerEndCoroutine());
+            yield return StartCoroutine(WaitCoroutine(4f));
+        }
+        StartCoroutine(EndingCoroutine());
+    }
+    
+    private IEnumerator EndingCoroutine()
+    {
         SwitchToState(Enums.GameState.Ending);
         yield return StartCoroutine(WaitCoroutine(2f));
-        SwitchToState(Enums.GameState.WaitingForPlayers);
     }
     
     private IEnumerator WaitCoroutine(float time)
@@ -99,26 +119,21 @@ public class GameManager : MySingleton<GameManager>
         yield return new WaitForSeconds(time);
     }
     
-    private IEnumerator RestartRound()
+    private IEnumerator WaitForTimerEndCoroutine()
     {
-        yield return new WaitForSeconds(2);
+        while (roundTimer.IsTimerDone()) yield return null;
+    }
+    
+    private IEnumerator StartRoundCoroutine()
+    {
         StartRound();
+        yield return new WaitForSeconds(2);
     }
     
     // *********************** EVENTS *********************** //
     
     public void OnMapLoaded() // event
     {
-        SwitchToState(Enums.GameState.Playing);
-    }
-
-    public void OnTimerEnd() // event
-    {
-        switch (CurrentState)
-        {
-            case Enums.GameState.Playing:
-                StartCoroutine(RestartRound());
-                break;
-        }
+        // SwitchToState(Enums.GameState.Playing);
     }
 }

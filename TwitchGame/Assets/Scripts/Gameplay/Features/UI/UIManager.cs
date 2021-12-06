@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text currentStateText;
     public TMP_Text playersListText;
 
-    public ScriptableFloatVariable timerVariable;
+    public ScriptableTimerVariable roundTimer;
     public ScriptablePlayersList playersList;
 
     private void OnEnable() => playersList.Players.ValueChanged += OnPlayersUpdated;
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerSlider.value = timerVariable.Value / 20f;
+        timerSlider.value = roundTimer.Value / 20f;
         currentStateText.text = GameManager.Instance.CurrentState.ToString();
     }
 }

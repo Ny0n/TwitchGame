@@ -4,7 +4,7 @@ public class MyDictionary<TKey, TValue> : Dictionary<TKey, TValue>
 {
     public event System.Action ValueChanged;
 
-    public void NotifyChange() => ValueChanged.Invoke();
+    public void NotifyChange() => ValueChanged?.Invoke();
 
     public new TValue this[TKey key] { get
         {
@@ -13,26 +13,26 @@ public class MyDictionary<TKey, TValue> : Dictionary<TKey, TValue>
         set
         {
             base[key] = value;
-            ValueChanged.Invoke();
+            ValueChanged?.Invoke();
         }
     }
 
     public new void Add(TKey key, TValue value)
     {
         base.Add(key, value);
-        ValueChanged.Invoke();
+        ValueChanged?.Invoke();
     }
 
     public new bool Remove(TKey key)
     {
         bool result = base.Remove(key);
-        ValueChanged.Invoke();
+        ValueChanged?.Invoke();
         return result;
     }
 
     public new void Clear()
     {
         base.Clear();
-        ValueChanged.Invoke();
+        ValueChanged?.Invoke();
     }
 }

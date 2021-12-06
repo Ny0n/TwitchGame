@@ -1,8 +1,10 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
 public class CommandManager : MySingleton<CommandManager>
 {
+    public ScriptableTimerVariable roundTimer;
     public ScriptablePlayersList playersList;
     public Command defaultCommand;
 
@@ -14,7 +16,11 @@ public class CommandManager : MySingleton<CommandManager>
     {
         base.Awake();
         StoredCommands = new Dictionary<string, CommandObject>();
-        _commandsToProcess = new List<CommandObject>(); }
+        _commandsToProcess = new List<CommandObject>();
+    }
+
+    private void OnEnable() => roundTimer.TimerEnd += OnTimerEnd;
+    private void OnDisable() => roundTimer.TimerEnd -= OnTimerEnd;
 
     // *********************** PROCESS *********************** //
 

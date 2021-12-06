@@ -349,8 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97a9423b4c2e7941a597b97b7d1dba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: {fileID: 11400000, guid: ed7dbfb31c100cb40b59d9d52f24d3e6, type: 2}
-  TimerEnd: {fileID: 11400000, guid: 21db8a366929338448974187f8dbb79a, type: 2}
 --- !u!1 &389594938
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,22 +411,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - _event: {fileID: 11400000, guid: 21db8a366929338448974187f8dbb79a, type: 2}
-    _onEventRaised:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 389594941}
-          m_TargetAssemblyTypeName: CommandManager, Assembly-CSharp
-          m_MethodName: OnTimerEnd
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - _event: {fileID: 11400000, guid: 42303422f16581b4996db193a15e2fc2, type: 2}
     _onEventRaised:
       m_PersistentCalls:
@@ -457,6 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3548231e78537314c94af50a5d5104d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundTimer: {fileID: 11400000, guid: e5c50a61d083001469e616ff05b1ac23, type: 2}
   playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
   defaultCommand: {fileID: 11400000, guid: 0ec0b54adaea041499bacee4c4e1c460, type: 2}
 --- !u!114 &389594942
@@ -1160,7 +1143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
-  timerManager: {fileID: 262622764}
+  roundTimer: {fileID: 11400000, guid: e5c50a61d083001469e616ff05b1ac23, type: 2}
   startRoundEvent: {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
   gameStartEvent: {fileID: 11400000, guid: 717b9464896ede4449ee7558a0573665, type: 2}
   gameEndEvent: {fileID: 11400000, guid: 42303422f16581b4996db193a15e2fc2, type: 2}
@@ -1189,38 +1172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventListeners:
-  - _event: {fileID: 11400000, guid: 42303422f16581b4996db193a15e2fc2, type: 2}
-    _onEventRaised:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 825313087}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-          m_MethodName: OnGameEnd
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - _event: {fileID: 11400000, guid: 21db8a366929338448974187f8dbb79a, type: 2}
-    _onEventRaised:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 825313087}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-          m_MethodName: OnTimerEnd
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - _event: {fileID: 11400000, guid: 565709e8458fc2545a07ac55ae3601bb, type: 2}
     _onEventRaised:
       m_PersistentCalls:
@@ -1285,7 +1236,7 @@ MonoBehaviour:
   timerSlider: {fileID: 174006974}
   currentStateText: {fileID: 603386746}
   playersListText: {fileID: 2109712264}
-  timerVariable: {fileID: 11400000, guid: ed7dbfb31c100cb40b59d9d52f24d3e6, type: 2}
+  roundTimer: {fileID: 11400000, guid: e5c50a61d083001469e616ff05b1ac23, type: 2}
   playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
 --- !u!1 &996979473
 GameObject:
