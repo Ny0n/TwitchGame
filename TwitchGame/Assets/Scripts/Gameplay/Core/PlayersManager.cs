@@ -59,7 +59,7 @@ public class PlayersManager : MySingleton<PlayersManager>
         // creation of new player object
         Player player = new Player(playerName, _currentPlayerNumber);
         player.SetSkin(_skinDatabase.GetRandomSkin());
-        player.Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn()); // TODO here for now
+        player.Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn(), Quaternion.identity); // TODO here for now
 
         _players.Add(playerName, player);
         _currentPlayerNumber++;
@@ -84,6 +84,9 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     public void OnGameEnd() // event
     {
-        UnregisterAllPlayers();
+        foreach (var player in playersList.GetPlayersList())
+        {
+            player.Remove();
+        }
     }
 }

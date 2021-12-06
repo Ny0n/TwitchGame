@@ -8,6 +8,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private GameObject _skinParent;
 
     private bool _rebindAnimator = false;
+    private readonly int Win1 = Animator.StringToHash("Win");
 
     private void LateUpdate()
     {
@@ -23,5 +24,10 @@ public class PlayerData : MonoBehaviour
         Destroy(_skinParent.transform.GetChild(0).gameObject);
         Instantiate(skin, _skinParent.transform);
         _rebindAnimator = true;
+    }
+
+    public void Win()
+    {
+        _animator.SetTrigger(Win1);
     }
 }

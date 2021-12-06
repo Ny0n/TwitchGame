@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MySingleton<GameManager>
 {
@@ -87,7 +88,6 @@ public class GameManager : MySingleton<GameManager>
         yield return StartCoroutine(StartingCoroutine());
         yield return StartCoroutine(PlayingCoroutine());
         yield return StartCoroutine(EndingCoroutine());
-        SwitchToState(Enums.GameState.WaitingForPlayers);
     }
     
     private IEnumerator StartingCoroutine()
@@ -111,7 +111,8 @@ public class GameManager : MySingleton<GameManager>
     private IEnumerator EndingCoroutine()
     {
         SwitchToState(Enums.GameState.Ending);
-        yield return StartCoroutine(WaitCoroutine(2f));
+        yield return StartCoroutine(WaitCoroutine(3f));
+        SceneManager.LoadScene("Scenes/WinnerScene");
     }
     
     private IEnumerator WaitCoroutine(float time)
@@ -121,7 +122,7 @@ public class GameManager : MySingleton<GameManager>
     
     private IEnumerator WaitForTimerEndCoroutine()
     {
-        while (roundTimer.IsTimerDone()) yield return null;
+        while (!roundTimer.IsTimerDone()) yield return null;
     }
     
     private IEnumerator StartRoundCoroutine()

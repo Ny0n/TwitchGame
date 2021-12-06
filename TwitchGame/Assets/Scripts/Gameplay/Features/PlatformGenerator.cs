@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
@@ -18,10 +19,12 @@ public class PlatformGenerator : MonoBehaviour
     public Vector3 playerSpawnOffset = new Vector3(0f, 2f, 0f);
     public Vector3 offsetFromNormalPlatforms = new Vector3(0f, 3f, 0f);
 
+    private List<GameObject> _generatedGamePlatforms;
     private Dictionary<int, GameObject> _generatedPlayerPlatforms;
 
     private void Awake()
     {
+        _generatedGamePlatforms = new List<GameObject>();
         _generatedPlayerPlatforms = new Dictionary<int, GameObject>();
     }
 
@@ -71,7 +74,12 @@ public class PlatformGenerator : MonoBehaviour
     {
         StartCoroutine(StartingGame());
     }
-
+    
+    public void OnGameEnd() // event
+    {
+        StartCoroutine(EndingGame());
+    }
+    
     private IEnumerator StartingGame()
     {
         // spawn game platforms
@@ -79,17 +87,29 @@ public class PlatformGenerator : MonoBehaviour
         {
             for (int h = 0; h < height; h++)
             {
-                Instantiate(platformPrefab, originPoint.position + (dist * w * Vector3.right) + (dist * h * Vector3.forward), Quaternion.identity, transform);
+                _generatedGamePlatforms.Add(Instantiate(platformPrefab, originPoint.position + (dist * w * Vector3.right) + (dist * h * Vector3.forward), Quaternion.identity, transform));
                 yield return new WaitForSeconds(waitTime);
             }
         }
 
         // destroy player platforms
-        foreach (KeyValuePair<int, GameObject> entry in _generatedPlayerPlatforms)
+        foreach (KeyValuePair<int, GameObject> entry in _generatedPlayerPlatforms.ToList())
         {
             Destroy(entry.Value);
         }
+        _generatedPlayerPlatforms.Clear();
 
         mapLoadedEvent.Raise();
+    }
+
+    private IEnumerator EndingGame()
+    {
+        // destroy game platforms
+        foreach (var platform in _generatedGamePlatforms.ToList())
+        {
+            Destroy(platform);
+            yield return new WaitForSeconds(waitTime);
+        }
+        _generatedGamePlatforms.Clear();
     }
 }

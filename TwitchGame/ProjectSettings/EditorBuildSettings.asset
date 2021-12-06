@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Bootstrap.unity
-    guid: a013ae72c59aa8348aa7c8b13e540b94
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/SceneAdrien.unity
     guid: fe8590f3237914f4dae81014ebc788ce
@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneTom.unity
     guid: bacb6f8ecf4fb2a448e1ebf8f10b5d75
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/WinnerScene.unity
+    guid: 7cffc89981f83214b93607690c8df6b7
   m_configObjects: {}

@@ -17,10 +17,10 @@ public class Player : Object
 
     private void NotifyChange() => PlayersManager.Instance?.NotifyPlayerUpdated(this);
 
-    public void Instantiate(GameObject prefab, Vector3 position)
+    public void Instantiate(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         // creation of player scene character
-        PlayerObject = Instantiate(prefab, position, Quaternion.identity);
+        PlayerObject = Object.Instantiate(prefab, position, rotation);
         PlayerObject.GetComponent<PlayerData>().Player = this;
         PlayerObject.name = Name;
         UpdateSkin();
@@ -56,6 +56,12 @@ public class Player : Object
         IsAlive = false;
         NotifyChange();
         Remove();
+    }
+
+    public void Win()
+    {
+        if (PlayerObject != null)
+            PlayerObject.GetComponent<PlayerData>().Win();
     }
 
     public override string ToString() => $"{{ Name = \"{Name}\", Number = \"{Number}\" }}";

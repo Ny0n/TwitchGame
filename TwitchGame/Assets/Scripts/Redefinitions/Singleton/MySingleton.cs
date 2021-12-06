@@ -4,7 +4,7 @@ public abstract class MySingleton<T> : MonoBehaviour where T : MySingleton<T>
 {
     public static T Instance { get; private set; }
 
-    protected virtual bool DoDestroyOnLoad { get; } = false;
+    protected virtual bool DoDestroyOnLoad { get; } = true;
 
     protected virtual void Awake()
     {

@@ -1,32 +1,35 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformContact : MonoBehaviour
 {
-    public float destructionTimer = 2f;
-
-    private bool _destructionStarted = false;
+    [SerializeField] private List<Material> _materials = new List<Material>();
+    private Renderer _renderer;
+    private int _currentState = -1;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _renderer = GetComponent<Renderer>();
+        GoToNextState();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GoToNextState()
     {
+        _currentState++;
+        if (_currentState >= _materials.Count)
+        {
+            Destroy(gameObject);
+            return;
+        }
         
+        Material mat = _materials[_currentState];
+        _renderer.material = mat;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        StartDestruction();
-    }
-
-    void StartDestruction()
-    {
-        if (_destructionStarted) return;
-        Destroy(gameObject, destructionTimer);
-        _destructionStarted = true;
+        if (collision.gameObject.CompareTag("Player"))
+            GoToNextState();
     }
 }
