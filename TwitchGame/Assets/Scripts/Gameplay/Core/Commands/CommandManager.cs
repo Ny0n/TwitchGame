@@ -79,17 +79,17 @@ public class CommandManager : MySingleton<CommandManager>
 
     // *********************** EVENTS *********************** //
 
-    public void OnRoundStart() // event
+    public void OnRoundStart() // SO event
     {
         ResetAllCommands();
     }
 
-    public void OnTimerEnd() // event
+    public void OnTimerEnd() // C# event
     {
         ExecuteAllCommands();
     }
 
-    public void OnGameEnd() // event
+    public void OnGameEnd() // SO event
     {
         StoredCommands.Clear();
     }
