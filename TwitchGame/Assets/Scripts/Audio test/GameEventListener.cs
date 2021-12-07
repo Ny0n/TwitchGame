@@ -31,6 +31,11 @@ public class GameEventListener : MonoBehaviour
         _gameEvent.RegisterListener(GetComponent<GameEventListener>());
     }
 
+    private void OnDisable()
+    {
+        _gameEvent.UnregisterListener(GetComponent<GameEventListener>());
+    }
+
     public void OnEventRaised()
     {
         _unityEvent.Invoke();
