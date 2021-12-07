@@ -25,8 +25,9 @@ public class PlayersManager : MySingleton<PlayersManager>
             _players.NotifyChange();
     }
 
-    public void OnReceivePlayerEvent(ScriptablePlayerEvent playerEvent) // event
+    public void OnReceivePlayerEvent(GenericEvent evt) // event
     {
+        ScriptablePlayerEvent playerEvent = (ScriptablePlayerEvent)evt;
         switch (playerEvent.Action)
         {
             case Enums.PlayerEventAction.Dead:
@@ -82,11 +83,12 @@ public class PlayersManager : MySingleton<PlayersManager>
         }
     }
 
-    public void OnGameEnd() // event
+    public void OnGameEnd(GenericEvent evt) // event
     {
         foreach (var player in playersList.GetPlayersList())
         {
             player.Remove();
         }
+        evt.Answer();
     }
 }

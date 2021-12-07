@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cf61d2c3db54a4ba867c0c65cb5c30, type: 3}
-  m_Name: MoveDown
+  m_Script: {fileID: 11500000, guid: cd840bfbcd30bfa4392665aaeeb479da, type: 3}
+  m_Name: Move Down Command
   m_EditorClassIdentifier: 
   <Text>k__BackingField: '!down'
+  _direction: 1

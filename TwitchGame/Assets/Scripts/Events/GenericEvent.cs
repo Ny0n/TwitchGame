@@ -17,7 +17,7 @@ public abstract class  GenericEvent : ScriptableObject
         _answered = 0;
         for (int i = _listeners.Count - 1; i >= 0; i--)
         {
-            _listeners[i]?.OnEventRaised();
+            _listeners[i]?.OnEventRaised(this);
         }
     }
 
@@ -29,6 +29,13 @@ public abstract class  GenericEvent : ScriptableObject
     public void UnregisterListener(GenericEventListener listener)
     {
         _listeners.Remove(listener);
+    }
+    
+    public IEnumerator RaiseAndWait()
+    {
+        this.Raise();
+        while (!this.HasEveryoneAnswered)
+            yield return null;
     }
     
     public IEnumerator WaitForSelfAnswers()

@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 681753aaf673aed4bbd4d7cb76ca0ec5, type: 3}
-  m_Name: MoveLeft
+  m_Script: {fileID: 11500000, guid: 2cc494fbc5b340149b1ccee190e47999, type: 3}
+  m_Name: Unregister Command
   m_EditorClassIdentifier: 
-  <Text>k__BackingField: '!left'
+  <Text>k__BackingField: '!leave'
+  _connexionType: 1
+  _playerEvent: {fileID: 11400000, guid: 976502ec049b36d46951733cfece77aa, type: 2}

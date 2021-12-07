@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21636b7f27580f3479557a3bd2de7f26, type: 3}
-  m_Name: MoveUp
+  m_Script: {fileID: 11500000, guid: f7a1d4251b484444ab345b95ab4f39b6, type: 3}
+  m_Name: ActionStart
   m_EditorClassIdentifier: 
-  <Text>k__BackingField: '!up'
+  _listeners: []

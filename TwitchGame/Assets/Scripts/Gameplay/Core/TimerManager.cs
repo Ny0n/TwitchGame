@@ -30,4 +30,10 @@ public class TimerManager : MySingleton<TimerManager>
         if (_timers.Contains(timer)) return;
         _timers.Add(timer);
     }
+    
+    public void RemoveTimer(ScriptableTimerVariable timer)
+    {
+        if (_timers.Contains(timer))
+            _timers.Remove(timer);
+    }
 }

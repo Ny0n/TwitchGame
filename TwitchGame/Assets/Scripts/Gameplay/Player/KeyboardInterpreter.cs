@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class KeyboardInput : MonoBehaviour
+public class KeyboardInterpreter : MonoBehaviour
 {
     [System.Serializable]
     private struct InputCommand
@@ -18,14 +20,13 @@ public class KeyboardInput : MonoBehaviour
         public List<InputCommand> inputCommands;
     }
 
-    [SerializeField] private List<PlayerInputs> players; // Create keyboard players in the inspector
+    [FormerlySerializedAs("players")] [SerializeField]
+    private List<PlayerInputs> _players; // Create keyboard players in the inspector
 
     private void Update()
     {
-        foreach (PlayerInputs playerInputs in players)
-        {
+        foreach (PlayerInputs playerInputs in _players)
             ManagePlayer(playerInputs.playerName, playerInputs.inputCommands);
-        }
     }
 
     private void ManagePlayer(string playerName, List<InputCommand> inputCommands)

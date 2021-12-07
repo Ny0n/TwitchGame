@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17dde7ab0c1ac7d46856f74a11b82faf, type: 3}
-  m_Name: PlayerEvent
+  m_Script: {fileID: 11500000, guid: aabe09dff8223584a84398b9552c2971, type: 3}
+  m_Name: Empty Command
   m_EditorClassIdentifier: 
-  _listeners: []
-  <PlayerName>k__BackingField: keyboard1
-  <Action>k__BackingField: 2
+  <Text>k__BackingField: '!stay'

@@ -32,6 +32,20 @@ public class ScriptableTimerVariable : ScriptableObject
             Debug.LogError("To use timers, please add an instance of TimerManager to the scene (temp)");
         }
     }
+    
+    public void StopTimer()
+    {
+        var timerManager = TimerManager.Instance;
+        if (timerManager != null)
+        {
+            timerManager.RemoveTimer(this);
+            Value = 0;
+        }
+        else
+        {
+            Debug.LogError("To use timers, please add an instance of TimerManager to the scene (temp)");
+        }
+    }
 
     public void OnTimerEnd()
     {

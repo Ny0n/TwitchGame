@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aabe09dff8223584a84398b9552c2971, type: 3}
-  m_Name: Empty
+  m_Script: {fileID: 11500000, guid: 2cc494fbc5b340149b1ccee190e47999, type: 3}
+  m_Name: Register Command
   m_EditorClassIdentifier: 
-  <Text>k__BackingField: '!stay'
+  <Text>k__BackingField: '!join'
+  _connexionType: 0
+  _playerEvent: {fileID: 11400000, guid: 976502ec049b36d46951733cfece77aa, type: 2}

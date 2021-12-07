@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using UnityEngine;
 
 [RequireComponent(typeof(TwitchInterpreter))]
-public class TwitchConnexion : MonoBehaviour
+public class TwitchClient : MonoBehaviour
 {
     private TcpClient twitchClient;
     private StreamReader reader;

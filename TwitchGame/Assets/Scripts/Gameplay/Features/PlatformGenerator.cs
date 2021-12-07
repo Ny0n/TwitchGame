@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    public ScriptableGameEvent mapLoadedEvent;
-
     public GameObject platformPrefab;
     public GameObject playerPlatformPrefab;
     public float waitTime = 0.04f;
@@ -70,17 +68,17 @@ public class PlatformGenerator : MonoBehaviour
         return GetSpawnPosFromPlatform(_generatedPlayerPlatforms[currentIndex]);
     }
 
-    public void OnGameStart() // event
+    public void OnGameStart(GenericEvent evt) // event
     {
-        StartCoroutine(StartingGame());
+        StartCoroutine(StartingGame(evt));
     }
     
-    public void OnGameEnd() // event
+    public void OnGameEnd(GenericEvent evt) // event
     {
-        StartCoroutine(EndingGame());
+        StartCoroutine(EndingGame(evt));
     }
     
-    private IEnumerator StartingGame()
+    private IEnumerator StartingGame(GenericEvent evt)
     {
         // spawn game platforms
         for (int w = 0; w < width; w++)
@@ -99,10 +97,10 @@ public class PlatformGenerator : MonoBehaviour
         }
         _generatedPlayerPlatforms.Clear();
 
-        mapLoadedEvent.Raise();
+        evt.Answer();
     }
 
-    private IEnumerator EndingGame()
+    private IEnumerator EndingGame(GenericEvent evt)
     {
         // destroy game platforms
         foreach (var platform in _generatedGamePlatforms.ToList())
@@ -111,5 +109,7 @@ public class PlatformGenerator : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         _generatedGamePlatforms.Clear();
+        
+        evt.Answer();
     }
 }

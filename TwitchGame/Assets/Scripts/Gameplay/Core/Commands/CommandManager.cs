@@ -1,26 +1,23 @@
 using System;
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CommandManager : MySingleton<CommandManager>
 {
-    public ScriptableTimerVariable roundTimer;
     public ScriptablePlayersList playersList;
     public Command defaultCommand;
 
-    private Dictionary<string, CommandObject> StoredCommands { get; set; }
-
     private List<CommandObject> _commandsToProcess;
+    private Dictionary<string, CommandObject> _storedCommands;
 
     protected override void Awake()
     {
         base.Awake();
-        StoredCommands = new Dictionary<string, CommandObject>();
+        _storedCommands = new Dictionary<string, CommandObject>();
         _commandsToProcess = new List<CommandObject>();
     }
-
-    private void OnEnable() => roundTimer.TimerEnd += OnTimerEnd;
-    private void OnDisable() => roundTimer.TimerEnd -= OnTimerEnd;
 
     // *********************** PROCESS *********************** //
 
@@ -62,18 +59,18 @@ public class CommandManager : MySingleton<CommandManager>
 
     private void StoreCommand(CommandObject commandObject)
     {
-        StoredCommands[commandObject.PlayerName] = commandObject;
+        _storedCommands[commandObject.PlayerName] = commandObject;
     }
 
     private void ExecuteAllCommands()
     {
-        foreach (var entry in StoredCommands.ToList())
+        foreach (var entry in _storedCommands.ToList())
             ExecuteCommand(entry.Value);
     }
 
     private void ResetAllCommands()
     {
-        foreach (var entry in StoredCommands.ToList())
+        foreach (var entry in _storedCommands.ToList())
             StoreCommand(new CommandObject(entry.Key, defaultCommand));
     }
 
@@ -84,13 +81,21 @@ public class CommandManager : MySingleton<CommandManager>
         ResetAllCommands();
     }
 
-    public void OnTimerEnd() // C# event
+    private IEnumerator ActionStart(GenericEvent evt) 
     {
         ExecuteAllCommands();
+        yield return new WaitForSeconds(4);
+        evt.Answer();
     }
 
-    public void OnGameEnd() // SO event
+    public void OnActionStart(GenericEvent evt)
     {
-        StoredCommands.Clear();
+        StartCoroutine(ActionStart(evt));
+    }
+
+    public void OnGameEnd(GenericEvent evt) // SO event
+    {
+        _storedCommands.Clear();
+        evt.Answer();
     }
 }

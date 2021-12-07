@@ -12,11 +12,11 @@ public class GenericEventListener
     private GenericEvent _event;
 
     [SerializeField]
-    private UnityEvent _onEventRaised;
+    private UnityEvent<GenericEvent> _onEventRaised;
 
-    public void OnEventRaised()
+    public void OnEventRaised(GenericEvent evt)
     {
-        _onEventRaised.Invoke();
+        _onEventRaised.Invoke(evt);
     }
 
     public void OnEnable()

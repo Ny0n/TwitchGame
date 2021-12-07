@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5592fa7ca35eacc458b21f041c2c7e9a, type: 3}
-  m_Name: Register
+  m_Script: {fileID: 11500000, guid: cd840bfbcd30bfa4392665aaeeb479da, type: 3}
+  m_Name: Move Up Command
   m_EditorClassIdentifier: 
-  <Text>k__BackingField: '!join'
-  playerEvent: {fileID: 11400000, guid: 976502ec049b36d46951733cfece77aa, type: 2}
+  <Text>k__BackingField: '!up'
+  _direction: 0
