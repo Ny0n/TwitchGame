@@ -7,16 +7,16 @@ using UnityEngine;
 public class CommandManager : MySingleton<CommandManager>
 {
     public ScriptablePlayersList playersList;
-    public Command defaultCommand;
+    public GameCommand defaultGameCommand;
 
-    private List<CommandObject> _commandsToProcess;
-    private Dictionary<string, CommandObject> _storedCommands;
+    private List<GameCommandObject> _commandsToProcess;
+    private Dictionary<string, GameCommandObject> _storedCommands;
 
     protected override void Awake()
     {
         base.Awake();
-        _storedCommands = new Dictionary<string, CommandObject>();
-        _commandsToProcess = new List<CommandObject>();
+        _storedCommands = new Dictionary<string, GameCommandObject>();
+        _commandsToProcess = new List<GameCommandObject>();
     }
 
     // *********************** PROCESS *********************** //
@@ -24,42 +24,42 @@ public class CommandManager : MySingleton<CommandManager>
     private void Update()
     {
         if (_commandsToProcess.Count <= 0) return;
-        foreach (CommandObject commandObject in _commandsToProcess.ToList())
+        foreach (GameCommandObject gameCommandObject in _commandsToProcess.ToList())
         {
-            _commandsToProcess.Remove(commandObject);
-            ProcessCommand(commandObject);
+            _commandsToProcess.Remove(gameCommandObject);
+            ProcessCommand(gameCommandObject);
         }
     }
 
-    public void AddCommand(CommandObject commandObject)
+    public void AddCommand(GameCommandObject gameCommandObject)
     {
-        _commandsToProcess.Add(commandObject);
+        _commandsToProcess.Add(gameCommandObject);
     }
 
-    private void ProcessCommand(CommandObject commandObject)
+    private void ProcessCommand(GameCommandObject gameCommandObject)
     {
         switch (GameManager.Instance.CurrentState)
         {
             case Enums.GameState.WaitingForPlayers:
-                ExecuteCommand(commandObject);
+                ExecuteCommand(gameCommandObject);
                 break;
 
             default:
-                StoreCommand(commandObject);
+                StoreCommand(gameCommandObject);
                 break;
         }
     }
 
     // *********************** EXECUTION *********************** //
 
-    private void ExecuteCommand(CommandObject commandObject)
+    private void ExecuteCommand(GameCommandObject gameCommandObject)
     {
-        commandObject.Execute(playersList);
+        gameCommandObject.Execute(playersList);
     }
 
-    private void StoreCommand(CommandObject commandObject)
+    private void StoreCommand(GameCommandObject gameCommandObject)
     {
-        _storedCommands[commandObject.PlayerName] = commandObject;
+        _storedCommands[gameCommandObject.PlayerName] = gameCommandObject;
     }
 
     private void ExecuteAllCommands()
@@ -71,7 +71,7 @@ public class CommandManager : MySingleton<CommandManager>
     private void ResetAllCommands()
     {
         foreach (var entry in _storedCommands.ToList())
-            StoreCommand(new CommandObject(entry.Key, defaultCommand));
+            StoreCommand(new GameCommandObject(entry.Key, defaultGameCommand));
     }
 
     // *********************** EVENTS *********************** //

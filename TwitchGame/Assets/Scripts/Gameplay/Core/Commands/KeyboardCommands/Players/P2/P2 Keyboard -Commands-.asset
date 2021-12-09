@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5d2fad9c8757b4d878be3414361044, type: 3}
+  m_Name: P2 Keyboard -Commands-
+  m_EditorClassIdentifier: 
+  _playerKeyboardCommands:
+  - {fileID: 11400000, guid: bef71846bfa0fff47a803075f31888bf, type: 2}
+  - {fileID: 11400000, guid: 03e32c787cec9254c9caa0cad7714033, type: 2}
+  - {fileID: 11400000, guid: 4897da129ecafa74a897ae12a4779a9f, type: 2}
+  - {fileID: 11400000, guid: 17795e55ef944bd409726bb3944666a3, type: 2}
+  - {fileID: 11400000, guid: dee29d059ecbbe84d8d02ed94bea17b3, type: 2}
+  - {fileID: 11400000, guid: b908f534df518a542a4f1857f2bc8572, type: 2}
