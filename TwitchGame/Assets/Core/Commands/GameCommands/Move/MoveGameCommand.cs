@@ -17,9 +17,9 @@ public class MoveGameCommand : GameCommand
     public override void Execute(string playerName, ScriptablePlayersList playersList)
     {
         if (!GameManager.Instance.CompareState(Enums.GameState.Playing)) return;
-        if (!playersList.IsPlayerRegistered(playerName)) return;
-
-        Player player = playersList.Players[playerName];
+        
+        Player player = playersList.TryGetPlayer(playerName);
+        if (player == null) return;
         if (!player.IsAlive) return;
 
         PlayerMove playerMove = player.PlayerObject.GetComponent<PlayerMove>();

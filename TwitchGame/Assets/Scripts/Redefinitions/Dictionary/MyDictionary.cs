@@ -6,10 +6,8 @@ public class MyDictionary<TKey, TValue> : Dictionary<TKey, TValue>
 
     public void NotifyChange() => ValueChanged?.Invoke();
 
-    public new TValue this[TKey key] { get
-        {
-            return base[key];
-        }
+    public new TValue this[TKey key] {
+        get => base[key];
         set
         {
             base[key] = value;

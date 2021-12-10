@@ -9,7 +9,7 @@ public class EventReceiver : MonoBehaviour
     {
         foreach (GenericEventListener _eventListener in _eventListeners)
         {
-            _eventListener.OnEnable();
+            _eventListener.Enable();
         }
     }
 
@@ -17,7 +17,7 @@ public class EventReceiver : MonoBehaviour
     {
         foreach (GenericEventListener _eventListener in _eventListeners)
         {
-            _eventListener.OnDisable();
+            _eventListener.Disable();
         }
     }
 }

@@ -44,17 +44,17 @@ public abstract class  GenericEvent : ScriptableObject
             yield return null;
     }
 
-    public IEnumerator WaitForEventAnswers(GenericEvent waitingEvent, GenericEvent concernedEvent)
+    public IEnumerator WaitForEventAnswers(GenericEvent otherEvent)
     {
-        while (!concernedEvent.HasEveryoneAnswered)
+        while (!otherEvent.HasEveryoneAnswered)
             yield return null;
-        waitingEvent.Answer();
+        this.Answer();
     }
     
-    public IEnumerator WaitForEventsAnswers(GenericEvent waitingEvent, List<GenericEvent> concernedEvents)
+    public IEnumerator WaitForEventsAnswers(List<GenericEvent> otherEvents)
     {
-        while (concernedEvents.Any(evt => !evt.HasEveryoneAnswered))
+        while (otherEvents.Any(evt => !evt.HasEveryoneAnswered))
             yield return null;
-        waitingEvent.Answer();
+        this.Answer();
     }
 }

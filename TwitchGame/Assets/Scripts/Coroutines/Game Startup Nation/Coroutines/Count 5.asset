@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cef8ae2007d5fe49a13dab2054ec2ea, type: 3}
-  m_Name: PlayersList
+  m_Script: {fileID: 11500000, guid: 0e29b9d09bfebf44b97ce36efc98e9fe, type: 3}
+  m_Name: Count 5
   m_EditorClassIdentifier: 
-  _names: []
+  _counterText: {fileID: 11400000, guid: a5e38ece2c9f02c44aae34611e3c282d, type: 2}
+  _counterDelay: 5

@@ -168,7 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventListeners:
-  - _event: {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
+  - _events:
+    - {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
     _onEventRaised:
       m_PersistentCalls:
         m_Calls:
@@ -184,7 +185,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - _event: {fileID: 11400000, guid: 42303422f16581b4996db193a15e2fc2, type: 2}
+  - _events:
+    - {fileID: 11400000, guid: 42303422f16581b4996db193a15e2fc2, type: 2}
     _onEventRaised:
       m_PersistentCalls:
         m_Calls:
@@ -200,7 +202,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - _event: {fileID: 11400000, guid: c4f6067c2483893449d42a3014876539, type: 2}
+  - _events:
+    - {fileID: 11400000, guid: c4f6067c2483893449d42a3014876539, type: 2}
     _onEventRaised:
       m_PersistentCalls:
         m_Calls:
