@@ -297,9 +297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba2cbfece83e34baadda0a964f11ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: gcgroupe9
-  password: oauth:pgzfy2ztaomz47yqihwwm2t829t2if
-  channelName: gcgroupe9
+  _username: gcgroupe9
+  _password: oauth:pgzfy2ztaomz47yqihwwm2t829t2if
+  _channelName: gcgroupe9
+  _toggleConnectionKeybind: 116
+  _connectionMessage: <Chat connected to the game>
+  _disconnectionMessage: <Chat disconnected from the game>
 --- !u!1 &1652982921
 GameObject:
   m_ObjectHideFlags: 0

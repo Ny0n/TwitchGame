@@ -1,54 +1,137 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [RequireComponent(typeof(TwitchInterpreter))]
 public class TwitchClient : MonoBehaviour
 {
-    private TcpClient twitchClient;
-    private StreamReader reader;
-    private StreamWriter writer;
+    public bool Connected => _tcpClient is {Connected: true};
+    
+    [Header("Twitch connection")]
+    [SerializeField] private string _username;
+    [SerializeField] private string _password;
+    [SerializeField] private string _channelName;
+    [SerializeField] private KeyCode _toggleConnectionKeybind = KeyCode.T;
+    
+    [Header("Default messages")]
+    [SerializeField] private string _connectionMessage = "<Chat connected to the game>";
+    [SerializeField] private string _disconnectionMessage = "<Chat disconnected from the game>";
 
-    public string username, password, channelName;
-
+    private TcpClient _tcpClient;
+    private StreamReader _streamReader;
+    private StreamWriter _streamWriter;
+    
+    private CancellationTokenSource _tokenSource;
+    private CancellationToken _token;
+    
     private TwitchInterpreter _twitchInterpreter;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start() => _twitchInterpreter = GetComponent<TwitchInterpreter>();
+    private void OnDisable() => DisconnectAsync();
+
+    private bool _crashRequested; // false by default
+    private void Update()
     {
-        _twitchInterpreter = GetComponent<TwitchInterpreter>();
-        Connect();
+        if (Input.GetKeyDown(_toggleConnectionKeybind))
+            ToggleConnection();
+
+        if (Input.GetKeyDown(KeyCode.C))
+            _crashRequested = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    #region Twitch Connection
+
+    private void ToggleConnection()
     {
-        if (!twitchClient.Connected)
-            Connect();
+        if (!Connected)
+            ConnectAsync();
+        else
+            DisconnectAsync();
+    }
+
+    private async void ConnectAsync()
+    {
+        if (Connected) return;
         
-        ReadChat();
+        _tcpClient = new TcpClient();
+        await _tcpClient.ConnectAsync("irc.chat.twitch.tv", 6667);
+        
+        _streamReader = new StreamReader(_tcpClient.GetStream());
+        _streamWriter = new StreamWriter(_tcpClient.GetStream());
+
+        await _streamWriter.WriteLineAsync("PASS " + _password);
+        await _streamWriter.WriteLineAsync("NICK " + _username);
+        await _streamWriter.WriteLineAsync("USER " + _username + " 8 * :" + _username);
+        await _streamWriter.WriteLineAsync("JOIN #" + _channelName);
+        await _streamWriter.FlushAsync();
+        
+        StartThreadReadChat();
+        
+        await SendChatMessageAsync(_connectionMessage);
+    }
+    
+    private async void DisconnectAsync()
+    {
+        if (!Connected) return;
+        
+        _tokenSource?.Cancel();
+        
+        await SendChatMessageAsync(_disconnectionMessage);
+        
+        _streamReader?.Close();
+        _streamWriter?.Close();
+        _tcpClient?.Close();
     }
 
-    private void Connect()
-    {
-        twitchClient = new TcpClient("irc.chat.twitch.tv", 6667);
-        reader = new StreamReader(twitchClient.GetStream());
-        writer = new StreamWriter(twitchClient.GetStream());
+    #endregion
+    
+    #region Read Chat Messages (Thread)
 
-        writer.WriteLine("PASS " + password);
-        writer.WriteLine("NICK " + username);
-        writer.WriteLine("USER " + username + " 8 * :" + username);
-        writer.WriteLine("JOIN #" + channelName);
-        writer.Flush(); 
+    private async void StartThreadReadChat()
+    {
+        _tokenSource = new CancellationTokenSource();
+        _token = _tokenSource.Token;
+
+        while (true) // if the thread ever crashes, we restart it
+        {
+            try
+            {
+                await Task.Run(ReadChatThread, _token);
+            }
+            catch
+            {
+                Debug.LogWarning("Twitch chat reader thread crashed, restarting...");
+            }
+            
+            if (_tokenSource.IsCancellationRequested)
+                break; // unless we manually requested the cancellation
+        }
+    }
+    
+    private void ReadChatThread() // thread func
+    {
+        while (!_tokenSource.IsCancellationRequested)
+        {
+            ReadChat();
+            Debug.Log("read");
+            
+            if (_crashRequested)
+            {
+                _crashRequested = false;
+                throw new ThreadInterruptedException();
+            }
+        }
     }
 
     private void ReadChat()
     {
-        if (twitchClient.Available > 0)
+        if (_tcpClient?.Available > 0)
         {
-            var message = reader.ReadLine();
-            if (message.Contains("PRIVMSG"))
+            var message = _streamReader?.ReadLine();
+            if (message != null && message.Contains("PRIVMSG"))
             {
                 var splitPoint = message.IndexOf("!", 1);
                 var chatName = message.Substring(0, splitPoint);
@@ -61,18 +144,26 @@ public class TwitchClient : MonoBehaviour
             }
         }
     }
-
+    
     private void NewMessage(string playerName, string message)
     {
         _twitchInterpreter.Interpret(playerName, message);
     }
+    
+    #endregion
 
-    private void SendIrcMessage(string message)
+    #region Send Chat Messages
+
+    private async Task SendChatMessageAsync(string message)
     {
+        if (!Connected) return;
+        
+        var format = ":" + _username + "!" + _username + "@" + _username + ".tmi.twitch.tv PRIVMSG #" + _channelName + " :";
+        
         try
         {
-            writer.WriteLine(message);
-            writer.Flush();
+            await _streamWriter.WriteLineAsync(format + message);
+            await _streamWriter.FlushAsync();
         }
         catch (Exception ex)
         {
@@ -80,16 +171,5 @@ public class TwitchClient : MonoBehaviour
         }
     }
 
-    private void SendPublicChatMessage(string message)
-    {
-        try
-        {
-            SendIrcMessage(":" + username + "!" + username + "@" + username + ".tmi.twitch.tv PRIVMSG #" + channelName +
-                           " :" + message);
-        }
-        catch ( Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
+    #endregion
 }
