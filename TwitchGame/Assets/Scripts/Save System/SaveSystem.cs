@@ -42,13 +42,14 @@ public class SaveSystem : MonoBehaviour
             try
             {
                 await WriteDataAsync(data);
+                // hide saving UI...
+                
+                Debug.Log("Saved!");
             }
             catch (Exception e)
             {
                 Debug.LogWarning($"Error while trying to save: {e}");
             }
-            
-            Debug.Log("Saved!");
         }));
     }
 
