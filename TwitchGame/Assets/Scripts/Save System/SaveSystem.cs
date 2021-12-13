@@ -131,7 +131,7 @@ public class SaveSystem : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogWarning("No save file to load");
+            Debug.LogWarning($"Error while trying to load: {e}");
         }
     }
     
@@ -142,28 +142,22 @@ public class SaveSystem : MonoBehaviour
         #region Read (Simple)
         
         // string text = File.ReadAllText(_filePath);
-        // string jsonData = JsonUtility.ToJson(text);
-        // return JsonUtility.FromJson<SaveData>(jsonData);
+        // return JsonUtility.FromJson<SaveData>(text);
         
         #endregion
         
         #region Read (Async)
         
-        var sb = new StringBuilder();
-        byte[] buffer = new byte[0x1000];
-        
+        // read bytes from file
         using FileStream fileStream = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-        int numRead;
-        while ((numRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-        {
-            string text = _encoding.GetString(buffer, 0, numRead);
-            sb.Append(text);
-        }
+        byte[] bytes = new byte[fileStream.Length];
+        await fileStream.ReadAsync(bytes, 0, (int)fileStream.Length);
         
+        // get data from bytes
         return await Task.Run(() =>
         {
-            string jsonData = JsonUtility.ToJson(sb.ToString());
-            return JsonUtility.FromJson<SaveData>(jsonData);
+            string text = _encoding.GetString(bytes);
+            return JsonUtility.FromJson<SaveData>(text);
         });
 
         #endregion
