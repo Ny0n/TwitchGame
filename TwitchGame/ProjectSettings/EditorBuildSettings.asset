@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneFlavien.unity
     guid: 1b48859b4091ce24cbb3ad30401cd6d7
   - enabled: 1
-    path: Assets/Scenes/SceneTom.unity
+    path: Assets/Scenes/AudioScene.unity
     guid: bacb6f8ecf4fb2a448e1ebf8f10b5d75
   - enabled: 1
     path: Assets/Scenes/Game.unity
