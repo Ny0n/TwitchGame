@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd840bfbcd30bfa4392665aaeeb479da, type: 3}
   m_Name: Game MoveDown
   m_EditorClassIdentifier: 
-  <Text>k__BackingField: '!down'
   _direction: 1
+  gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}

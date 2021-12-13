@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd840bfbcd30bfa4392665aaeeb479da, type: 3}
-  m_Name: Game MoveLeft
+  m_Script: {fileID: 11500000, guid: f7a1d4251b484444ab345b95ab4f39b6, type: 3}
+  m_Name: LevelStart
   m_EditorClassIdentifier: 
-  _direction: 2
-  gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
+  _listeners: []

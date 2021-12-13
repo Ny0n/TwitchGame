@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class WinnerSpawn : MonoBehaviour
 {
     public ScriptablePlayersList playersList;
+    public ScriptableGameEvent nextLevelEvent;
+    
     public GameObject playerPrefab;
 
     private IEnumerator Start()
@@ -28,6 +30,6 @@ public class WinnerSpawn : MonoBehaviour
     private IEnumerator ReturnCoroutine()
     {
         yield return new WaitForSeconds(5);
-        SceneManager.LoadScene("Scenes/SceneFlavien");
+        nextLevelEvent.Raise();
     }
 }

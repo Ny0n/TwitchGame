@@ -14,9 +14,11 @@ public class MoveGameCommand : GameCommand
 
     [SerializeField] private Direction _direction;
     
+    public ScriptableGameStateVariable gameState;
+    
     public override void Execute(string playerName, ScriptablePlayersList playersList)
     {
-        if (!GameManager.Instance.CompareState(Enums.GameState.Playing)) return;
+        if (!gameState.CompareState(Enums.GameState.Playing)) return;
         
         Player player = playersList.TryGetPlayer(playerName);
         if (player == null) return;

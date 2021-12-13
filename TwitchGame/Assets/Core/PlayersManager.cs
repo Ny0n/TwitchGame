@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(SkinDatabase))]
 public class PlayersManager : MySingleton<PlayersManager>
 {
+    public ScriptableGameStateVariable gameState;
     public ScriptablePlayersList playersList;
 
     [SerializeField] private GameObject playerPrefab;
@@ -35,7 +36,7 @@ public class PlayersManager : MySingleton<PlayersManager>
                 break;
 
             default:
-                if (GameManager.Instance.CurrentState != Enums.GameState.WaitingForPlayers)
+                if (!gameState.CompareState(Enums.GameState.WaitingForPlayers))
                     return;
 
                 switch (playerEvent.Action)

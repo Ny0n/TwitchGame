@@ -2,6 +2,7 @@ public static class Enums
 {
     public enum GameState
     {
+        Null,
         Paused,
         WaitingForPlayers,
         Starting,

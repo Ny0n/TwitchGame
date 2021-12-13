@@ -8,13 +8,12 @@ using UnityEngine;
 [RequireComponent(typeof(TwitchInterpreter))]
 public class TwitchClient : MonoBehaviour
 {
-    public bool Connected => _tcpClient is {Connected: true};
-    
     [Header("Twitch connection")]
     [SerializeField] private string _username;
     [SerializeField] private string _password;
     [SerializeField] private string _channelName;
     [SerializeField] private KeyCode _toggleConnectionKeybind = KeyCode.T;
+    [SerializeField] private ScriptableBoolVariable _twitchStatus;
     
     [Header("Default messages")]
     [SerializeField] private string _connectionMessage = "<Chat connected to the game>";
@@ -28,6 +27,8 @@ public class TwitchClient : MonoBehaviour
     private CancellationToken _token;
     
     private TwitchInterpreter _twitchInterpreter;
+    
+    private bool Connected => _tcpClient is {Connected: true};
 
     private void Start() => _twitchInterpreter = GetComponent<TwitchInterpreter>();
     private void OnDisable() => DisconnectAsync();
@@ -40,6 +41,9 @@ public class TwitchClient : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
             _crashRequested = true;
+
+        if (Connected != _twitchStatus.Value)
+            _twitchStatus.SetValue(Connected);
     }
 
     #region Twitch Connection

@@ -7,52 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MySingleton<GameManager>
 {
     public ScriptablePlayersList playersList;
+    public ScriptableGameStateVariable gameState;
 
     public ScriptableTimerVariable roundTimer;
+    public ScriptableGameEvent nextLevelEvent;
     public ScriptableGameEvent startRoundEvent;
     public ScriptableGameEvent startActionEvent;
-    
-    [Header("State events")]
-    public ScriptableGameEvent gameStartEvent;
-    public ScriptableGameEvent gameEndEvent;
 
-    private ScriptableGameEvent _currentStateEvent;
     private bool _playing;
-
-    // *********************** GAME STATE *********************** //
-    
-    public Enums.GameState CurrentState { get; private set; }
-
-    public bool CompareState(Enums.GameState state) => CurrentState == state;
-
-    private void SwitchToState(Enums.GameState state)
-    {
-        CurrentState = state;
-        switch (CurrentState)
-        {
-            case Enums.GameState.Paused:
-                _currentStateEvent = null;
-                break;
-            case Enums.GameState.WaitingForPlayers:
-                _currentStateEvent = null;
-                break;
-            case Enums.GameState.Starting:
-                _currentStateEvent = gameStartEvent;
-                break;
-            case Enums.GameState.Playing:
-                _playing = true;
-                _currentStateEvent = null;
-                break;
-            case Enums.GameState.Ending:
-                _currentStateEvent = gameEndEvent;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(state), state, null);
-        }
-
-        if (_currentStateEvent is ScriptableGameEvent)
-            _currentStateEvent.Raise();
-    }
     
     // *********************** UNITY CALLS *********************** //
     
@@ -62,17 +24,17 @@ public class GameManager : MySingleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        SwitchToState(Enums.GameState.Paused);
+        gameState.SwitchToState(Enums.GameState.Paused);
     }
 
     private void Start()
     {
-        SwitchToState(Enums.GameState.WaitingForPlayers);
+        gameState.SwitchToState(Enums.GameState.WaitingForPlayers);
     }
 
     private void Update()
     {
-        if (CompareState(Enums.GameState.WaitingForPlayers))
+        if (gameState.CompareState(Enums.GameState.WaitingForPlayers))
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 StartCoroutine(GameLoopCoroutine());
@@ -83,7 +45,7 @@ public class GameManager : MySingleton<GameManager>
 
     private void StartRound()
     {
-        if (!CompareState(Enums.GameState.Playing))
+        if (!gameState.CompareState(Enums.GameState.Playing))
             return;
         roundTimer.StartTimer();
         startRoundEvent.Raise();
@@ -94,6 +56,7 @@ public class GameManager : MySingleton<GameManager>
         int alive = playersList.GetPlayersList().Count(player => player.IsAlive);
         if (alive <= 1)
         {
+            _playing = false;
             StartCoroutine(EndingCoroutine());
         }
     }
@@ -108,13 +71,16 @@ public class GameManager : MySingleton<GameManager>
     
     private IEnumerator StartingCoroutine()
     {
-        SwitchToState(Enums.GameState.Starting);
-        yield return StartCoroutine(_currentStateEvent.WaitForSelfAnswers());
+        gameState.SwitchToState(Enums.GameState.Starting);
+        yield return StartCoroutine(gameState.CurrentStateEvent.WaitForSelfAnswers());
     }
     
     private IEnumerator PlayingCoroutine()
     {
-        SwitchToState(Enums.GameState.Playing);
+        gameState.SwitchToState(Enums.GameState.Playing);
+        _playing = true;
+        
+        CheckForGameEnd();
         while (_playing)
         {
             StartRound();
@@ -125,9 +91,9 @@ public class GameManager : MySingleton<GameManager>
     
     private IEnumerator EndingCoroutine()
     {
-        SwitchToState(Enums.GameState.Ending);
-        yield return StartCoroutine(_currentStateEvent.WaitForSelfAnswers());
-        SceneManager.LoadScene("Scenes/WinnerScene");
+        gameState.SwitchToState(Enums.GameState.Ending);
+        yield return StartCoroutine(gameState.CurrentStateEvent.WaitForSelfAnswers());
+        nextLevelEvent.Raise();
     }
     
     private IEnumerator WaitForTimerEndCoroutine()
@@ -139,7 +105,6 @@ public class GameManager : MySingleton<GameManager>
 
     private void OnPlayersUpdated() // C# event
     {
-        
+        CheckForGameEnd();
     }
-    
 }

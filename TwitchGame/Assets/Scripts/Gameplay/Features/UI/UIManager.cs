@@ -9,18 +9,29 @@ public class UIManager : MonoBehaviour
     public TMP_Text currentStateText;
     public TMP_Text playersListText;
     public TMP_Text twitchText;
-    private TwitchClient _twitchClient;
 
+    public ScriptableGameStateVariable gameState;
     public ScriptableTimerVariable roundTimer;
+    public ScriptableBoolVariable twitchStatus;
     public ScriptablePlayersList playersList;
 
     private void Start()
     {
-        _twitchClient = FindObjectOfType<TwitchClient>();
+        OnPlayersUpdated();
+        OnTwitchUpdated();
     }
 
-    private void OnEnable() => playersList.Players.ValueChanged += OnPlayersUpdated;
-    private void OnDisable() => playersList.Players.ValueChanged -= OnPlayersUpdated;
+    private void OnEnable()
+    {
+        playersList.Players.ValueChanged += OnPlayersUpdated;
+        twitchStatus.ValueChanged += OnTwitchUpdated;
+    }
+
+    private void OnDisable()
+    {
+        playersList.Players.ValueChanged -= OnPlayersUpdated;
+        twitchStatus.ValueChanged -= OnTwitchUpdated;
+    }
 
     void OnPlayersUpdated()
     {
@@ -29,6 +40,14 @@ public class UIManager : MonoBehaviour
         {
             playersListText.text += GetLineFormat(player);
         }
+    }
+    
+    void OnTwitchUpdated()
+    {
+        const string connected = "<color=green>connected</color>";
+        const string disconnected = "<color=red>disconnected</color>";
+
+        twitchText.text = twitchStatus.Value ? connected : disconnected;
     }
 
     private string GetLineFormat(Player player)
@@ -46,11 +65,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         timerSlider.value = roundTimer.Value / 20f;
-        currentStateText.text = GameManager.Instance.CurrentState.ToString();
-        
-        const string connected = "<color=green>connected</color>";
-        const string disconnected = "<color=red>disconnected</color>";
-
-        twitchText.text = _twitchClient.Connected ? connected : disconnected;
+        currentStateText.text = gameState.Value.ToString();
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CommandManager : MySingleton<CommandManager>
 {
+    public ScriptableGameStateVariable gameState;
     public ScriptablePlayersList playersList;
     public GameCommand defaultGameCommand;
 
@@ -38,7 +39,7 @@ public class CommandManager : MySingleton<CommandManager>
 
     private void ProcessCommand(GameCommandObject gameCommandObject)
     {
-        switch (GameManager.Instance.CurrentState)
+        switch (gameState.Value)
         {
             case Enums.GameState.WaitingForPlayers:
                 ExecuteCommand(gameCommandObject);
