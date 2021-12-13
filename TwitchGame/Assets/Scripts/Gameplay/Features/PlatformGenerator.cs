@@ -88,7 +88,9 @@ public class PlatformGenerator : MonoBehaviour
                     originPoint.position + (dist * w * Vector3.right) + (dist * h * Vector3.forward),
                     Quaternion.identity, transform);
 
-                _platformsList.Platforms[new Vector2(w, h)] = platform.GetComponent<PlatformData>();
+                Vector2 pos = new Vector2(w, h);
+                _platformsList.Platforms[pos] = platform.GetComponent<PlatformData>();
+                _platformsList.Platforms[pos].Init(pos);
                 yield return new WaitForSeconds(waitTime);
             }
         }

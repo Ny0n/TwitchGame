@@ -1,20 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+[RequireComponent(typeof(SaveSaver), typeof(SaveLoader))]
 public class SaveSystem : MonoBehaviour
 {
+    [Header("Save config")]
     [SerializeField] private string _saveFolderName;
     [SerializeField] private string _saveFileName;
     [SerializeField] private string _saveFileExtension;
-    
-    [SerializeField] private ScriptablePlayersList _playersList;
-    [SerializeField] private ScriptablePlatformsList _platformsList;
     
     private readonly Encoding _encoding = Encoding.UTF8;
 
@@ -35,61 +32,20 @@ public class SaveSystem : MonoBehaviour
 
     #region Saving
 
-    public void SaveData()
+    public async Task<bool> SaveData(SaveData data)
     {
-        StartCoroutine(GetDataCoroutine(async data =>
+        try
         {
-            try
-            {
-                await WriteDataAsync(data);
-                // hide saving UI...
-                
-                Debug.Log("Saved!");
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"Error while trying to save: {e}");
-            }
-        }));
-    }
-
-    private IEnumerator GetDataCoroutine(System.Action<SaveData> callback)
-    {
-        // We save the players and the platforms
-        
-        List<PlayerSaveData> playerSaveDatas = new List<PlayerSaveData>();
-        List<PlatformSaveData> platformSaveDatas = new List<PlatformSaveData>();
-
-        foreach (var player in _playersList.GetPlayersList())
-        {
-            playerSaveDatas.Add(new PlayerSaveData()
-            {
-                name = player.Name,
-                number = player.Number,
-                isAlive = player.IsAlive,
-            });
-            yield return null;
+            await WriteDataAsync(data);
+            return true;
         }
-        
-        foreach (var platform in _platformsList.GetValuesList())
+        catch (Exception e)
         {
-            platformSaveDatas.Add(new PlatformSaveData()
-            {
-                state = platform.CurrentState,
-                position = platform.CurrentPosition,
-            });
-            yield return null;
+            Debug.LogWarning($"Error while trying to save: {e}");
+            return false;
         }
-        
-        SaveData data = new SaveData()
-        {
-            players = playerSaveDatas,
-            platforms = platformSaveDatas,
-        };
-        
-        callback.Invoke(data);
     }
-
+    
     private async Task WriteDataAsync(SaveData data)
     {
         TestForDir();
@@ -121,18 +77,16 @@ public class SaveSystem : MonoBehaviour
 
     #region Loading
 
-    public async void LoadData()
+    public async Task<SaveData?> LoadData()
     {
         try
         {
-            SaveData data = await ReadDataAsync();
-            // load game with save data
-            
-            Debug.Log("Save file loaded!");
+            return await ReadDataAsync();
         }
         catch (Exception e)
         {
-            Debug.LogWarning($"Error while trying to load: {e}");
+            Debug.LogWarning($"Error while trying to load save file: {e}");
+            return null;
         }
     }
     

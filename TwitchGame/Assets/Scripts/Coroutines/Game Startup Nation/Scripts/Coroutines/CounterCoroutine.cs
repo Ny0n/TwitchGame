@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 [CreateAssetMenu(menuName = "Coroutines/Counter")]
 public class CounterCoroutine : GameCoroutine

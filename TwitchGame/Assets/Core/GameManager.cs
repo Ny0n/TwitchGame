@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MySingleton<GameManager>
 {

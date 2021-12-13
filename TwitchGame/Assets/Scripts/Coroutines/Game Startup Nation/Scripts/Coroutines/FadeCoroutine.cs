@@ -1,7 +1,6 @@
 using System.Collections;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Coroutines/Fade")]
 public class FadeCoroutine : GameCoroutine
