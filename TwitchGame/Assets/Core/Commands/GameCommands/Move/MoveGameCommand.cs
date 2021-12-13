@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Command/Game/Move", fileName = "Game _MoveCommand_")]
@@ -20,8 +21,8 @@ public class MoveGameCommand : GameCommand
     {
         if (!gameState.CompareState(Enums.GameState.Playing)) return;
         
-        Player player = playersList.TryGetPlayer(playerName);
-        if (player == null) return;
+        var player = playersList.TryGetPlayer(playerName);
+        if (!(player is Player)) return;
         if (!player.IsAlive) return;
 
         PlayerMove playerMove = player.PlayerObject.GetComponent<PlayerMove>();
@@ -42,5 +43,6 @@ public class MoveGameCommand : GameCommand
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        Debug.Log("2");
     }
 }

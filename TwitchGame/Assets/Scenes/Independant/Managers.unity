@@ -275,8 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
   playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
-  playerPrefab: {fileID: 7913447538169836104, guid: 1c4a1f970ab1ff6478bf0ad8d9a74280, type: 3}
-  platformGenerator: {fileID: 0}
+  playerEvent: {fileID: 11400000, guid: a88018c2a8e7ee24b96c93b30f711cb6, type: 2}
 --- !u!4 &996979475
 Transform:
   m_ObjectHideFlags: 0

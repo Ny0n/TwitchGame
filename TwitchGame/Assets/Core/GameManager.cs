@@ -53,6 +53,8 @@ public class GameManager : MySingleton<GameManager>
     
     private void CheckForGameEnd()
     {
+        if (!gameState.CompareState(Enums.GameState.Playing)) return;
+        
         int alive = playersList.GetPlayersList().Count(player => player.IsAlive);
         if (alive <= 1)
         {

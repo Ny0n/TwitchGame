@@ -4,8 +4,9 @@ public class Player : Object
 {
     public string Name { get; private set; } = "NONAME";
     public int Number { get; private set; } = -1;
-    public GameObject PlayerObject { get; private set; }
     public bool IsAlive { get; private set; } = true;
+    
+    public GameObject PlayerObject { get; private set; }
 
     private GameObject skin;
 

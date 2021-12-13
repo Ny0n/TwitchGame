@@ -15,5 +15,6 @@ public static class Enums
         Add,
         Remove,
         Dead,
+        Spawn,
     }
 }

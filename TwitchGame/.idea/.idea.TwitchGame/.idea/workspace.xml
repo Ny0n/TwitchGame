@@ -6,15 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="cf3f6987-f922-4690-82b9-82174175e5cc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TwitchGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TwitchGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/Commands.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/Commands.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/CommandManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/CommandManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/GameCommands/Move/MoveGameCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/GameCommands/Move/MoveGameCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SceneFlavien.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SceneFlavien.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Variables/Lists/PlayersList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Variables/Lists/PlayersList.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Events/EventReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Events/EventReceiver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Events/GenericEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Events/GenericEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Events/GenericEventListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Events/GenericEventListener.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Redefinitions/Dictionary/MyDictionary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Redefinitions/Dictionary/MyDictionary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ScriptablePlayersList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ScriptablePlayersList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/PlayersManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/PlayersManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Independant/Managers.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Independant/Managers.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformContact.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformContact.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Player/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tasks/RotateCube.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tasks/RotateCube.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,11 +31,14 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/WinnerSpawn.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/ScriptableGameEventEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Save System/SaveSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BaseEventEditor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Bootstrap/LevelBootstrap.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ScriptableGameStateVariable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Gameplay/Player/PlayerSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Variables/ScriptablePlatformsList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/ScriptableGameEventEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Save System/SaveData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/ScriptablePlayerEventEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Save System/CubeCreator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="21ewNFDVjhBl9IUDYDG7Do1I9qx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -101,6 +108,7 @@
       <workItem from="1639052398637" duration="6834000" />
       <workItem from="1639124477981" duration="11333000" />
       <workItem from="1639330096275" duration="17036000" />
+      <workItem from="1639383546029" duration="11932000" />
     </task>
     <servers />
   </component>

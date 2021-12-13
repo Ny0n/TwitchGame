@@ -66,7 +66,10 @@ public class CommandManager : MySingleton<CommandManager>
     private void ExecuteAllCommands()
     {
         foreach (var entry in _storedCommands.ToList())
+        {
+            print("command");
             ExecuteCommand(entry.Value);
+        }
     }
 
     private void ResetAllCommands()

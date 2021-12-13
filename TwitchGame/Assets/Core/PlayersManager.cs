@@ -5,9 +5,7 @@ public class PlayersManager : MySingleton<PlayersManager>
 {
     public ScriptableGameStateVariable gameState;
     public ScriptablePlayersList playersList;
-
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private PlatformGenerator platformGenerator;
+    public ScriptablePlayerEvent playerEvent;
 
     private int _currentPlayerNumber = 1;
     private SkinDatabase _skinDatabase;
@@ -61,10 +59,11 @@ public class PlayersManager : MySingleton<PlayersManager>
         // creation of new player object
         Player player = new Player(playerName, _currentPlayerNumber);
         player.SetSkin(_skinDatabase.GetRandomSkin());
-        player.Instantiate(playerPrefab, platformGenerator.GetPlayerSpawn(), Quaternion.identity); // TODO here for now
 
         _players.Add(playerName, player);
         _currentPlayerNumber++;
+        
+        playerEvent.SetAndRaise(playerName, Enums.PlayerEventAction.Spawn);
     }
     
     private void UnregisterPlayer(string playerName)

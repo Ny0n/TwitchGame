@@ -17,12 +17,11 @@ public class PlatformGenerator : MonoBehaviour
     public Vector3 playerSpawnOffset = new Vector3(0f, 2f, 0f);
     public Vector3 offsetFromNormalPlatforms = new Vector3(0f, 3f, 0f);
 
-    private List<GameObject> _generatedGamePlatforms;
+    [SerializeField] private ScriptablePlatformsList _platformsList;
     private Dictionary<int, GameObject> _generatedPlayerPlatforms;
 
     private void Awake()
     {
-        _generatedGamePlatforms = new List<GameObject>();
         _generatedPlayerPlatforms = new Dictionary<int, GameObject>();
     }
 
@@ -85,7 +84,11 @@ public class PlatformGenerator : MonoBehaviour
         {
             for (int h = 0; h < height; h++)
             {
-                _generatedGamePlatforms.Add(Instantiate(platformPrefab, originPoint.position + (dist * w * Vector3.right) + (dist * h * Vector3.forward), Quaternion.identity, transform));
+                GameObject platform = Instantiate(platformPrefab,
+                    originPoint.position + (dist * w * Vector3.right) + (dist * h * Vector3.forward),
+                    Quaternion.identity, transform);
+
+                _platformsList.Platforms[new Vector2(w, h)] = platform.GetComponent<PlatformData>();
                 yield return new WaitForSeconds(waitTime);
             }
         }
@@ -103,12 +106,12 @@ public class PlatformGenerator : MonoBehaviour
     private IEnumerator EndingGame(GenericEvent evt)
     {
         // destroy game platforms
-        foreach (var platform in _generatedGamePlatforms.ToList())
+        foreach (var platform in _platformsList.GetValuesList())
         {
-            Destroy(platform);
+            Destroy(platform.gameObject);
             yield return new WaitForSeconds(waitTime);
         }
-        _generatedGamePlatforms.Clear();
+        _platformsList.Platforms.Clear();
         
         evt.Answer();
     }
