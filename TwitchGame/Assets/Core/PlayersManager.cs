@@ -1,21 +1,19 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SkinDatabase))]
 public class PlayersManager : MySingleton<PlayersManager>
 {
-    public ScriptableGameStateVariable gameState;
-    public ScriptablePlayersList playersList;
-    public ScriptablePlayerEvent playerEvent;
+    [SerializeField] private ScriptableGameStateVariable _gameState;
+    [SerializeField] private ScriptableSkinDatabase _skinDatabase;
+    [SerializeField] private ScriptablePlayersList _playersList;
+    [SerializeField] private ScriptablePlayerEvent _playerSpawnEvent;
 
     private int _currentPlayerNumber = 1;
-    private SkinDatabase _skinDatabase;
     private MyDictionary<string, Player> _players;
 
     protected override void Awake()
     {
         base.Awake();
-        _players = playersList.Players;
-        _skinDatabase = GetComponent<SkinDatabase>();
+        _players = _playersList.Players;
     }
 
     public void NotifyPlayerUpdated(Player player)
@@ -34,7 +32,7 @@ public class PlayersManager : MySingleton<PlayersManager>
                 break;
 
             default:
-                if (!gameState.CompareState(Enums.GameState.WaitingForPlayers))
+                if (!_gameState.CompareState(Enums.GameState.WaitingForPlayers))
                     return;
 
                 switch (playerEvent.Action)
@@ -53,7 +51,7 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void RegisterNewPlayer(string playerName)
     {
-        if (playersList.IsPlayerRegistered(playerName))
+        if (_playersList.IsPlayerRegistered(playerName))
             return;
 
         // creation of new player object
@@ -63,32 +61,45 @@ public class PlayersManager : MySingleton<PlayersManager>
         _players.Add(playerName, player);
         _currentPlayerNumber++;
         
-        playerEvent.SetAndRaise(playerName, Enums.PlayerEventAction.Spawn);
+        _playerSpawnEvent.SetAndRaise(playerName, Enums.PlayerEventAction.Spawn);
     }
     
     private void UnregisterPlayer(string playerName)
     {
-        if (!playersList.IsPlayerRegistered(playerName))
+        if (!_playersList.IsPlayerRegistered(playerName))
             return;
 
         _players[playerName].Remove();
         _players.Remove(playerName);
     }
 
-    private void UnregisterAllPlayers()
+    public void UnregisterAllPlayers()
     {
-        foreach (string playerName in playersList.GetNamesList())
+        foreach (string playerName in _playersList.GetNamesList())
         {
             UnregisterPlayer(playerName);
         }
     }
 
+    // *********************** EVENTS *********************** //
+    
     public void OnGameEnd(GenericEvent evt) // event
     {
-        foreach (var player in playersList.GetPlayersList())
+        foreach (var player in _playersList.GetPlayersList())
         {
             player.Remove();
         }
         evt.Answer();
+    }
+    
+    public void OnGameWaiting(GenericEvent evt) // SO event
+    {
+        UnregisterAllPlayers();
+        evt.Answer();
+    }
+    
+    public void OnLoadSave() // SO event
+    {
+        UnregisterAllPlayers();
     }
 }

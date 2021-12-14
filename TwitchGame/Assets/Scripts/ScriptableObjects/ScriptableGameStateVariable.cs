@@ -7,8 +7,11 @@ public class ScriptableGameStateVariable : ScriptableObject
     [SerializeField] private Enums.GameState _value = Enums.GameState.Null;
     
     [Header("State change events")]
-    public ScriptableGameEvent gameStartEvent;
-    public ScriptableGameEvent gameEndEvent;
+    [SerializeField] private ScriptableGameEvent _gamePausedEvent;
+    [SerializeField] private ScriptableGameEvent _gameWaitingEvent;
+    [SerializeField] private ScriptableGameEvent _gameStartingEvent;
+    [SerializeField] private ScriptableGameEvent _gamePlayingEvent;
+    [SerializeField] private ScriptableGameEvent _gameEndingEvent;
     
     public Enums.GameState Value
     {
@@ -23,22 +26,23 @@ public class ScriptableGameStateVariable : ScriptableObject
     public void SwitchToState(Enums.GameState state)
     {
         _value = state;
+        
         switch (Value)
         {
             case Enums.GameState.Paused:
-                CurrentStateEvent = null;
+                CurrentStateEvent = _gamePausedEvent;
                 break;
             case Enums.GameState.WaitingForPlayers:
-                CurrentStateEvent = null;
+                CurrentStateEvent = _gameWaitingEvent;
                 break;
             case Enums.GameState.Starting:
-                CurrentStateEvent = gameStartEvent;
+                CurrentStateEvent = _gameStartingEvent;
                 break;
             case Enums.GameState.Playing:
-                CurrentStateEvent = null;
+                CurrentStateEvent = _gamePlayingEvent;
                 break;
             case Enums.GameState.Ending:
-                CurrentStateEvent = gameEndEvent;
+                CurrentStateEvent = _gameEndingEvent;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
@@ -46,5 +50,12 @@ public class ScriptableGameStateVariable : ScriptableObject
     
         if (CurrentStateEvent is ScriptableGameEvent)
             CurrentStateEvent.Raise();
+    }
+
+    
+    [ContextMenu("Switch to Selected")]
+    private void ManualSwitch()
+    {
+        SwitchToState(_value);
     }
 }

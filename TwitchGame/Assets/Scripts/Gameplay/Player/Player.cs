@@ -5,10 +5,11 @@ public class Player : Object
     public string Name { get; private set; } = "NONAME";
     public int Number { get; private set; } = -1;
     public bool IsAlive { get; private set; } = true;
-    
+    public Vector3 Position { get; set; } = Vector3.zero;
+
     public GameObject PlayerObject { get; private set; }
 
-    private GameObject skin;
+    public (int index, GameObject skin) skinData { get; private set; }
 
     public Player(string name, int number)
     {
@@ -29,9 +30,9 @@ public class Player : Object
         NotifyChange();
     }
 
-    public void SetSkin(GameObject skin)
+    public void SetSkin((int index, GameObject skin) skinData)
     {
-        this.skin = skin;
+        this.skinData = skinData;
         UpdateSkin();
 
         NotifyChange();
@@ -48,8 +49,8 @@ public class Player : Object
 
     private void UpdateSkin()
     {
-        if (skin != null && PlayerObject != null)
-            PlayerObject.GetComponent<PlayerData>().SetSkin(skin);
+        if (skinData.skin != null && PlayerObject != null)
+            PlayerObject.GetComponent<PlayerData>().SetSkin(skinData.skin);
     }
 
     public void Kill()

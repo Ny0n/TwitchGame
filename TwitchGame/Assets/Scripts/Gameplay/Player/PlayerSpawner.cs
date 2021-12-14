@@ -13,7 +13,6 @@ public class PlayerSpawner : MonoBehaviour
         if (playerEvent.Action == Enums.PlayerEventAction.Spawn)
         {
             Player player = playersList.TryGetPlayer(playerEvent.PlayerName);
-            print("spawn");
             player.Instantiate(_playerPrefab, _platformGenerator.GetPlayerSpawn(), Quaternion.identity);
         }
     }

@@ -211,12 +211,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7a0755aeebf834b90d7c712df9495e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
-  gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
-  roundTimer: {fileID: 11400000, guid: e5c50a61d083001469e616ff05b1ac23, type: 2}
-  nextLevelEvent: {fileID: 11400000, guid: 0d5dc49d127a53445a130b12c909f60c, type: 2}
-  startRoundEvent: {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
-  startActionEvent: {fileID: 11400000, guid: c4f6067c2483893449d42a3014876539, type: 2}
+  _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
+  _roundTimer: {fileID: 11400000, guid: e5c50a61d083001469e616ff05b1ac23, type: 2}
+  _nextLevelEvent: {fileID: 11400000, guid: 0d5dc49d127a53445a130b12c909f60c, type: 2}
+  _startRoundEvent: {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
+  _startActionEvent: {fileID: 11400000, guid: c4f6067c2483893449d42a3014876539, type: 2}
 --- !u!114 &825313088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +241,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8490914b9cbdac1479d083e99381243b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventListeners: []
+  _eventListeners:
+  - _events:
+    - {fileID: 11400000, guid: 717b9464896ede4449ee7558a0573665, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 825313087}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: OnGameStart
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 34a51fee9aef12240a0f30e8d8051191, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 825313087}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: OnGamePlay
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 42303422f16581b4996db193a15e2fc2, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 825313087}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: OnGameEnd
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 9ab6675859694964182a02fba18233c4, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 825313087}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: OnGamePause
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: d7741a042395c7c4a8351e5ddbdf199e, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 825313087}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: OnGameWaiting
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 5b24587f253a0fd48921a34b670db0aa, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 825313087}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: OnLoadSave
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &996979473
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 996979475}
   - component: {fileID: 996979474}
-  - component: {fileID: 996979477}
   - component: {fileID: 996979476}
   m_Layer: 0
   m_Name: PlayersManager
@@ -273,9 +374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68d19ba11ff5cb4cbbc139a11e128d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
-  playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
-  playerEvent: {fileID: 11400000, guid: a88018c2a8e7ee24b96c93b30f711cb6, type: 2}
+  _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
+  _skinDatabase: {fileID: 11400000, guid: 24e4b7355b053384fb8c920592557775, type: 2}
+  _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  _playerSpawnEvent: {fileID: 11400000, guid: a88018c2a8e7ee24b96c93b30f711cb6, type: 2}
 --- !u!4 &996979475
 Transform:
   m_ObjectHideFlags: 0
@@ -337,68 +439,37 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &996979477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996979473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ccd95d37f4ca924ca0c10af95d25efd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSkin: {fileID: 919132149155446097, guid: fd68f2e32aa4bf342a06bfb824f695de, type: 3}
-  skins:
-  - {fileID: 919132149155446097, guid: db86530682f3f154b8721fc72e48d12f, type: 3}
-  - {fileID: 919132149155446097, guid: daf2a88480d9d6348aa67657bb635685, type: 3}
-  - {fileID: 919132149155446097, guid: f5e90c9330cf4ce48a17f73c598b3f5a, type: 3}
-  - {fileID: 919132149155446097, guid: ac0593dc0aa227f47822d0d63115ced3, type: 3}
-  - {fileID: 919132149155446097, guid: 0398bc4d337f4cd498a7fc07202678fd, type: 3}
-  - {fileID: 919132149155446097, guid: 8a466266b0fab7b43ac80b6bce1e5c3c, type: 3}
-  - {fileID: 919132149155446097, guid: 976488b3063761f4d8227aa23f1440fb, type: 3}
-  - {fileID: 919132149155446097, guid: 337c21ea9571cc24d8bf488839b9e108, type: 3}
-  - {fileID: 919132149155446097, guid: 09f56e81351754d4c887c9cecf413cb9, type: 3}
-  - {fileID: 919132149155446097, guid: 8d0f2f27f3f9bc647a8d17351e04ee24, type: 3}
-  - {fileID: 919132149155446097, guid: 519d51b28c496f34185326d318a0895d, type: 3}
-  - {fileID: 919132149155446097, guid: 605a8ee757a2bda4f83e50d1a2210497, type: 3}
-  - {fileID: 919132149155446097, guid: 280665f8245a04f4fac2298ea47e48a1, type: 3}
-  - {fileID: 919132149155446097, guid: e82228aa58f34e14191d876271544af1, type: 3}
-  - {fileID: 919132149155446097, guid: 6830b0b3aa41fbf418cb299e06279959, type: 3}
-  - {fileID: 919132149155446097, guid: dfc679479fb5e394dbec4ad33a5715b4, type: 3}
-  - {fileID: 919132149155446097, guid: 2435a0293bebdf44e908d16fb5e18599, type: 3}
-  - {fileID: 919132149155446097, guid: 7fecc11fb1af5b442bdd0bf9523362b0, type: 3}
-  - {fileID: 919132149155446097, guid: ad314a4cc3a6326409408f6d64836455, type: 3}
-  - {fileID: 919132149155446097, guid: bcdaba3dad756e547b6e18c085ee3f7f, type: 3}
-  - {fileID: 919132149155446097, guid: 483c7ab6dd32d014fb0205397b3d1dcf, type: 3}
-  - {fileID: 919132149155446097, guid: 0f5f452476720da459b00d6eb1844a24, type: 3}
-  - {fileID: 919132149155446097, guid: 3dc727fe5b91d7544899603f85e9dee3, type: 3}
-  - {fileID: 919132149155446097, guid: e0b268a72ca513d40a3f47029a52c633, type: 3}
-  - {fileID: 919132149155446097, guid: e68f27c5166b84142879ebe01155ec58, type: 3}
-  - {fileID: 919132149155446097, guid: df6493bfb9ae9ba42aa5217e7599c8d9, type: 3}
-  - {fileID: 919132149155446097, guid: 1540daee0bf6a514e9e018b19953186c, type: 3}
-  - {fileID: 919132149155446097, guid: 95f799f0b96621b4d8586fae60cf84f2, type: 3}
-  - {fileID: 919132149155446097, guid: edfec060d9d4f8345b930f0820b5c8b2, type: 3}
-  - {fileID: 919132149155446097, guid: 54b0ffa5c5565f944845ba1726f317c7, type: 3}
-  - {fileID: 919132149155446097, guid: 73fdf94c6b64a2d46992a2c63b2d4a57, type: 3}
-  - {fileID: 919132149155446097, guid: 49cb68b02af5d0d43b48b626e0fcdf35, type: 3}
-  - {fileID: 919132149155446097, guid: 877933cd9f3947742bc0b1994a2a15ea, type: 3}
-  - {fileID: 919132149155446097, guid: 9d695efeaa49355439cff6f48fa9f24c, type: 3}
-  - {fileID: 919132149155446097, guid: ccf118d134853b84681a6ac80948a65e, type: 3}
-  - {fileID: 919132149155446097, guid: ba6a55fa9bec71f4ab3820c93e558539, type: 3}
-  - {fileID: 919132149155446097, guid: bd23a01bc45df8749963d9c1272a67c9, type: 3}
-  - {fileID: 919132149155446097, guid: 4e24e379219fbfe448172e1abb2d4e9b, type: 3}
-  - {fileID: 919132149155446097, guid: e4a30a69413b2904981efcaf7bc266e3, type: 3}
-  - {fileID: 919132149155446097, guid: d688b2fbea8301046a9b09efca86a0b2, type: 3}
-  - {fileID: 919132149155446097, guid: 5dd2d988d19f7894aa22d1a8a58e07f7, type: 3}
-  - {fileID: 919132149155446097, guid: d0f1b751e722eda4d88b44027a7f5ead, type: 3}
-  - {fileID: 919132149155446097, guid: 14e9c43513c94b64cb810c2b63fc64b5, type: 3}
-  - {fileID: 919132149155446097, guid: c9f0fce8b1a640f43a81b2a240ab03dc, type: 3}
-  - {fileID: 919132149155446097, guid: 5973cec9ed9523c4f8e1f3ce710263ca, type: 3}
-  - {fileID: 919132149155446097, guid: a473b96fda8005b4cafe7c04a5e4dbc2, type: 3}
-  - {fileID: 919132149155446097, guid: 217512311e56f694db4e54b65cc65f58, type: 3}
-  - {fileID: 919132149155446097, guid: 8a1b83e33f1264b42944252a079288ee, type: 3}
-  - {fileID: 919132149155446097, guid: 7ee8b0b8d72c524468d370dda781eb86, type: 3}
-  - {fileID: 919132149155446097, guid: 1c9f4d22405862b4c9a5bcb718a8d00f, type: 3}
-  - {fileID: 919132149155446097, guid: 68abdffbd23d308419dcd75975133f02, type: 3}
+  - _events:
+    - {fileID: 11400000, guid: d7741a042395c7c4a8351e5ddbdf199e, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 996979474}
+          m_TargetAssemblyTypeName: PlayersManager, Assembly-CSharp
+          m_MethodName: OnGameWaiting
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 5b24587f253a0fd48921a34b670db0aa, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 996979474}
+          m_TargetAssemblyTypeName: PlayersManager, Assembly-CSharp
+          m_MethodName: OnLoadSave
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

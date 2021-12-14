@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
@@ -7,15 +8,20 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _skinParent;
 
-    private bool _rebindAnimator = false;
+    private int _rebindAnimator;
     private readonly int Win1 = Animator.StringToHash("Win");
+
+    private void Update()
+    {
+        Player.Position = transform.position;
+    }
 
     private void LateUpdate()
     {
-        if (_rebindAnimator)
+        if (_rebindAnimator > 0)
         {
             _animator.Rebind();
-            _rebindAnimator = false;
+            _rebindAnimator--;
         }
     }
 
@@ -23,7 +29,7 @@ public class PlayerData : MonoBehaviour
     {
         Destroy(_skinParent.transform.GetChild(0).gameObject);
         Instantiate(skin, _skinParent.transform);
-        _rebindAnimator = true;
+        _rebindAnimator = 10;
     }
 
     public void Win()

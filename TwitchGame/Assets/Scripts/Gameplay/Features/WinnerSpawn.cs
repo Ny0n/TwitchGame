@@ -27,6 +27,7 @@ public class WinnerSpawn : MonoBehaviour
     private IEnumerator ReturnCoroutine()
     {
         yield return new WaitForSeconds(5);
+        playersList.Players.Clear();
         nextLevelEvent.Raise();
     }
 }

@@ -4,38 +4,38 @@ using UnityEngine;
 
 public class GameManager : MySingleton<GameManager>
 {
-    public ScriptablePlayersList playersList;
-    public ScriptableGameStateVariable gameState;
+    [SerializeField] private ScriptablePlayersList _playersList;
+    [SerializeField] private ScriptableGameStateVariable _gameState;
 
-    public ScriptableTimerVariable roundTimer;
-    public ScriptableGameEvent nextLevelEvent;
-    public ScriptableGameEvent startRoundEvent;
-    public ScriptableGameEvent startActionEvent;
+    [SerializeField] private ScriptableTimerVariable _roundTimer;
+    [SerializeField] private ScriptableGameEvent _nextLevelEvent;
+    [SerializeField] private ScriptableGameEvent _startRoundEvent;
+    [SerializeField] private ScriptableGameEvent _startActionEvent;
 
-    private bool _playing;
+    private Coroutine _startingCoroutine, _playingCoroutine, _endingCoroutine;
     
     // *********************** UNITY CALLS *********************** //
     
-    private void OnEnable() => playersList.Players.ValueChanged += OnPlayersUpdated;
-    private void OnDisable() => playersList.Players.ValueChanged -= OnPlayersUpdated;
+    private void OnEnable() => _playersList.Players.ValueChanged += OnPlayersUpdated;
+    private void OnDisable() => _playersList.Players.ValueChanged -= OnPlayersUpdated;
 
     protected override void Awake()
     {
         base.Awake();
-        gameState.SwitchToState(Enums.GameState.Paused);
+        _gameState.SwitchToState(Enums.GameState.Paused);
     }
 
     private void Start()
     {
-        gameState.SwitchToState(Enums.GameState.WaitingForPlayers);
+        _gameState.SwitchToState(Enums.GameState.WaitingForPlayers);
     }
 
     private void Update()
     {
-        if (gameState.CompareState(Enums.GameState.WaitingForPlayers))
+        if (_gameState.CompareState(Enums.GameState.WaitingForPlayers))
         {
             if (Input.GetKeyDown(KeyCode.Space))
-                StartCoroutine(GameLoopCoroutine());
+                _gameState.SwitchToState(Enums.GameState.Starting);
         }
     }
     
@@ -43,62 +43,62 @@ public class GameManager : MySingleton<GameManager>
 
     private void StartRound()
     {
-        if (!gameState.CompareState(Enums.GameState.Playing))
-            return;
-        roundTimer.StartTimer();
-        startRoundEvent.Raise();
+        _roundTimer.StartTimer();
+        _startRoundEvent.Raise();
+    }
+    
+    private void StopRound()
+    {
+        _roundTimer.StopTimer();
     }
     
     private void CheckForGameEnd()
     {
-        if (!gameState.CompareState(Enums.GameState.Playing)) return;
+        if (!_gameState.CompareState(Enums.GameState.Playing)) return;
         
-        int alive = playersList.GetPlayersList().Count(player => player.IsAlive);
+        int alive = _playersList.GetPlayersList().Count(player => player.IsAlive);
         if (alive <= 1)
         {
-            _playing = false;
-            StartCoroutine(EndingCoroutine());
+            StopAllCoroutines();
+            _gameState.SwitchToState(Enums.GameState.Ending);
         }
     }
     
     // *********************** COROUTINES *********************** //
-
-    private IEnumerator GameLoopCoroutine()
-    {
-        yield return StartCoroutine(StartingCoroutine());
-        yield return StartCoroutine(PlayingCoroutine());
-    }
     
     private IEnumerator StartingCoroutine()
     {
-        gameState.SwitchToState(Enums.GameState.Starting);
-        yield return StartCoroutine(gameState.CurrentStateEvent.WaitForSelfAnswers());
+        yield return StartCoroutine(_gameState.CurrentStateEvent.WaitForSelfAnswers());
+        _gameState.SwitchToState(Enums.GameState.Playing);
     }
     
     private IEnumerator PlayingCoroutine()
     {
-        gameState.SwitchToState(Enums.GameState.Playing);
-        _playing = true;
-        
         CheckForGameEnd();
-        while (_playing)
+        while (true) // while the end has not been detected
         {
             StartRound();
             yield return StartCoroutine(WaitForTimerEndCoroutine());
-            yield return StartCoroutine(startActionEvent.RaiseAndWait());
+            yield return StartCoroutine(_startActionEvent.RaiseAndWait());
         }
     }
     
     private IEnumerator EndingCoroutine()
     {
-        gameState.SwitchToState(Enums.GameState.Ending);
-        yield return StartCoroutine(gameState.CurrentStateEvent.WaitForSelfAnswers());
-        nextLevelEvent.Raise();
+        StopRound();
+        yield return StartCoroutine(_gameState.CurrentStateEvent.WaitForSelfAnswers());
+        _nextLevelEvent.Raise();
     }
     
     private IEnumerator WaitForTimerEndCoroutine()
     {
-        while (!roundTimer.IsTimerDone()) yield return null;
+        while (!_roundTimer.IsTimerDone()) yield return null;
+    }
+
+    private void TryToStopCoroutine(Coroutine coroutine)
+    {
+        if (coroutine != null)
+            StopCoroutine(coroutine);
     }
     
     // *********************** EVENTS *********************** //
@@ -106,5 +106,47 @@ public class GameManager : MySingleton<GameManager>
     private void OnPlayersUpdated() // C# event
     {
         CheckForGameEnd();
+    }
+
+    public void OnGameStart(GenericEvent evt) // SO event
+    {
+        evt.Answer();
+        
+        TryToStopCoroutine(_startingCoroutine);
+        _startingCoroutine = StartCoroutine(StartingCoroutine());
+    }
+
+    public void OnGamePlay(GenericEvent evt) // SO event
+    {
+        evt.Answer();
+        
+        TryToStopCoroutine(_playingCoroutine);
+        _playingCoroutine = StartCoroutine(PlayingCoroutine());
+    }
+    
+    public void OnGameEnd(GenericEvent evt) // SO event
+    {
+        evt.Answer();
+        
+        TryToStopCoroutine(_endingCoroutine);
+        _endingCoroutine = StartCoroutine(EndingCoroutine());
+    }
+    
+    public void OnGamePause(GenericEvent evt) // SO event
+    {
+        evt.Answer();
+        
+    }
+    
+    public void OnGameWaiting(GenericEvent evt) // SO event
+    {
+        evt.Answer();
+        
+    }
+    
+    public void OnLoadSave() // SO event
+    {
+        StopAllCoroutines();
+        StopRound();
     }
 }

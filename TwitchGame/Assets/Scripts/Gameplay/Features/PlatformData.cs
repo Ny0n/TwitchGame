@@ -24,6 +24,7 @@ public class PlatformData : MonoBehaviour
 
     public void SetState(int state)
     {
+        CurrentState = state;
         Material mat = _materials[state];
         _renderer.material = mat;
     }

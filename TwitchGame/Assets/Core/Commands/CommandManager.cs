@@ -66,7 +66,6 @@ public class CommandManager : MySingleton<CommandManager>
     {
         foreach (var entry in _storedCommands.ToList())
         {
-            print("command");
             ExecuteCommand(entry.Value);
         }
     }
@@ -84,14 +83,14 @@ public class CommandManager : MySingleton<CommandManager>
         ResetAllCommands();
     }
 
-    private IEnumerator ActionStart(GenericEvent evt) 
+    private IEnumerator ActionStart(GenericEvent evt)
     {
         ExecuteAllCommands();
         yield return new WaitForSeconds(4);
         evt.Answer();
     }
 
-    public void OnActionStart(GenericEvent evt)
+    public void OnActionStart(GenericEvent evt) // SO event
     {
         StartCoroutine(ActionStart(evt));
     }

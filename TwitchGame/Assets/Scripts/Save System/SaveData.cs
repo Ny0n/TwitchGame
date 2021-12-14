@@ -14,8 +14,8 @@ public struct PlayerSaveData
     public string name;
     public int number;
     public bool isAlive;
-    public bool skinID;
-    public Vector2 position;
+    public int skinIndex;
+    public Vector3 position;
 }
 
 [System.Serializable]

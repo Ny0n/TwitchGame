@@ -117,4 +117,16 @@ public class PlatformGenerator : MonoBehaviour
         
         evt.Answer();
     }
+    
+    public void OnLoadSave() // SO event
+    {
+        StopAllCoroutines();
+        
+        // we destroy every platform
+        foreach (var platform in _platformsList.Platforms)
+        {
+            Destroy(platform.Value.gameObject);
+        }
+        _platformsList.Platforms.Clear();
+    }
 }

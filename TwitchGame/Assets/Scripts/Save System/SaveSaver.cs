@@ -5,8 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(SaveSystem))]
 public class SaveSaver : MonoBehaviour
 {
+    [SerializeField] private ScriptableGameStateVariable _gameState;
     [SerializeField] private ScriptablePlayersList _playersList;
     [SerializeField] private ScriptablePlatformsList _platformsList;
+    
+    [Header("Events")]
+    [SerializeField] private ScriptableGameEvent _saveGameEvent;
+    [SerializeField] private ScriptableGameEvent _saveGameEndEvent;
     
     private SaveSystem _saveSystem;
     
@@ -17,6 +22,14 @@ public class SaveSaver : MonoBehaviour
         // start anim
         Debug.Log("Save start");
 
+        if (!_gameState.CompareState(Enums.GameState.Playing))
+        {
+            Debug.Log("Can only save in playing mode!");
+            return;
+        }
+        
+        _saveGameEvent.Raise();
+        
         SaveData data = await Task.Run(GetDataThread);
         bool success = await _saveSystem.SaveData(data);
         
@@ -33,6 +46,8 @@ public class SaveSaver : MonoBehaviour
             // show failure
             Debug.Log("Failed to save...");
         }
+        
+        _saveGameEndEvent.Raise();
     }
 
     private SaveData GetDataThread()
@@ -49,6 +64,8 @@ public class SaveSaver : MonoBehaviour
                 name = player.Name,
                 number = player.Number,
                 isAlive = player.IsAlive,
+                skinIndex = player.skinData.index,
+                position = player.Position,
             });
         }
         
