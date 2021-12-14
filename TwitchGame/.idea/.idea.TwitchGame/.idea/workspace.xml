@@ -6,30 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cf3f6987-f922-4690-82b9-82174175e5cc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TwitchGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TwitchGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/CommandManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/CommandManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/GameCommands/Move/MoveGameCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/GameCommands/Move/MoveGameCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/KeyboardCommands/KeyboardInterpreter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/KeyboardCommands/KeyboardInterpreter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Commands/KeyboardCommands/Players/PlayerKeyboardCommands.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Commands/KeyboardCommands/Players/PlayerKeyboardCommands.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/TimerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/TimerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Coroutines/CounterCoroutine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Coroutines/CounterCoroutine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Coroutines/FadeCoroutine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Coroutines/FadeCoroutine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Coroutines/WaitCoroutine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Coroutines/WaitCoroutine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Variables/TextVariableSetter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Coroutines/Game Startup Nation/Scripts/Variables/TextVariableSetter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/PlatformGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/UI/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/WinnerSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Features/WinnerSpawn.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Player/PlayerSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Player/PlayerSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Save System/CubeCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Save System/CubeCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Save System/PauseMenu.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Save System/PauseMenu.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Save System/SaveSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Save System/SaveSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Save System/SaveSystem.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Save System/SaveSystem.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ScriptableCooldown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ScriptableCooldown.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Variables/ScriptablePlayersList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Variables/ScriptablePlayersList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Variables/ScriptableTimerVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Variables/ScriptableTimerVariable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tasks/RotateCube.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tasks/RotateCube.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Editor/ScriptableGameEventEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Save System/SaveData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/ScriptablePlayerEventEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/SlideShow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Save System/CubeCreator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="21ewNFDVjhBl9IUDYDG7Do1I9qx" />
@@ -121,6 +98,7 @@
       <workItem from="1639124477981" duration="11333000" />
       <workItem from="1639330096275" duration="17036000" />
       <workItem from="1639383546029" duration="18286000" />
+      <workItem from="1639485184699" duration="1250000" />
     </task>
     <servers />
   </component>
