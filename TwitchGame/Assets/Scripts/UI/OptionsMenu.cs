@@ -16,16 +16,55 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private Slider _sliderMusicVolume;
 
+    [SerializeField]
+    private Toggle _toggleFullscreen;
+
+    [SerializeField]
+    private TMPro.TMP_Dropdown _resDropdown;
+
     public void OnEnable()
     {
 
         SetAllSlidersToPos();
 
-        //SetAllVolumes();
-        //it works but it has to happen on main menu not options menu
-
-
+        SetResAndFullscreen();
     }
+
+    private void SetResAndFullscreen()
+    {
+        if (PlayerPrefs.HasKey("fullscreen"))
+        {
+            bool fsState = intToBool(PlayerPrefs.GetInt("fullscreen"));
+
+            _toggleFullscreen.isOn = fsState;
+
+        }
+
+        if (PlayerPrefs.HasKey("resolution"))
+        {
+            Debug.Log("resol : " + PlayerPrefs.GetInt("resolution"));
+            _resDropdown.value = PlayerPrefs.GetInt("resolution");
+        }
+    }
+
+    #region bool & int functions
+    //used to save bools in playerprefs (only used in this script)
+    int boolToInt(bool val)
+    {
+        if (val)
+            return 1;
+        else
+            return 0;
+    }
+
+    bool intToBool(int val)
+    {
+        if (val != 0)
+            return true;
+        else
+            return false;
+    }
+    #endregion
 
     /// <summary>
     /// sets the position of sliders to match player pref volumes
@@ -45,26 +84,6 @@ public class OptionsMenu : MonoBehaviour
             _sliderSFXVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat("sfxVolume"));
         }
     }
-
-    /// <summary>
-    /// set mixer volumes to match player pref volumes
-    /// </summary>
-    //private void SetAllVolumes()
-    //{
-    //    if (PlayerPrefs.HasKey("mainVolume"))
-    //    {
-    //        _audioMixer.SetFloat("mainVolume", PlayerPrefs.GetFloat("mainVolume"));
-    //    }
-    //    if (PlayerPrefs.HasKey("sfxVolume"))
-    //    {
-    //        _audioMixer.SetFloat("sfxVolume", PlayerPrefs.GetFloat("sfxVolume"));
-    //    }
-    //    if (PlayerPrefs.HasKey("musicVolume"))
-    //    {
-    //        _audioMixer.SetFloat("musicVolume", PlayerPrefs.GetFloat("musicVolume"));
-    //    }
-
-    //}
 
     //names are magic. Store them?
     public void MainVolumeChanged(float value)
@@ -88,7 +107,25 @@ public class OptionsMenu : MonoBehaviour
 
         PlayerPrefs.SetFloat("musicVolume", value);
     }
-    
+
+    public void ResolutionChanged()
+    {
+        PlayerPrefs.SetInt("resolution", _resDropdown.value);
+
+        Debug.Log("value : " + _resDropdown.value);
+
+        //PROBLEM IN RESOLUTION DROPDOWN ==> WHEN OPTIONS ARE CREATED THEY SET PLAYERPREF WITH CALLBACK OF VALUECHANGED
+    }
+
+    public void FullscreenChanged()
+    {
+        int fsState = boolToInt(_toggleFullscreen.isOn);
+
+        PlayerPrefs.SetInt("fullscreen", fsState);
+
+
+    }
+
     /// <summary>
     /// toggles fullscreen on & off
     /// </summary>
@@ -97,10 +134,15 @@ public class OptionsMenu : MonoBehaviour
     {
         if (isFullScreen)
         {
+#if !UNITY_EDITOR
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-        } else
+#endif
+        }
+        else
         {
             Screen.fullScreenMode = FullScreenMode.Windowed;
         }
     }
-}
+
+        }
+
