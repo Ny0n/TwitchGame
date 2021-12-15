@@ -4,50 +4,44 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    [SerializeField]
-    private AudioMixer _audioMixer;
+    [SerializeField] private AudioMixer _audioMixer;
 
-    [SerializeField]
-    private Slider _sliderMainVolume;
-
-    [SerializeField]
-    private Slider _sliderSFXVolume;
-
-    [SerializeField]
-    private Slider _sliderMusicVolume;
-
-    [SerializeField]
-    private Toggle _toggleFullscreen;
-
-    [SerializeField]
-    private TMPro.TMP_Dropdown _resDropdown;
+    [Header("UI Elements")]
+    [SerializeField] private Slider _sliderMainVolume;
+    [SerializeField] private Slider _sliderSFXVolume;
+    [SerializeField] private Slider _sliderMusicVolume;
+    [SerializeField] private Toggle _toggleFullscreen;
+    [SerializeField] private TMPro.TMP_Dropdown _resDropdown;
+    
+    [Header("PlayerPrefs keys")]
+    [SerializeField] private ScriptableStringVariable _mainVolumeKey;
+    [SerializeField] private ScriptableStringVariable _sfxVolumeKey;
+    [SerializeField] private ScriptableStringVariable _musicVolumeKey;
+    [SerializeField] private ScriptableStringVariable _fullscreenKey;
+    [SerializeField] private ScriptableStringVariable _resolutionKey;
 
     public void OnEnable()
     {
-
         SetAllSlidersToPos();
-
         SetResAndFullscreen();
     }
 
     private void SetResAndFullscreen()
     {
-        if (PlayerPrefs.HasKey("fullscreen"))
+        if (PlayerPrefs.HasKey(_fullscreenKey.Value))
         {
-            bool fsState = intToBool(PlayerPrefs.GetInt("fullscreen"));
-
+            bool fsState = intToBool(PlayerPrefs.GetInt(_fullscreenKey.Value));
             _toggleFullscreen.isOn = fsState;
-
         }
 
-        if (PlayerPrefs.HasKey("resolution"))
+        if (PlayerPrefs.HasKey(_resolutionKey.Value))
         {
-            Debug.Log("resol : " + PlayerPrefs.GetInt("resolution"));
-            _resDropdown.value = PlayerPrefs.GetInt("resolution");
+            _resDropdown.value = PlayerPrefs.GetInt(_resolutionKey.Value);
         }
     }
 
     #region bool & int functions
+    
     //used to save bools in playerprefs (only used in this script)
     int boolToInt(bool val)
     {
@@ -64,6 +58,7 @@ public class OptionsMenu : MonoBehaviour
         else
             return false;
     }
+    
     #endregion
 
     /// <summary>
@@ -71,68 +66,51 @@ public class OptionsMenu : MonoBehaviour
     /// </summary>
     private void SetAllSlidersToPos()
     {
-        if (PlayerPrefs.HasKey("mainVolume"))
+        if (PlayerPrefs.HasKey(_mainVolumeKey.Value))
         {
-            _sliderMainVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat("mainVolume"));
+            _sliderMainVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat(_mainVolumeKey.Value));
         }
-        if (PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey(_musicVolumeKey.Value))
         {
-            _sliderMusicVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat("musicVolume"));
+            _sliderMusicVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat(_musicVolumeKey.Value));
         }
-        if (PlayerPrefs.HasKey("sfxVolume"))
+        if (PlayerPrefs.HasKey(_sfxVolumeKey.Value))
         {
-            _sliderSFXVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat("sfxVolume"));
+            _sliderSFXVolume.SetValueWithoutNotify(PlayerPrefs.GetFloat(_sfxVolumeKey.Value));
         }
     }
 
-    //names are magic. Store them?
     public void MainVolumeChanged(float value)
     {
-        _audioMixer.SetFloat("mainVolume", value);
-
-        PlayerPrefs.SetFloat("mainVolume", value);
+        _audioMixer.SetFloat(_mainVolumeKey.Value, value);
+        PlayerPrefs.SetFloat(_mainVolumeKey.Value, value);
 
     }
 
     public void SFXVolumeChanged(float value)
     {
-        _audioMixer.SetFloat("sfxVolume", value);
-
-        PlayerPrefs.SetFloat("sfxVolume", value);
+        _audioMixer.SetFloat(_sfxVolumeKey.Value, value);
+        PlayerPrefs.SetFloat(_sfxVolumeKey.Value, value);
     }
 
     public void MusicVolumeChanged(float value)
     {
-        _audioMixer.SetFloat("musicVolume", value);
-
-        PlayerPrefs.SetFloat("musicVolume", value);
+        _audioMixer.SetFloat(_musicVolumeKey.Value, value);
+        PlayerPrefs.SetFloat(_musicVolumeKey.Value, value);
     }
 
     public void ResolutionChanged()
     {
-        PlayerPrefs.SetInt("resolution", _resDropdown.value);
-
-        Debug.Log("value : " + _resDropdown.value);
-
-        //PROBLEM IN RESOLUTION DROPDOWN ==> WHEN OPTIONS ARE CREATED THEY SET PLAYERPREF WITH CALLBACK OF VALUECHANGED
+        PlayerPrefs.SetInt(_resolutionKey.Value, _resDropdown.value);
+        // the actual resolution change takes place in the ResolutionDropdown script
     }
 
     public void FullscreenChanged()
     {
         int fsState = boolToInt(_toggleFullscreen.isOn);
-
-        PlayerPrefs.SetInt("fullscreen", fsState);
-
-
-    }
-
-    /// <summary>
-    /// toggles fullscreen on & off
-    /// </summary>
-    /// <param name="isFullScreen">bool : is checkbox checked</param>
-    public void ToggleFullscreen(bool isFullScreen)
-    {
-        if (isFullScreen)
+        PlayerPrefs.SetInt(_fullscreenKey.Value, fsState);
+        
+        if (_toggleFullscreen.isOn)
         {
 #if !UNITY_EDITOR
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
@@ -143,6 +121,4 @@ public class OptionsMenu : MonoBehaviour
             Screen.fullScreenMode = FullScreenMode.Windowed;
         }
     }
-
-        }
-
+}

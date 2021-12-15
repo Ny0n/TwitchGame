@@ -5,26 +5,31 @@ using UnityEngine.UI;
 
 public class ResolutionDropdown : MonoBehaviour
 {
-    Resolution[] resolutions;
-
-    [SerializeField]
     public TMPro.TMP_Dropdown dropdownMenu;
 
-    void Start()
+    private Resolution[] _resolutions;
+    
+    void Awake()
     {
-        resolutions = Screen.resolutions;
-        dropdownMenu.onValueChanged.AddListener(delegate { Screen.SetResolution(resolutions[dropdownMenu.value].width, resolutions[dropdownMenu.value].height, false); });
-        for (int i = 0; i < resolutions.Length; i++)
+        _resolutions = Screen.resolutions;
+        
+        // we add the screen resolutions to the dropdown
+        for (int i = 0; i < _resolutions.Length; i++)
         {
-            dropdownMenu.options[i].text = ResToString(resolutions[i]);
-            dropdownMenu.value = i;
-            dropdownMenu.options.Add(new TMPro.TMP_Dropdown.OptionData(dropdownMenu.options[i].text));
+            var option = new TMPro.TMP_Dropdown.OptionData(ResToString(_resolutions[i]));
+            dropdownMenu.options.Add(option);
         }
     }
 
-    //used for the label
-    string ResToString(Resolution res)
+    // used for the label
+    private string ResToString(Resolution res)
     {
         return res.width + " x " + res.height;
+    }
+
+    public void ResolutionChanged()
+    {
+        // PlayerPrefs var changed in the OptionsMenu script
+        Screen.SetResolution(_resolutions[dropdownMenu.value].width, _resolutions[dropdownMenu.value].height, false);
     }
 }
