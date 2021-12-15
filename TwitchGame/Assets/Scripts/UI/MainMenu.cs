@@ -5,6 +5,11 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField]
     private AudioMixer _audioMixer;
+    
+    [Header("PlayerPrefs keys")]
+    [SerializeField] private ScriptableStringVariable _mainVolumeKey;
+    [SerializeField] private ScriptableStringVariable _sfxVolumeKey;
+    [SerializeField] private ScriptableStringVariable _musicVolumeKey;
 
     public void Start()
     {
@@ -13,29 +18,26 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
-        Debug.Log("Application quit");
-    }
-
-    public void PlayGame()
-    {
-        //start game scenes
+#endif
     }
 
     private void SetAllVolumes()
     {
-        if (PlayerPrefs.HasKey("mainVolume"))
+        if (PlayerPrefs.HasKey(_mainVolumeKey.Value))
         {
-            _audioMixer.SetFloat("mainVolume", PlayerPrefs.GetFloat("mainVolume"));
+            _audioMixer.SetFloat(_mainVolumeKey.Value, PlayerPrefs.GetFloat(_mainVolumeKey.Value));
         }
-        if (PlayerPrefs.HasKey("sfxVolume"))
+        if (PlayerPrefs.HasKey(_sfxVolumeKey.Value))
         {
-            _audioMixer.SetFloat("sfxVolume", PlayerPrefs.GetFloat("sfxVolume"));
+            _audioMixer.SetFloat(_sfxVolumeKey.Value, PlayerPrefs.GetFloat(_sfxVolumeKey.Value));
         }
-        if (PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey(_musicVolumeKey.Value))
         {
-            _audioMixer.SetFloat("musicVolume", PlayerPrefs.GetFloat("musicVolume"));
+            _audioMixer.SetFloat(_musicVolumeKey.Value, PlayerPrefs.GetFloat(_musicVolumeKey.Value));
         }
-
     }
 }
