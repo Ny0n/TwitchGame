@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68d19ba11ff5cb4cbbc139a11e128d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 00ee35065f98a904889954c4f6bafb68, type: 2}
   _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
   _skinDatabase: {fileID: 11400000, guid: 24e4b7355b053384fb8c920592557775, type: 2}
   _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}

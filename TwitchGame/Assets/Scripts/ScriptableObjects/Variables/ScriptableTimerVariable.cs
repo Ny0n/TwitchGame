@@ -4,8 +4,7 @@ using Debug = UnityEngine.Debug;
 [CreateAssetMenu(menuName = "Special/Timer")]
 public class ScriptableTimerVariable : ScriptableObject
 {
-    [SerializeField] [Tooltip("Duration in seconds")]
-    private float _duration;
+    [SerializeField] private ScriptableSettings _settings;
     
     public float Value { get; set; }
     public event System.Action TimerEnd;
@@ -19,7 +18,7 @@ public class ScriptableTimerVariable : ScriptableObject
         var timerManager = TimerManager.Instance;
         if (timerManager != null)
         {
-            Value = _duration;
+            Value = _settings.RoundDuration;
             timerManager.AddTimer(this);
         }
         else

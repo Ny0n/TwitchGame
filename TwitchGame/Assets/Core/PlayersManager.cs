@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayersManager : MySingleton<PlayersManager>
 {
+    [SerializeField] private ScriptableSettings _settings;
     [SerializeField] private ScriptableGameStateVariable _gameState;
     [SerializeField] private ScriptableSkinDatabase _skinDatabase;
     [SerializeField] private ScriptablePlayersList _playersList;
@@ -51,6 +52,9 @@ public class PlayersManager : MySingleton<PlayersManager>
 
     private void RegisterNewPlayer(string playerName)
     {
+        if (_playersList.Players.Count >= _settings.MaxNumberOfPlayers) // settings
+            return;
+        
         if (_playersList.IsPlayerRegistered(playerName))
             return;
 
