@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabe09dff8223584a84398b9552c2971, type: 3}
   m_Name: Game Empty
   m_EditorClassIdentifier: 
-  <Text>k__BackingField: '!stay'
+  _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}

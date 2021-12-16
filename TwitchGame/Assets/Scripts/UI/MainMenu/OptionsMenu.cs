@@ -33,10 +33,18 @@ public class OptionsMenu : MonoBehaviour
             bool fsState = intToBool(PlayerPrefs.GetInt(_fullscreenKey.Value));
             _toggleFullscreen.isOn = fsState;
         }
+        else
+        {
+            _toggleFullscreen.isOn = true;
+        }
 
         if (PlayerPrefs.HasKey(_resolutionKey.Value))
         {
             _resDropdown.value = PlayerPrefs.GetInt(_resolutionKey.Value);
+        }
+        else
+        {
+            _resDropdown.value = _resDropdown.options.Count;
         }
     }
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Game MoveUp
   m_EditorClassIdentifier: 
   _direction: 0
-  gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
+  _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
