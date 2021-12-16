@@ -1,20 +1,22 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResolutionDropdown : MonoBehaviour
 {
-    public TMPro.TMP_Dropdown dropdownMenu;
+    [SerializeField] private TMP_Dropdown _dropdownMenu;
 
     private Resolution[] _resolutions;
-    
-    void Awake()
+
+    public void InitOptions()
     {
         _resolutions = Screen.resolutions;
-        
+    
         // we add the screen resolutions to the dropdown
         for (int i = 0; i < _resolutions.Length; i++)
         {
             var option = new TMPro.TMP_Dropdown.OptionData(ResToString(_resolutions[i]));
-            dropdownMenu.options.Add(option);
+            _dropdownMenu.options.Add(option);
         }
     }
 
@@ -27,6 +29,6 @@ public class ResolutionDropdown : MonoBehaviour
     public void ResolutionChanged()
     {
         // PlayerPrefs var changed in the OptionsMenu script
-        Screen.SetResolution(_resolutions[dropdownMenu.value].width, _resolutions[dropdownMenu.value].height, false);
+        Screen.SetResolution(_resolutions[_dropdownMenu.value].width, _resolutions[_dropdownMenu.value].height, Screen.fullScreenMode);
     }
 }

@@ -6,6 +6,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private AudioMixer _audioMixer;
     
+    [SerializeField] private OptionsMenu _optionsMenu;
+    [SerializeField] private ResolutionDropdown _resDropdown;
+    
     [Header("PlayerPrefs keys")]
     [SerializeField] private ScriptableStringVariable _mainVolumeKey;
     [SerializeField] private ScriptableStringVariable _sfxVolumeKey;
@@ -14,6 +17,8 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         SetAllVolumes();
+        _resDropdown.InitOptions();
+        _optionsMenu.InitOptions();
     }
 
     public void QuitGame()

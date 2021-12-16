@@ -8,6 +8,8 @@ public class WinnerSpawn : MonoBehaviour
     [SerializeField] private ScriptableGameEvent _nextLevelEvent;
     
     [SerializeField] private GameObject _playerPrefab;
+    
+    [SerializeField] private bool _loadNextLevel = true;
 
     private IEnumerator Start()
     {
@@ -30,6 +32,8 @@ public class WinnerSpawn : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _playersList.Players.Clear();
-        _nextLevelEvent.Raise();
+        
+        if (_loadNextLevel)
+            _nextLevelEvent.Raise();
     }
 }

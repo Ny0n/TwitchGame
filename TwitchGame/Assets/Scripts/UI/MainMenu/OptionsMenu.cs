@@ -20,7 +20,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private ScriptableStringVariable _fullscreenKey;
     [SerializeField] private ScriptableStringVariable _resolutionKey;
 
-    public void OnEnable()
+    public void InitOptions()
     {
         SetAllSlidersToPos();
         SetResAndFullscreen();
@@ -113,7 +113,7 @@ public class OptionsMenu : MonoBehaviour
         if (_toggleFullscreen.isOn)
         {
 #if !UNITY_EDITOR
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
 #endif
         }
         else
