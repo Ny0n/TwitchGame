@@ -141,7 +141,8 @@ public class SaveLoader : MonoBehaviour
             
             yield return null; // we let the gameobject spawn
             
-            player.PlayerObject.GetComponent<Rigidbody>().useGravity = false;
+            if (player.PlayerObject != null)
+                player.PlayerObject.GetComponent<Rigidbody>().useGravity = false;
             
             yield return new WaitForSeconds(_delay);
         }
