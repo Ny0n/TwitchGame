@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,8 +11,9 @@ public class SaveSaver : MonoBehaviour
     [SerializeField] private ScriptablePlatformsList _platformsList;
     
     [Header("Events")]
-    [SerializeField] private ScriptableGameEvent _saveGameEvent;
-    [SerializeField] private ScriptableGameEvent _saveGameEndEvent;
+    [SerializeField] private ScriptableGameEvent _saveGameStartEvent;
+    [SerializeField] private ScriptableGameEvent _saveGameEndSuccessEvent;
+    [SerializeField] private ScriptableGameEvent _saveGameEndFailureEvent;
     
     private SaveSystem _saveSystem;
     
@@ -20,34 +22,40 @@ public class SaveSaver : MonoBehaviour
     public async void Save()
     {
         // start anim
-        Debug.Log("Save start");
-
+        _saveGameStartEvent.Raise();
+        
         if (!_gameState.CompareState(Enums.GameState.Playing))
         {
             Debug.Log("Can only save in playing mode!");
+            _saveGameEndFailureEvent.Raise();
+            return;
+        }
+
+        SaveData data;
+
+        try
+        {
+            data = await Task.Run(GetDataThread);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Saver: Error while trying to get data");
+            _saveGameEndFailureEvent.Raise();
             return;
         }
         
-        _saveGameEvent.Raise();
-        
-        SaveData data = await Task.Run(GetDataThread);
-        bool success = await _saveSystem.SaveData(data);
-        
-        // stop anim
-        Debug.Log("Save end");
+        bool success = await _saveSystem.SaveData(data); // already protected
         
         if (success)
         {
             // show success
-            Debug.Log("Saved successfully!");
+            _saveGameEndSuccessEvent.Raise();
         }
         else
         {
             // show failure
-            Debug.Log("Failed to save...");
+            _saveGameEndFailureEvent.Raise();
         }
-        
-        _saveGameEndEvent.Raise();
     }
 
     private SaveData GetDataThread()

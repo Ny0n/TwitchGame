@@ -17,7 +17,7 @@ public class ObservableVariable<T> : ScriptableObject
         T oldValue = _value;
         _value = value;
         
-        if (!Equals(oldValue, _value))
+        if (!Equals(oldValue, _value) && ValueChanged != null)
             ValueChanged.Invoke();
     }
 }

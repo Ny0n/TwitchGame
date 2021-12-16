@@ -120,7 +120,7 @@ public class TwitchClient : MonoBehaviour
         while (!_tokenSource.IsCancellationRequested)
         {
             ReadChat();
-            Debug.Log("read");
+            // Debug.Log("read");
             
             if (_crashRequested)
             {

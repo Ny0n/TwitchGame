@@ -691,6 +691,7 @@ MonoBehaviour:
   _canvasGroups:
   - {fileID: 55835735}
   - {fileID: 1334511598}
+  _pauseDelay: 1
   _fadeInDelay: 1
   _fadeOutDelay: 1
 --- !u!1001 &1664743463
@@ -843,7 +844,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1753099121}
   - component: {fileID: 1753099120}
-  - component: {fileID: 1753099119}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -851,14 +851,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1753099119
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753099118}
-  m_Enabled: 1
 --- !u!20 &1753099120
 Camera:
   m_ObjectHideFlags: 0

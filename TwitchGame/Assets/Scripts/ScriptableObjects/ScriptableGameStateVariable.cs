@@ -4,7 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Variable/Game State")]
 public class ScriptableGameStateVariable : ScriptableObject
 {
-    [SerializeField] private Enums.GameState _value = Enums.GameState.Null;
+    [SerializeField] private Enums.GameState _inspectorValue = Enums.GameState.Null;
+    
+    private Enums.GameState _value = Enums.GameState.Null;
     
     [Header("State change events")]
     [SerializeField] private ScriptableGameEvent _gamePausedEvent;
@@ -56,6 +58,6 @@ public class ScriptableGameStateVariable : ScriptableObject
     [ContextMenu("Switch to Selected")]
     private void ManualSwitch()
     {
-        SwitchToState(_value);
+        SwitchToState(_inspectorValue);
     }
 }

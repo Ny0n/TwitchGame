@@ -19,6 +19,12 @@ public class LevelBootstrap : Bootstrap
         _levelStartEvent?.Raise();
     }
     
+    [ContextMenu("Reload current level")]
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(_thisLevel.Value);
+    }
+    
     [ContextMenu("Next Level")]
     public void NextLevel()
     {

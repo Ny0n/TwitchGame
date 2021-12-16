@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6449924198689383696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6449924198689383698}
+  - component: {fileID: 6449924198689383699}
+  - component: {fileID: 6419650518670137336}
+  - component: {fileID: 1606630401281384653}
+  - component: {fileID: 892203734}
+  m_Layer: 0
+  m_Name: SaveSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6449924198689383698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449924198689383696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 439.77518, y: 175.34541, z: -25.207085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6449924198689383699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449924198689383696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d3be298bd8a5047a518eb85fb926be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveFolderName: saves
+  _saveFileName: save01
+  _saveFileExtension: json
+--- !u!114 &6419650518670137336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449924198689383696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5e5452199a75a4da45801d5744ead8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
+  _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  _platformsList: {fileID: 11400000, guid: d4fcb41e74d2f0a4583b385c557b7186, type: 2}
+  _saveGameStartEvent: {fileID: 11400000, guid: c5f3c30174e0222499d7ac3a67cbe389, type: 2}
+  _saveGameEndSuccessEvent: {fileID: 11400000, guid: f9b3f0aeb727ee147907925513de6169, type: 2}
+  _saveGameEndFailureEvent: {fileID: 11400000, guid: 27a11c4f8f226494090a28b7fffce844, type: 2}
+--- !u!114 &1606630401281384653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449924198689383696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3344a4fe96fe75443823ea2beee4ece2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
+  _skinDatabase: {fileID: 11400000, guid: 24e4b7355b053384fb8c920592557775, type: 2}
+  _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  _platformsList: {fileID: 11400000, guid: d4fcb41e74d2f0a4583b385c557b7186, type: 2}
+  _loadSaveStartEvent: {fileID: 11400000, guid: 5b24587f253a0fd48921a34b670db0aa, type: 2}
+  _loadSaveStartPrepEvent: {fileID: 11400000, guid: 0a64a397833190b4299e78642560a809, type: 2}
+  _loadSaveEndSuccessEvent: {fileID: 11400000, guid: 2a3a345000d2ddf43ac2cf8d9e19df9b, type: 2}
+  _loadSaveEndFailureEvent: {fileID: 11400000, guid: de153bbef3fb5d04daf1f3bf799e35d1, type: 2}
+  _playerPrefab: {fileID: 7913447538169836104, guid: 1c4a1f970ab1ff6478bf0ad8d9a74280, type: 3}
+  _platformPrefab: {fileID: 8417205674601576954, guid: e8f3fe3f4c7eb984c9be03a824b96d17, type: 3}
+  _delay: 0.04
+--- !u!114 &892203734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449924198689383696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8490914b9cbdac1479d083e99381243b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventListeners:
+  - _events:
+    - {fileID: 11400000, guid: 8f470e6ef2584df458c223d644785f1d, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6419650518670137336}
+          m_TargetAssemblyTypeName: SaveSaver, Assembly-CSharp
+          m_MethodName: Save
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: dd9a7a6581962f746a065bbef4dd1b46, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1606630401281384653}
+          m_TargetAssemblyTypeName: SaveLoader, Assembly-CSharp
+          m_MethodName: Load
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

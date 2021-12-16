@@ -53,7 +53,10 @@ public class PlayersManager : MySingleton<PlayersManager>
     private void RegisterNewPlayer(string playerName)
     {
         if (_playersList.Players.Count >= _settings.MaxNumberOfPlayers) // settings
+        {
+            Debug.Log("Maximum number of players reached!");
             return;
+        }
         
         if (_playersList.IsPlayerRegistered(playerName))
             return;

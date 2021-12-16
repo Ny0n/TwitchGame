@@ -110,7 +110,8 @@ public class PlatformGenerator : MonoBehaviour
         // destroy game platforms
         foreach (var platform in _platformsList.GetValuesList())
         {
-            Destroy(platform.gameObject);
+            if (platform != null)
+                Destroy(platform.gameObject);
             yield return new WaitForSeconds(waitTime);
         }
         _platformsList.Platforms.Clear();
@@ -125,7 +126,8 @@ public class PlatformGenerator : MonoBehaviour
         // we destroy every platform
         foreach (var platform in _platformsList.Platforms)
         {
-            Destroy(platform.Value.gameObject);
+            if (platform.Value != null)
+                Destroy(platform.Value.gameObject);
         }
         _platformsList.Platforms.Clear();
     }

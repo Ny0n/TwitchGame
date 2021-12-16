@@ -42,6 +42,5 @@ public class MoveGameCommand : GameCommand
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        Debug.Log("2");
     }
 }

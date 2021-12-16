@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,8 +14,10 @@ public class SaveLoader : MonoBehaviour
     [SerializeField] private ScriptablePlatformsList _platformsList;
 
     [Header("Events")]
-    [SerializeField] private ScriptableGameEvent _loadSaveEvent;
-    [SerializeField] private ScriptableGameEvent _loadSaveEndEvent;
+    [SerializeField] private ScriptableGameEvent _loadSaveStartEvent;
+    [SerializeField] private ScriptableGameEvent _loadSaveStartPrepEvent;
+    [SerializeField] private ScriptableGameEvent _loadSaveEndSuccessEvent;
+    [SerializeField] private ScriptableGameEvent _loadSaveEndFailureEvent;
     
     [Header("Other")]
     [SerializeField] private GameObject _playerPrefab;
@@ -30,29 +33,33 @@ public class SaveLoader : MonoBehaviour
     public async void Load()
     {
         // start anim
-        Debug.Log("Load start");
+        _loadSaveStartEvent.Raise();
         
-        SaveData? data = await _saveSystem.LoadData();
-        
-        _loadSaveEvent.Raise();
-        
-        // stop anim
-        Debug.Log("Load end");
+        SaveData? data = await _saveSystem.LoadData(); // already protected
         
         if (data != null)
         {
-            await ApplyData((SaveData) data);
+            _loadSaveStartPrepEvent.Raise(); // for scripts that need to do things before loading a new save
+
+            try
+            {
+                await ApplyData((SaveData) data);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Loader: Error while trying to load data (we advise restarting a new game)");
+                _loadSaveEndFailureEvent.Raise();
+                return;
+            }
             
             // show success
-            Debug.Log("Loaded save file successfully!");
+            _loadSaveEndSuccessEvent.Raise();
         }
         else
         {
             // show failure
-            Debug.Log("Failed to load save file...");
+            _loadSaveEndFailureEvent.Raise();
         }
-        
-        _loadSaveEndEvent.Raise();
     }
 
     private async Task ApplyData(SaveData data)
@@ -73,10 +80,10 @@ public class SaveLoader : MonoBehaviour
         {
             player.Value.PlayerObject.GetComponent<Rigidbody>().useGravity = true; // we add the gravity back
         }
-        
-        _gameState.SwitchToState(Enums.GameState.Playing);
 
         #endregion
+        
+        _gameState.SwitchToState(Enums.GameState.Playing);
     }
 
     private void StartCo(IEnumerator coroutine)
