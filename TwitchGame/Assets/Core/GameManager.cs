@@ -75,6 +75,8 @@ public class GameManager : MySingleton<GameManager>
     private IEnumerator PlayingCoroutine()
     {
         CheckForGameEnd();
+        yield return null;
+        
         while (true) // while the end has not been detected
         {
             StartRound();

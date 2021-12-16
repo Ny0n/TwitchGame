@@ -212,8 +212,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380158721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.79, z: -4.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.35068208, z: 1}
   m_Children:
   - {fileID: 1382083803}
   m_Father: {fileID: 0}
@@ -243,8 +243,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382083802}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.79, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 2.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 380158725}
@@ -262,9 +262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786aeb495ff82014997c57fe9ddc4b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
-  nextLevelEvent: {fileID: 11400000, guid: 0d5dc49d127a53445a130b12c909f60c, type: 2}
-  playerPrefab: {fileID: 7913447538169836104, guid: 1c4a1f970ab1ff6478bf0ad8d9a74280, type: 3}
+  _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
+  _nextLevelEvent: {fileID: 11400000, guid: 0d5dc49d127a53445a130b12c909f60c, type: 2}
+  _playerPrefab: {fileID: 7913447538169836104, guid: 1c4a1f970ab1ff6478bf0ad8d9a74280, type: 3}
 --- !u!1 &1702071170
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837037625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1.9, z: -5.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

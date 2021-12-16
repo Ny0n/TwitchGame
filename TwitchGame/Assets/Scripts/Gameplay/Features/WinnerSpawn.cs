@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class WinnerSpawn : MonoBehaviour
 {
-    public ScriptablePlayersList playersList;
-    public ScriptableGameEvent nextLevelEvent;
+    [SerializeField] private ScriptablePlayersList _playersList;
+    [SerializeField] private ScriptableGameEvent _nextLevelEvent;
     
-    public GameObject playerPrefab;
+    [SerializeField] private GameObject _playerPrefab;
 
     private IEnumerator Start()
     {
-        Player winner = (from player in playersList.Players where player.Value.IsAlive select player.Value).FirstOrDefault();
+        Player winner = (from player in _playersList.Players where player.Value.IsAlive select player.Value).FirstOrDefault();
 
         if (winner is Player)
         {
-            print("winner " + winner.Name);
-            winner.Instantiate(playerPrefab, transform.position, transform.rotation);
-            yield return null;
+            var transform1 = transform;
+            winner.Instantiate(_playerPrefab, transform1.position, transform1.rotation);
+
+            for (int i = 0; i < 10; i++) // we wait for the player's animator to be good
+                yield return null;
             winner.Win();
         }
 
@@ -27,7 +29,7 @@ public class WinnerSpawn : MonoBehaviour
     private IEnumerator ReturnCoroutine()
     {
         yield return new WaitForSeconds(5);
-        playersList.Players.Clear();
-        nextLevelEvent.Raise();
+        _playersList.Players.Clear();
+        _nextLevelEvent.Raise();
     }
 }

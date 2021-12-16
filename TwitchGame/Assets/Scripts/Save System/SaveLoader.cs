@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,7 +44,7 @@ public class SaveLoader : MonoBehaviour
             {
                 await ApplyData((SaveData) data);
             }
-            catch (Exception e)
+            catch
             {
                 Debug.Log("Loader: Error while trying to load data (we advise restarting a new game)");
                 _loadSaveEndFailureEvent.Raise();

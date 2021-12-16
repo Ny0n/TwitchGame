@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -37,7 +36,7 @@ public class SaveSaver : MonoBehaviour
         {
             data = await Task.Run(GetDataThread);
         }
-        catch (Exception e)
+        catch
         {
             Debug.Log("Saver: Error while trying to get data");
             _saveGameEndFailureEvent.Raise();

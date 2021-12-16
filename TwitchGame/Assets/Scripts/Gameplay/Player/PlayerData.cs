@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _skinParent;
+    [SerializeField] private GameObject _hudParent;
 
     private int _rebindAnimator;
     private readonly int Win1 = Animator.StringToHash("Win");
@@ -34,5 +35,6 @@ public class PlayerData : MonoBehaviour
     public void Win()
     {
         _animator.SetTrigger(Win1);
+        Destroy(_hudParent);
     }
 }
