@@ -50,10 +50,9 @@ public class GameSettingsMenu : MonoBehaviour
         }
     }
 
-    public void LoadFromGoogle()
+    public async void LoadFromGoogle()
     {
-        int maxPlayers = 20;
-        float roundDuration = 15f;
+        (int maxPlayers, float roundDuration) = await GoogleSheetClient.Instance.ReadGameSettings();
         
         _settings.MaxNumberOfPlayers = maxPlayers;
         _settings.RoundDuration = roundDuration;

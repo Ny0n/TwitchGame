@@ -77,7 +77,8 @@ public class SaveLoader : MonoBehaviour
 
         foreach (var player in _playersList.Players)
         {
-            player.Value.PlayerObject.GetComponent<Rigidbody>().useGravity = true; // we add the gravity back
+            if (player.Value.PlayerObject != null)
+                player.Value.PlayerObject.GetComponent<Rigidbody>().useGravity = true; // we add the gravity back
         }
 
         #endregion

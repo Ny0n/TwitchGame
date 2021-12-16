@@ -3,8 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Special/Cooldown")]
 public class ScriptableCooldown : ScriptableObject
 {
-    [SerializeField] [Tooltip("Length in ms")]
+    [SerializeField] [Tooltip("Length in s")]
     private float _cooldownDuration;
+    
+    private float _nextCooldownDate;
+
+    private void OnEnable()
+    {
+        _nextCooldownDate = Time.time;
+    }
 
     public void StartCooldown()
     {
@@ -15,6 +22,4 @@ public class ScriptableCooldown : ScriptableObject
     {
         return Time.time > _nextCooldownDate;
     }
-    
-    private float _nextCooldownDate;
 }

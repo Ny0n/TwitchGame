@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Independant/LoadingScreen.unity
     guid: e8d716dcdcc13c6459a1be4c24a08f36
   - enabled: 1
+    path: Assets/Scenes/Independant/Google.unity
+    guid: 5af341894e9dbb94a8a425c9a67f359e
+  - enabled: 1
     path: Assets/Scenes/Menus/Main_Menu.unity
     guid: 254be50112efd184dad799f47e8621f2
   - enabled: 1

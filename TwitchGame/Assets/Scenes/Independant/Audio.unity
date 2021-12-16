@@ -171,6 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1327206598}
+  - component: {fileID: 1327206600}
   - component: {fileID: 1327206599}
   m_Layer: 0
   m_Name: Audio Player (Event Receiver)
@@ -257,6 +258,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1327206600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327206597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3be7befb64a0e4f87d97eba787125f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: c6ff17f34b42c4f4fb9eb1c2447dafcc, type: 2}
+  _mainVolumeKey: {fileID: 11400000, guid: 8d2030a1bf9cf244691069a06337eb03, type: 2}
+  _sfxVolumeKey: {fileID: 11400000, guid: e86ec32735e803048a8bdc846fa52a74, type: 2}
+  _musicVolumeKey: {fileID: 11400000, guid: d968ea59d41bf3c4c9e8a23dbc4b50a2, type: 2}
 --- !u!1 &1559453274
 GameObject:
   m_ObjectHideFlags: 0
