@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1402eedbc3f5d9f4a88d4f512a5a4297, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  _value: 5
+  _inspectorValue: 5
   _gamePausedEvent: {fileID: 11400000, guid: 9ab6675859694964182a02fba18233c4, type: 2}
   _gameWaitingEvent: {fileID: 11400000, guid: d7741a042395c7c4a8351e5ddbdf199e, type: 2}
   _gameStartingEvent: {fileID: 11400000, guid: 717b9464896ede4449ee7558a0573665, type: 2}

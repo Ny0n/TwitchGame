@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scenesToLoad: []
+  _finishedLoadingLevelEvent: {fileID: 0}
+  _loadLevelAsyncEvent: {fileID: 0}
+  _levelStartEvent: {fileID: 11400000, guid: d3b03afc49905aa4abc83e0051a00bed, type: 2}
   _thisLevel: {fileID: 0}
   _nextLevelName: {fileID: 0}
-  _levelStartEvent: {fileID: 11400000, guid: d3b03afc49905aa4abc83e0051a00bed, type: 2}
 --- !u!114 &6554153937639819267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +88,40 @@ MonoBehaviour:
         - m_Target: {fileID: 6554153937639819269}
           m_TargetAssemblyTypeName: LevelBootstrap, Assembly-CSharp
           m_MethodName: NextLevelAdditive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 312c1c6bc652b7940918abfaca8141a0, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6554153937639819269}
+          m_TargetAssemblyTypeName: LevelBootstrap, Assembly-CSharp
+          m_MethodName: ReloadLevelAsync
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _events:
+    - {fileID: 11400000, guid: 5aea146e69bfa8a4baf05da4755fff55, type: 2}
+    _onEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6554153937639819269}
+          m_TargetAssemblyTypeName: LevelBootstrap, Assembly-CSharp
+          m_MethodName: NextLevelAsync
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

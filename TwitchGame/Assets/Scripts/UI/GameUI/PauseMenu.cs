@@ -6,7 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private ScriptableBoolVariable _gamePaused;
     [SerializeField] private ScriptableStringVariable _mainMenuScene;
-    [SerializeField] private ScriptableGameEvent _reloadLevel;
+    [SerializeField] private ScriptableGameEvent _reloadLevelAsyncEvent;
+    [SerializeField] private ScriptableGameEvent _loadLevelAsyncEvent;
     
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _defaultSelectedItem;
@@ -64,11 +65,12 @@ public class PauseMenu : MonoBehaviour
     
     public void Restart()
     {
-        _reloadLevel.Raise();
+        _reloadLevelAsyncEvent.Raise();
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(_mainMenuScene.Value);
+        _loadLevelAsyncEvent.Raise();
+        SceneManager.LoadSceneAsync(_mainMenuScene.Value);
     }
 }

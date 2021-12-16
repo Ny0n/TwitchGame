@@ -214,7 +214,8 @@ MonoBehaviour:
   _playersList: {fileID: 11400000, guid: dedd8850a18ed4a43be019ad1c22bbb1, type: 2}
   _gameState: {fileID: 11400000, guid: 3f5671948dc315f428e1a16989da269e, type: 2}
   _roundTimer: {fileID: 11400000, guid: e5c50a61d083001469e616ff05b1ac23, type: 2}
-  _nextLevelEvent: {fileID: 11400000, guid: 0d5dc49d127a53445a130b12c909f60c, type: 2}
+  _loadLevelAsyncEvent: {fileID: 11400000, guid: 2e4c90db208f5a94e91edd403fe6c12c, type: 2}
+  _nextLevelAsyncEvent: {fileID: 11400000, guid: 5aea146e69bfa8a4baf05da4755fff55, type: 2}
   _startRoundEvent: {fileID: 11400000, guid: 210a2cde9fb299546a947642caf3d431, type: 2}
   _startActionEvent: {fileID: 11400000, guid: c4f6067c2483893449d42a3014876539, type: 2}
 --- !u!114 &825313088

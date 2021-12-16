@@ -9,16 +9,28 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/Slide_Show.unity
     guid: 3e162f60dc27f7846a5cf8c9045b050d
   - enabled: 1
+    path: Assets/Scenes/Independant/LoadingScreen.unity
+    guid: e8d716dcdcc13c6459a1be4c24a08f36
+  - enabled: 1
     path: Assets/Scenes/Menus/Main_Menu.unity
+    guid: 254be50112efd184dad799f47e8621f2
+  - enabled: 1
+    path: Assets/Scenes/Menus/Main_Menu_UI.unity
     guid: 4de8df9512bbe684a9279200e9cf69f1
   - enabled: 1
     path: Assets/Scenes/Game/Game.unity
+    guid: 0f44bc869ddcb8447be930b5035bc3c2
+  - enabled: 1
+    path: Assets/Scenes/Game/Game_Terrain.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Game/Game_UI.unity
     guid: 14497cc98ea3aa44f899013400f3d4fd
   - enabled: 1
     path: Assets/Scenes/Winner/Winner.unity
+    guid: 7c0ab75644f59364f8995de0e72290a8
+  - enabled: 1
+    path: Assets/Scenes/Winner/Winner_Terrain.unity
     guid: 7cffc89981f83214b93607690c8df6b7
   - enabled: 1
     path: Assets/Scenes/Winner/Winner_UI.unity

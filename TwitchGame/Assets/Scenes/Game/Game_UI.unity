@@ -5098,7 +5098,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gamePaused: {fileID: 11400000, guid: e52bcc4eae01f814cb7d99963fc420e4, type: 2}
   _mainMenuScene: {fileID: 11400000, guid: 42a737eaffb30ac4ab7bd7fa22450093, type: 2}
-  _reloadLevel: {fileID: 11400000, guid: 312c1c6bc652b7940918abfaca8141a0, type: 2}
+  _reloadLevelAsyncEvent: {fileID: 11400000, guid: 312c1c6bc652b7940918abfaca8141a0, type: 2}
+  _loadLevelAsyncEvent: {fileID: 11400000, guid: 2e4c90db208f5a94e91edd403fe6c12c, type: 2}
   _panel: {fileID: 5035205283680337722}
   _defaultSelectedItem: {fileID: 5035205284758766509}
 --- !u!114 &5035205284455097009

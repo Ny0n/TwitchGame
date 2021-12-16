@@ -8,7 +8,7 @@ public class GameManager : MySingleton<GameManager>
     [SerializeField] private ScriptableGameStateVariable _gameState;
 
     [SerializeField] private ScriptableTimerVariable _roundTimer;
-    [SerializeField] private ScriptableGameEvent _nextLevelEvent;
+    [SerializeField] private ScriptableGameEvent _nextLevelAsyncEvent;
     [SerializeField] private ScriptableGameEvent _startRoundEvent;
     [SerializeField] private ScriptableGameEvent _startActionEvent;
 
@@ -89,7 +89,7 @@ public class GameManager : MySingleton<GameManager>
     {
         StopRound();
         yield return StartCoroutine(_gameState.CurrentStateEvent.WaitForSelfAnswers());
-        _nextLevelEvent.Raise();
+        _nextLevelAsyncEvent.Raise();
     }
     
     private IEnumerator WaitForTimerEndCoroutine()

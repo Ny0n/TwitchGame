@@ -1,34 +1,32 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelBootstrap : Bootstrap
 {
-    [SerializeField]
-    private ScriptableStringVariable _thisLevel;
-
-    [SerializeField]
-    private ScriptableStringVariable _nextLevelName;
-
-    [SerializeField]
-    private ScriptableGameEvent _levelStartEvent;
-
-    private IEnumerator Start()
-    {
-        yield return new WaitForSeconds(1);
-        _levelStartEvent?.Raise();
-    }
+    [SerializeField] private ScriptableGameEvent _loadLevelAsyncEvent;
     
-    [ContextMenu("Reload current level")]
-    public void ReloadLevel()
+    [Header("Level details")]
+    [SerializeField] private ScriptableStringVariable _thisLevel;
+    [SerializeField] private ScriptableStringVariable _nextLevelName;
+    
+    [ContextMenu("Reload current level async")]
+    public void ReloadLevelAsync()
     {
-        SceneManager.LoadScene(_thisLevel.Value);
+        _loadLevelAsyncEvent.Raise();
+        SceneManager.LoadSceneAsync(_thisLevel.Value);
     }
     
     [ContextMenu("Next Level")]
     public void NextLevel()
     {
         SceneManager.LoadScene(_nextLevelName.Value);
+    }
+    
+    [ContextMenu("Next Level Async")]
+    public void NextLevelAsync()
+    {
+        _loadLevelAsyncEvent.Raise();
+        SceneManager.LoadSceneAsync(_nextLevelName.Value);
     }
 
     [ContextMenu("Next Level additive")]
