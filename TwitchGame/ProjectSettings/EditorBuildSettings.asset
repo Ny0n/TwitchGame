@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/Slide_Show.unity
     guid: 3e162f60dc27f7846a5cf8c9045b050d
   - enabled: 1
+    path: Assets/Scenes/Independant/BigScene.unity
+    guid: 7dd150931c216de49896bfd620cbe57d
+  - enabled: 1
     path: Assets/Scenes/Independant/LoadingScreen.unity
     guid: e8d716dcdcc13c6459a1be4c24a08f36
   - enabled: 1

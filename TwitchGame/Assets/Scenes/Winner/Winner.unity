@@ -179,6 +179,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: cb549c2303bd86a43913a20d2282848c, type: 2}
     - target: {fileID: 6554153937639819269, guid: 5738eeea46f74ab409d65e1fa81ba59e, type: 3}
+      propertyPath: _loadedScenes
+      value: 
+      objectReference: {fileID: 11400000, guid: c3b7f68838cf3b2438092e7d36e85357, type: 2}
+    - target: {fileID: 6554153937639819269, guid: 5738eeea46f74ab409d65e1fa81ba59e, type: 3}
       propertyPath: _nextLevelName
       value: 
       objectReference: {fileID: 11400000, guid: 42a737eaffb30ac4ab7bd7fa22450093, type: 2}

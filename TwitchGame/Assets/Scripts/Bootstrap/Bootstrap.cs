@@ -11,8 +11,8 @@ public class Bootstrap : MonoBehaviour
     [Header("Load events")]
     [SerializeField] private ScriptableGameEvent _finishedLoadingLevelEvent;
     [SerializeField] private ScriptableGameEvent _levelStartEvent;
-
-    private int _loaded;
+    
+    [SerializeField] private ScriptableFloatVariable _loadedScenes;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class Bootstrap : MonoBehaviour
         // StartCoroutine(LoadScenesCoroutine());
         
         // async mode (loading icon doesn't freeze) (but maybe dangerous?)
-        _loaded = 0;
+        _loadedScenes.Value = 0;
         foreach (var scene in _scenesToLoad)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(scene.Value, LoadSceneMode.Additive);
@@ -36,10 +36,11 @@ public class Bootstrap : MonoBehaviour
 
     private IEnumerator LoadScenesCoroutine()
     {
-        _loaded = 0;
+        _loadedScenes.Value = 0;
         foreach (var scene in _scenesToLoad)
         {
             SceneManager.LoadScene(scene.Value, LoadSceneMode.Additive);
+            _loadedScenes.Value++;
         }
         yield return null;
         Finished();
@@ -47,8 +48,8 @@ public class Bootstrap : MonoBehaviour
 
     private void LoadedScene(AsyncOperation asyncOperation)
     {
-        _loaded++;
-        if (_loaded >= _scenesToLoad.Count)
+        _loadedScenes.Value++;
+        if (_loadedScenes.Value >= _scenesToLoad.Count)
             Finished();
     }
 

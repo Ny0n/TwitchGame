@@ -243,7 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 706655537}
-  - component: {fileID: 706655538}
+  - component: {fileID: 706655539}
   - component: {fileID: 706655536}
   m_Layer: 0
   m_Name: TwitchManager
@@ -286,7 +286,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &706655538
+--- !u!114 &706655539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,9 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba2cbfece83e34baadda0a964f11ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _username: gcgroupe9
-  _password: oauth:pgzfy2ztaomz47yqihwwm2t829t2if
-  _channelName: gcgroupe9
+  _username: 
+  _password: 
+  _channelName: 
   _toggleConnectionKeybind: 116
   _twitchStatus: {fileID: 11400000, guid: 40ff6a5ad22771144b24d8145f64a98c, type: 2}
   _connectionMessage: <Chat connected to the game>

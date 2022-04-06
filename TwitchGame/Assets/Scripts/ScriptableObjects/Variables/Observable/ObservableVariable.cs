@@ -10,7 +10,7 @@ public class ObservableVariable<T> : ScriptableObject
         set => SetValue(value);
     }
 
-    public System.Action ValueChanged;
+    public event System.Action ValueChanged;
 
     public void SetValue(T value)
     {

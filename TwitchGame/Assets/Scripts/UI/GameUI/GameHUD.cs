@@ -8,12 +8,14 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private TMP_Text _currentStateText;
     [SerializeField] private TMP_Text _playersListText;
     [SerializeField] private TMP_Text _twitchText;
+    [SerializeField] private TMP_Text _scenesText;
 
     [SerializeField] private ScriptableSettings _settings;
     [SerializeField] private ScriptableGameStateVariable _gameState;
     [SerializeField] private ScriptableTimerVariable _roundTimer;
     [SerializeField] private ScriptableBoolVariable _twitchStatus;
     [SerializeField] private ScriptablePlayersList _playersList;
+    [SerializeField] private ScriptableFloatVariable _loadedScenes;
 
     private void Start()
     {
@@ -27,14 +29,21 @@ public class GameHUD : MonoBehaviour
     {
         _playersList.Players.ValueChanged += OnPlayersUpdated;
         _twitchStatus.ValueChanged += OnTwitchUpdated;
+        _loadedScenes.ValueChanged += OnScenesUpdated;
     }
 
     private void OnDisable()
     {
         _playersList.Players.ValueChanged -= OnPlayersUpdated;
         _twitchStatus.ValueChanged -= OnTwitchUpdated;
+        _loadedScenes.ValueChanged -= OnScenesUpdated;
     }
 
+    void OnScenesUpdated()
+    {
+        _scenesText.text = _loadedScenes.Value.ToString();
+    }
+    
     void OnPlayersUpdated()
     {
         _playersListText.text = "";
